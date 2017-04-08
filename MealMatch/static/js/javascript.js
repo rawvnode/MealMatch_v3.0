@@ -3,9 +3,15 @@ var ingredientArray = [];
 console.log(ingredientArray);
  $(function(){
  $( ".search_bar" ).keyup(function( event ) {
-    var inputs = $('#ingredient-form').val()
+
+
 
         ajax_func();
+
+
+
+
+
 
 
       //automatiskKomplettering();
@@ -42,20 +48,49 @@ function ajax_func(){
         dataType: "json",
         // handle a successful response
         success : function(array){
-            //console.log(array);
+            console.log(array);
             array = JSON.parse(array);
             automatiskKomplettering(array);
 
-        },
+        }
         // handle a non-successful response
         //error :"",
     });
 }
 
 function setCookies(){
-    document.cookie = "input =" +  "[" + ingredientArray + "]";
-    }
+    document.cookie = "input =" + ingredientArray;
 
+
+
+    }
+function addItemMyIng() { //not tested, prototype
+
+     input_array = getCookie('input').split(',')
+     console.log(input_array)
+    input_array.forEach(function(element){
+            console.log(element)
+            var li = document.createElement("li");
+            li.innerHTML = element;
+
+            li.setAttribute('id', "item"+ lastid, 'class', 'list-group-item');
+            var removeSpan = document.createElement('span');
+            removeSpan.setAttribute('class','pull-right');
+            li.appendChild(removeSpan);
+            console.log(document.getElementById("ingredients"))
+            document.getElementById("ingredients").appendChild(li);
+            var removeButton = document.createElement('button');
+            removeButton.appendChild(document.createTextNode('X'));
+            removeButton.setAttribute("id","removeButton" );
+            removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
+            removeSpan.appendChild(removeButton);
+
+            input.value = "";
+            lastid += 1;
+    })
+
+
+}
 
 function addItem(){
         var ing = "ing";
@@ -66,9 +101,13 @@ function addItem(){
 
 
         if (input.value.length > 0){
-
+            //funktionsanrop till något som städar bort ogiltiga tecken
             ingredientArray.push(input.value);
             li.innerHTML = ingredientArray[(ingredientArray.length - 1)];
+
+
+
+
             li.setAttribute('id', "item"+ lastid, 'class', 'list-group-item');
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');

@@ -14,13 +14,16 @@ class comments(Document):
     username = StringField()
     user_comment = StringField()
 
+class mapped(Document):
+    value = DictField()
 
 class recipe(DynamicDocument):
     title = StringField(required=True)
     time = StringField()
     servings = IntField()
     directions = ListField(required=True)
-    ingredients = ListField(EmbeddedDocumentField('ingredients'))
+    ingredients_list = ListField()
+    ingredients_complete = ListField()
     rating = ListField(EmbeddedDocumentField('rating'))  # has to be 1 by default
     category = ListField(required=True)
     clicks = IntField(required=True, default = 1)
@@ -28,11 +31,13 @@ class recipe(DynamicDocument):
     author = StringField(default = 'By MealMatch')
     comments = ListField(EmbeddedDocumentField('comments'))
     pictures = StringField()
+    id = ObjectIdField(primary_key=True)
 
 
     meta = {'strict' : False}
 
-class food(Document):
+class food_ref(Document):
     food = StringField(required=True)
-    group = StringField(required=True)
-    subgroup = StringField(required=True)
+    #_id = StringField(primary_key=True)
+
+
