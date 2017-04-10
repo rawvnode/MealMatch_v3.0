@@ -4,15 +4,7 @@ console.log(ingredientArray);
  $(function(){
  $( ".search_bar" ).keyup(function( event ) {
 
-
-
         ajax_func();
-
-
-
-
-
-
 
       //automatiskKomplettering();
     });
@@ -58,40 +50,41 @@ function ajax_func(){
     });
 }
 
+
 function setCookies(){
     document.cookie = "input =" + ingredientArray;
 
 
 
     }
-function addItemMyIng() { //not tested, prototype
+// Adds the ingredient list from the startpage, to the filter on the left side, after a matching has been done
+function addItemMyIng() {
 
      input_array = getCookie('input').split(',')
      console.log(input_array)
     input_array.forEach(function(element){
-            console.log(element)
+
             var li = document.createElement("li");
             li.innerHTML = element;
-
             li.setAttribute('id', "item"+ lastid, 'class', 'list-group-item');
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');
             li.appendChild(removeSpan);
-            console.log(document.getElementById("ingredients"))
+            console.log(document.getElementById("ingredients"));
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
             removeButton.appendChild(document.createTextNode('X'));
             removeButton.setAttribute("id","removeButton" );
             removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
             removeSpan.appendChild(removeButton);
-
-            input.value = "";
+            input_array.value = "";
             lastid += 1;
     })
 
 
 }
-
+// Adds ingredient to search list, on startpage
+var lastid = 0;
 function addItem(){
         var ing = "ing";
         var li = document.createElement("li");
@@ -112,6 +105,7 @@ function addItem(){
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');
             li.appendChild(removeSpan);
+
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
             removeButton.appendChild(document.createTextNode('X'));
@@ -127,9 +121,6 @@ function addItem(){
         }
     }
 
-
-var lastid = 0;
-
 function removeIngredient(itemid){
      console.log(document.getElementById(itemid).textContent);
      var item2 = document.getElementById(itemid).textContent;
@@ -142,16 +133,9 @@ function removeIngredient(itemid){
             }
      }
 
-
-
-
      var item = document.getElementById(itemid);
      console.log("ta bort:" + item.value);
      document.getElementById('ingredients').removeChild(item);
-
-
-
-
 
 }
 function automatiskKomplettering(array){
@@ -166,11 +150,24 @@ function automatiskKomplettering(array){
 
 function putInList(){
 
-
-
     var ing = document.getElementById("item0").childNodes.item(0).nodeValue;
  console.log(ing)
 //     ing = document.getElementById("item1").childNodes.item(0).nodeValue;
 
 
 }
+
+function recipeBox{
+    var div = document.createElement("div");
+    var title = document.getElementById(GET TITELE HERE SOMEHOW);
+
+    ingredientArray.push(input.value);
+    div.innerHTML = document.createElement("div");
+        div.innerHTML = document.createElement("header");
+        div.innerHTML = document.createElement("main");
+
+
+
+
+}
+

@@ -33,7 +33,7 @@ def startpage(request):
 
 
 def sanitize(user_string):
-    user_string = re.sub("[^a-öA-Ö],[^-]," "","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
+    user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     return user_string
 
@@ -66,7 +66,7 @@ def recipes(request):
         arr.append(queryMapped(item))
 
 
-    #Intesect-funktioner etc
+    #Intersect-funktioner etc
 
 
     for object in arr:
@@ -78,7 +78,15 @@ def recipes(request):
         recipe_array.append(temp_array)
         temp_array = []
 
-    #print(recipe_array)
+
+    print(len(recipe_array[0]))
+    test_recipe = []
+    for index in range(len(recipe_array[0])):
+        test_recipe.append(recipe.objects.get(id = recipe_array[0][index]))
+
+    print(len(test_recipe))
+
+
 
 
     #print(type(result))
@@ -101,10 +109,11 @@ def recipes(request):
      #   print(item.value)
 
 
-    return render(request, "recipes.html")
+    return render(request, "recipes.html", {"recipe_array":test_recipe})
 
 def autocorrect(request):
     input = sanitize(request.POST['input']) #gets the user input and sanitizses using sanitize()
+
     array = []
     if (len(input) > 0):
         foods = food_ref.objects(food__istartswith=input) #checks if any word starts with the user input

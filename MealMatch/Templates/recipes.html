@@ -13,7 +13,7 @@
                     <div class="my_ingredients">
                         <div class="panel-group">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
+                                <div class="panel-heading" onload = "addItemMyIng()">
                                     <a data-toggle="collapse" href="#collapse1">My ingredients</a>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse">
@@ -45,36 +45,64 @@
                 </div>
             </div>
             <div class="col-sm-10">
-                <div class="site-main__row">
+                <!--<div class="site-main__row">
                     <div class="recipes">
                         <div class="list-row">
-                            <div class="list-item list-item--recipe list-item--size-33" data-id="245570">
+                            <div class="list-item list-item&#45;&#45;recipe list-item&#45;&#45;size-33" data-id="245570">
                                 <div class="list-item__inner">
                                     <header class="list-item__header">
-                                        <a class="list-item__image" href="http://www.tasteline.com/recept/barillas-italienska-kottbullar-med-het-tomatsas/"></a>
+                                        {%for recipe in recipe_array%}
+                                        <img class= "recipe_image" src={{recipe.image}} style="width:98%; height:150px;">
+                                        {% endfor %}
                                     </header>
                                     <main class="list-item__content">
                                         <a class="list-item__link" href="http://www.tasteline.com/recept/barillas-italienska-kottbullar-med-het-tomatsas/">
                                             <p class="list-item__title">
-                                                <span class="list-item__title-inner">Barillas Italienska köttbullar med het tomatsås</span>
+                                                {%for recipe in recipe_array%}
+                                                <span class="list-item__title-inner">{{ recipe.title }}</span>
+                                                {% endfor %}
                                             </p>
                                         </a>
                                         <div class="list-item__votes"><span class="recipe-rating" title="Betyg: 4.5 Antal röster: 2" data-id="245570"><i class="fa fa-star-o highlight" data-grade="1"></i><i class="fa fa-star-o highlight" data-grade="2"></i><i class="fa fa-star-o highlight" data-grade="3"></i><i class="fa fa-star-o highlight" data-grade="4"></i><i class="fa fa-star-o half-highlight" data-grade="5"></i></span></div>
                                         <ul class="list-item__meta">
-                                            <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> 12 ingredienser</li>
+                                            {%for recipe in recipe_array%}
+                                            <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> {{recipe.ingredients_list|length}} Ingredients</li>
+                                            {% endfor %}
                                         </ul>
                                     </main>
                                 </div>
 
                             </div>
 
+
                         </div>
                     </div>
 
+                </div>-->
+
+                <div class="container-fluid">
+                    <div class="row">
+                        {%for recipe in recipe_array%}
+                            <div class="col-sm-3 recipeBox" >
+
+                                <img class= "recipe_image" src={{recipe.image}} style="width:98%; height:150px;">
+
+
+                                <h2>{{recipe.title}}</h2>
+
+
+                                <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> {{recipe.ingredients_list|length}} Ingredients</li>
+
+
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
+
+
+<script> addItemMyIng()</script>
 
 
 {% endblock %}
