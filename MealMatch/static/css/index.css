@@ -3,7 +3,9 @@
 /********************************************************************************************/
 
 /*** CLASS ***/
-
+.center_button{
+    text-align: center;
+}
 .startPage {
     background-image: linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.2)), url("../images/background.jpg");
     background-size: cover;

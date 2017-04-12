@@ -72,10 +72,11 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'MealMatch.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Fabian/Desktop/testenv/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Fabian/Documents/GitHub/mealmatch_v2.0/MealMatch/Templates/"],
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
@@ -87,7 +88,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'MealMatch.wsgi.application'
 
 

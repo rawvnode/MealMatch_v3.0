@@ -1,6 +1,7 @@
 .col-sm-2 {
     height: 45em;
     margin-top: 1.1em;
+    border: none;
 }
 .special_diet {
     height: 3em;
@@ -29,6 +30,7 @@
 
 .col-sm-10 {
     height: 64em;
+    border: none;
 }
 
 .recipes {
@@ -127,4 +129,21 @@
 .container_background{
     background-image: linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.2)), url("../images/background.jpg");
     background-size: cover;
+}
+
+#recipes_main_box{
+
+    overflow: auto;
+    overflow-x: hidden;
+}
+#recipe_box{
+    border: 1px solid black;
+    margin: 1em 1em 1em 1em;
+    width: 20%;
+    height: 25em;
+    padding: 0 0 0 0;
+    background-color: gainsboro;
+    box-shadow: 1px 1px 25px 2px white;
+
+
 }

@@ -157,14 +157,17 @@ function putInList(){
 
 }
 
-function recipeBox{
-    var div = document.createElement("div");
-    var title = document.getElementById(GET TITELE HERE SOMEHOW);
+function extractRecipe(recipe){
 
-    ingredientArray.push(input.value);
-    div.innerHTML = document.createElement("div");
-        div.innerHTML = document.createElement("header");
-        div.innerHTML = document.createElement("main");
+
+       console.log(recipe.title)
+       console.log(recipe.ingredients_list)
+       console.log(recipe.sevings)
+       console.log(recipe.directions)
+       console.log(recipe.author)
+       console.log(recipe.tags)
+
+
 
 
 

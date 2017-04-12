@@ -23,18 +23,11 @@
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>
                                         </div>
-
                                     <div class="panel-body">
                                         <div class="input-group">
                                             <ol id="ingredients" style="font-size: 1.7em";>
-
                                             </ol>
-
-
-
-
                                         </div>
-
                                     </div>
                                     <div class="panel-footer"><button type="button" class="btn" id="matchme" onclick="makeCookie()">Match me</button></div>
                                 </div>
@@ -44,61 +37,39 @@
 
                 </div>
             </div>
-            <div class="col-sm-10">
-                <!--<div class="site-main__row">
-                    <div class="recipes">
-                        <div class="list-row">
-                            <div class="list-item list-item&#45;&#45;recipe list-item&#45;&#45;size-33" data-id="245570">
-                                <div class="list-item__inner">
-                                    <header class="list-item__header">
-                                        {%for recipe in recipe_array%}
-                                        <img class= "recipe_image" src={{recipe.image}} style="width:98%; height:150px;">
-                                        {% endfor %}
-                                    </header>
-                                    <main class="list-item__content">
-                                        <a class="list-item__link" href="http://www.tasteline.com/recept/barillas-italienska-kottbullar-med-het-tomatsas/">
-                                            <p class="list-item__title">
-                                                {%for recipe in recipe_array%}
-                                                <span class="list-item__title-inner">{{ recipe.title }}</span>
-                                                {% endfor %}
-                                            </p>
-                                        </a>
-                                        <div class="list-item__votes"><span class="recipe-rating" title="Betyg: 4.5 Antal röster: 2" data-id="245570"><i class="fa fa-star-o highlight" data-grade="1"></i><i class="fa fa-star-o highlight" data-grade="2"></i><i class="fa fa-star-o highlight" data-grade="3"></i><i class="fa fa-star-o highlight" data-grade="4"></i><i class="fa fa-star-o half-highlight" data-grade="5"></i></span></div>
-                                        <ul class="list-item__meta">
-                                            {%for recipe in recipe_array%}
-                                            <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> {{recipe.ingredients_list|length}} Ingredients</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </main>
-                                </div>
 
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                </div>-->
-
+            <div class="col-sm-10" id="recipes_main_box">
                 <div class="container-fluid">
                     <div class="row">
+
+
                         {%for recipe in recipe_array%}
-                            <div class="col-sm-3 recipeBox" >
-
-                                <img class= "recipe_image" src={{recipe.image}} style="width:98%; height:150px;">
 
 
-                                <h2>{{recipe.title}}</h2>
+
+                            <form class = "single_recipe" action="/recipes/presenterarecept" method="POST" >
+                                {% csrf_token %}
+
+                            <div class="col-sm-3" id="recipe_box" data-id ={{recipe.id}}>
+
+                                <input type="image" name="ind_recipe" class= "recipe_image" src={{recipe.image}} style="width:100%; height:auto;" value='{{recipe.to_json}}'>
+
+
+                                <h4>{{recipe.title}}</h4>
 
 
                                 <li class="list-item__meta-item"><i class="list-item__meta-icon fa fa-tags" aria-hidden="true"></i> {{recipe.ingredients_list|length}} Ingredients</li>
 
 
                             </div>
+                            </form>
+
                         {% endfor %}
+
                     </div>
                 </div>
         </div>
+    </div>
     </div>
 
 

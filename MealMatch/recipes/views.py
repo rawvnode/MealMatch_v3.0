@@ -10,26 +10,36 @@ from bson.json_util import dumps
 import re
 from bson.objectid import ObjectId
 import bson
-
+from django.core import serializers
+import json
 
 #from urlparse import urljoin
 
 
 
-
-def test_(request):
-    print("startpage")
-
-
-    recipes = recipe.objects.get()
-    all = ""
-    for i in recipes.payload:
-        print( i, recipes.payload[i])
-    return HttpResponse(all)
+#
+# def test_(request):
+#     print("startpage")
+#
+#
+#     recipes = recipe.objects.get()
+#     all = ""
+#     for i in recipes.payload:
+#         print( i, recipes.payload[i])
+#     return HttpResponse(all)
 
 
 def startpage(request):
     return render(request, "startpage.html")
+
+def presentRecipe(request):
+    recipe = json.loads(request.POST['ind_recipe'])
+    print(recipe['title'])
+
+
+
+
+    return render(request, "presenterarecept.html", {"recipe": recipe})
 
 
 def sanitize(user_string):
@@ -51,6 +61,9 @@ def stripAndObjectify(result): #Strips the data from bad formatting (mongoengine
 
 def queryMapped(item): #Returns a query from the mapped collection. Matches icontaint on the id field of mapped collection
     return mapped.objects.get(id__icontains=item)
+
+
+
 
 
 
@@ -79,12 +92,17 @@ def recipes(request):
         temp_array = []
 
 
-    print(len(recipe_array[0]))
+
+
+
+
+
+
+
     test_recipe = []
     for index in range(len(recipe_array[0])):
-        test_recipe.append(recipe.objects.get(id = recipe_array[0][index]))
+        test_recipe.append((recipe.objects.get(id = recipe_array[0][index])))
 
-    print(len(test_recipe))
 
 
 
