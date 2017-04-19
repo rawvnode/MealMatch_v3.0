@@ -13,9 +13,6 @@ var mapfunction = function() {
 
 
         value[this.title] = this._id
-        // if(array.indexOf(value) == -1) {
-        //   array.push(value)
-        //   }
 
         emit(key, value)
 
@@ -37,11 +34,13 @@ var reducefunction = function (ing, title) {
 
 var finalizefunc= function (key, result ){
     var array = []
+
+
     //Look up scope function
     for (var key in result){
 
 
-        array.push({"_id" : result[key] })
+        array.push(result[key])
 
     }
 

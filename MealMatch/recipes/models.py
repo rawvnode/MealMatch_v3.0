@@ -1,22 +1,23 @@
 from mongoengine import *
 from mongoengine import queryset_manager
 import time
+from .models import *
+from collections import OrderedDict
 
 
  ##### CUSTOM QUERYSETS #####
 class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce. Maps count with keys
 
     def get_stats(keys):
+        limitval = 120 #The amount of results to query
         reduced_result = {}
         start = time.time()
-        clicks_rating = recipe.objects(id__in=keys).exclude('ingredients_complete').exclude('directions') #Exclude speeds up the query process
+        clicks_rating = recipe.objects.skip(len(keys) - limitval).filter(id__in=keys).exclude('ingredients_complete').exclude('directions')#Exclude speeds up the query process
         end = time.time()
         print(end - start)
-
         for item in clicks_rating:
             print(item.rating)
             reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_list), "image": item.image}
-        #print(reduced_result.keys().vales)
         return reduced_result
 
     def join(reduced_result, freq):
@@ -25,15 +26,30 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
         return reduced_result
 
     def key_frequency(self): #maybe to be renamed
-        arr = []
-        for item in self:
-            for key in item.value:
-                arr += list(key.to_mongo().to_dict().values()) #helt orimlig rad, jag vet. //Fabian
-        freq = {x: arr.count(x) for x in arr}
+        freq = self.item_frequencies("value") ##key frequency
+        freq = OrderedDict(reversed(sorted(freq.items(),key=lambda x: (x[1])))) ##sorts by key frequency
+        print(freq)
         reduced_result = mappedQuerysSet.get_stats(freq.keys())
-        return mappedQuerysSet.join(reduced_result, freq)
 
-## recipe models ""
+        returnval = mappedQuerysSet.join(reduced_result, freq)
+        print(type(returnval))
+        return returnval
+
+
+    def get_related(self):
+        reduced_result = mappedQuerysSet.get_stats(self.keys())
+        return mappedQuerysSet.join(reduced_result, self)
+
+
+
+### Old (deleter after 26th of april):
+ #arr = []
+       #for item in self:
+       #    for key in item.value:
+       #        arr += list(key.to_mongo().to_dict().values()) #helt orimlig rad, jag vet. //Fabian
+
+        #freq = {x: arr.count(x) for x in arr}
+## recipe models ##
 
 class ingredients(Document):
     amount = ListField(required=True)
@@ -46,8 +62,6 @@ class rating(Document):
 class comments(Document):
     username = StringField()
     user_comment = StringField()
-
-
 
 class recipe(DynamicDocument):
     title = StringField(required=True)
@@ -75,17 +89,12 @@ class recipe(DynamicDocument):
 
 ## mapped models ##
 class mapped_id(Document):
-    #id = ObjectIdField(primary_key=True)
-    pass
-
+    id = ObjectIdField(primary_key=True)
 
 class mapped(Document):
-    title = StringField()
-    value = ListField(EmbeddedDocumentField('mapped_id'))
+    value = ListField(ObjectIdField(primary_key=True))
+    #value = ListField(EmbeddedDocumentField('mapped_id'))
     #value = DictField() <--- restore this to get working queryset
-
-
-
     meta = {'queryset_class': mappedQuerysSet}  # Defines a custom queryet
 
 class food_ref(Document):

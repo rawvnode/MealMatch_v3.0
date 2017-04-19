@@ -20,36 +20,39 @@ import math
 
 ############# VIEW FUNCTIONS #####################
 def startpage(request):
+    print("fucking starpage")
     return render(request, "startpage.html")
 
-def presentRecipe(request): #Queries and renders a recipe based on an objectid
+
+##Queries and renders a recipe when a recipe in the result list is clicked##
+def presentRecipe(request):
     print("present recipe: ", request.method)
     if request.method == "GET": #When the page is retrieved
         print("present recipe, get request")
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
         return render(request, "presenterarecept.html", {"recipe": recipe_response})
-    if request.method == "POST":
-        pass
 
-def retrieveRecipes(request): #queries user inputs on database (mapped collection and query_recipe)
-    print("retrieve recipe: ", request.method)
+##Queries user inputs on database and renders a result list##
+def retrieveRecipes(request):
     if request.method == "GET":
-        input = request.COOKIES.get('input').split(',') #Splits the query based on ,
-        for element in input:
-            element = sanitize(element) #Sanitizses !! IMPORTANT !!
+        raw_input = request.path[17:].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
+        input = []
+        for element in raw_input:
+            input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
+        ## **COMMENT** ##
+        # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
+        q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
+        print("q1: ", q1)
 
-
-        query_mapped = mapped.objects(id__in=input).only('value').key_frequency() #queries from the mapped colletion and does a key_frequency check
-        ##if we want, we can add a new computed field to query_mapped which adds a parameter for relevance (such as clicks*rating*match % )
-
+        query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
         sorted_list = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
-
         return render(request, "recipes.html", {"recipe_array": sorted_list})
     else:
-        startpage(request)
+        return render(request, "startpage.html")
 
-def autocorrect(request): #autocorrect implementation
+##Autocorrect implementation. Must be adjusted to prevent crashed (eg via elasticsearch or fewer queries)##
+def autocorrect(request):
     input = sanitize(request.POST['input'])  # gets the user input and sanitizses using sanitize()
     if (len(input) > 0):
 
@@ -65,6 +68,7 @@ def autocorrect(request): #autocorrect implementation
 
 ############# HELPER FUNCTIONS #############
 def sanitize(user_string):
+    user_string = re.sub("_", " ", user_string)  # Converts underscore to whitespace
     user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     return user_string
