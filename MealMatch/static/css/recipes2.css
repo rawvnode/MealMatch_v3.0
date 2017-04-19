@@ -1,0 +1,45 @@
+
+.w3-white {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.w3-light-grey {
+    padding-top: 1.6em;
+}
+
+
+#ingredient-form {
+    width:80%;
+}
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif
+    }
+.startPage {
+    background-size: cover;
+}
+
+.panel-default {
+    padding:0.5em;
+}
+
+.glyphicon-plus {
+    color: white;
+    font-size: 1.5em;
+    padding:0.1em
+}
+
+#searchbar_plus {
+    border-radius: 0.3em;
+    background-color: green;
+    padding-top: 0.2em;
+    padding-left: 0.6em;
+    padding-bottom: 0.1em;
+    float:right;
+}
