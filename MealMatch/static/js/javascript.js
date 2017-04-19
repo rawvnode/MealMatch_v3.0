@@ -1,33 +1,38 @@
 var ingredientArray = [];
 
-console.log(ingredientArray);
+// Listeenes
+
+
  $(function(){
  $( ".search_bar" ).keyup(function( event ) {
 
         ajax_func();
-
-      //automatiskKomplettering();
     });
  });
 
- function getCookie(name) { //function that returns a cookie
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+ $(function(){
+ $( "#matchme" ).click(function( event ) {
+       event.preventDefault();
+       setURL();
+       $(".ing_form").submit();
+    });
+ });
+
+
+//Setter function
+function setURL() {
+    for (var i in ingredientArray){
+        var action = $( ".ing_form" ).attr("action")
+        ingredientArray[i] = ingredientArray[i].replace(/\s/g, "_");
+        action = action  + ingredientArray[i] + "&"
+        $(".ing_form").attr("action", action)
+    window.alert($( ".ing_form" ).attr("action"))
+}
 }
 
 
-function ajax_func(){
+ //Ajax functions
+ function ajax_func(){
     var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
     //console.log(csrftoken)
     var inputs = $('#ingredient-form').val()
@@ -50,8 +55,30 @@ function ajax_func(){
     });
 }
 
+ // Other functions
+
+ function getCookie(name) { //function that returns a cookie
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+
+
 
 function setCookies(){
+    window.alert("hej")
     document.cookie = "input =" + ingredientArray;
 
 
@@ -86,15 +113,23 @@ function addItemMyIng() {
 // Adds ingredient to search list, on startpage
 var lastid = 0;
 function addItem(){
+
+
+
         var ing = "ing";
         var li = document.createElement("li");
         var input = document.getElementById("ingredient-form");
 
+
+
         //if(":" in input remove....)
 
-
         if (input.value.length > 0){
+
+
             //funktionsanrop till något som städar bort ogiltiga tecken
+
+
             ingredientArray.push(input.value);
             li.innerHTML = ingredientArray[(ingredientArray.length - 1)];
 
