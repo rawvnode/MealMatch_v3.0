@@ -38,17 +38,19 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
 
         freq = self.item_frequencies("value") ##key frequency
         freq = OrderedDict(reversed(sorted(freq.items(),key=lambda x: (x[1])))) ##sorts by key frequency
-        print(freq)
-        reduced_result = mappedQuerysSet.get_stats(freq.keys())
+
+
+        query_keys = list(freq.keys())[0:1000]
+
+
+        reduced_result = mappedQuerysSet.get_stats(query_keys)
 
         returnval = mappedQuerysSet.join(reduced_result, freq)
         #print(type(returnval))
         return returnval
 
 
-    def get_related(self):
-        reduced_result = mappedQuerysSet.get_stats(self.keys())
-        return mappedQuerysSet.join(reduced_result, self)
+
 
 
 
