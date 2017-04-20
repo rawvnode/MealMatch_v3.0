@@ -38,6 +38,7 @@
                                                 <li id="item"+lastid class="list-group-item">
                                                 </li>
                                                 {% endfor %}
+
                                             </ol>
                                         </div>
 
@@ -75,16 +76,17 @@
 
         <!-- First Photo Grid-->
         <div class="w3-row-padding">
-            {%for id, recipe in recipe_array.items%}
-                <form class = "single_recipe" action="/recipes/presenterarecept/{{id}}" method="GET">
+
+            {%for item in recipes %}
+                <form class = "single_recipe" action="/recipes/presenterarecept/{{item|first}}" method="GET">
                     {% csrf_token %}
-                <div class="w3-third w3-container w3-margin-bottom" data-id ={{recipe.id}} >
-                <input type="image" name="ind_recipe" class= "recipe_image" value = {{recipe}} src={{recipe.image }} style="width:100%; height:auto;>
+                <div class="w3-third w3-container w3-margin-bottom" data-id ={{item|first}}>
+                <input type="image" name="ind_recipe" class= "recipe_image" value = "" src={{item.1.image }} style="width:100%; height:auto;" >
                 <div class="w3-container w3-white">
-                    <p><b>{{recipe.title}}</b></p>
-                    <p>You have {{recipe.frequency}} out of {{recipe.ing_count}} Ingredients</p>
+
+                    <p><b>{{item.1.title}}</b></p>
                     <div class="w3-grey">
-                        <div class="w3-container w3-dark-grey w3-center" style="width:{{recipe.ratio}}% " id = "procentbar">{{recipe.ratio}}%</div>
+                        <div class="w3-container w3-dark-grey w3-center" style="width:95%">You have {{item.1.frequency}} out of {{item.1.ing_count}} Ingredients</div>
                     </div>
                 </div>
                 </div>
@@ -101,17 +103,51 @@
 
 
         </div>
+        <!---<div class="w3-row-padding">
+
+            {%for id, recipe in recipe_array.items%}
+                <form class = "single_recipe" action="/recipes/presenterarecept/{{id}}" method="GET">
+                    {% csrf_token %}
+                <div class="w3-third w3-container w3-margin-bottom" data-id ={{recipe.id}}>
+                <input type="image" name="ind_recipe" class= "recipe_image" value = {{recipe}} src={{recipe.image }} style="width:100%; height:auto;" >
+                <div class="w3-container w3-white">
+                    <p><b>{{recipe.title}}</b></p>
+                    <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                    <div class="w3-grey">
+                        <div class="w3-container w3-dark-grey w3-center" style="width:95%">You have {{recipe.frequency}} out of {{recipe.ing_count}} Ingredients</div>
+                    </div>
+                </div>
+                </div>
+                </form>
+
+                {% if forloop.counter|divisibleby:3 %}
+                </div>
+
+                <div class="w3-row-padding">
+                {% endif %}
+
+                {% endfor %}
+                </div>
+
+
+        </div>--->
 
 
         <!-- Pagination -->
         <div class="w3-center w3-padding-32">
             <div class="w3-bar">
-                <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-                <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+                <p>{{recipes}}</p>
+                {% if recipes.has_previous%}
+                    <a href="?page={{ recipes.previous_page_number }}" class="w3-bar-item w3-button w3-hover-black">«</a>
+                {% endif %}
+                {% if recipes.has_next %}
+                    <a href="?page="{{recipes.number}}" class="w3-bar-item w3-black w3-button">{{paginator.number}}</a>
+                    <a href="?page="{{recipes.next_page_number}}" class="w3-bar-item w3-black w3-button">»</a>
+                {% endif %}
+
                 <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
                 <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
                 <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-                <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
             </div>
         </div>
 

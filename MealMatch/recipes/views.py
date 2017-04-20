@@ -15,6 +15,8 @@ import json
 import time
 from collections import OrderedDict
 import math
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
 
 
 
@@ -31,8 +33,6 @@ def presentRecipe(request):
         print("present recipe, get request")
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
-        print(recipe_response.ingredients_complete)
-
         return render(request, "presenterarecept.html", {"recipe": recipe_response})
 
 ##Queries user inputs on database and renders a result list##
@@ -45,11 +45,38 @@ def retrieveRecipes(request):
         ## **COMMENT** ##
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
         q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
-        print("q1: ", q1)
-        #x[1]['frequency']/x[1]['ing_count'] *
         query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
-        sorted_list = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
-        return render(request, "recipes.html", {"recipe_array": sorted_list})
+
+        count =  mapped.objects(id__in=input).only('value').reduced_count()
+
+
+
+        start = time.time()
+        sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
+        end1 = time.time()
+        print("melantid: ", end1 - start)
+
+
+        dictlist = []
+        for key, value in sorted_dict.items():
+            temp = [key,value]
+            dictlist.append(temp)
+
+        end = time.time()
+        print(end - start)
+
+
+
+        paginator = Paginator(dictlist, 9)  # Show 9 contacts per page
+        page = request.GET.get('page', 1)
+
+        try:
+            recipes = paginator.page(page)
+        except PageNotAnInteger:
+            recipes = paginator.page(1)
+        except EmptyPage:
+            recipes = paginator.page(paginator.num_pages)
+        return render(request, "recipes.html", {"user_input" : input, "recipes": recipes})
     else:
         return render(request, "startpage.html")
 
@@ -75,6 +102,17 @@ def sanitize(user_string):
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     return user_string
 
+def recipepages(request):
 
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        contacts = paginator.page(count)
 
+    return render(request, 'list.html', {'contacts': contacts})
 
