@@ -25,29 +25,6 @@ def update_table(request):   #change profile settings
         return render(request,"account_functions/update_table.html")
 
 
-# Create your views here.
-def create_new_user(request):
-    if request.method == "POST":
-        print(users.objects(username = request.POST['mail']))
-
-        if users.objects(username = request.POST['mail']) ==  None:
-
-            user = users.create_user(request.POST['mail'], request.POST['pwd'])
-            user.save()
-            create_staff = True
-            if create_staff:
-                staff = users(username = "agatonvet", is_superuser = True)
-                staff.save()
-            return HttpResponse('you have created a user')
-            #return render(request, "new_user.html")
-        else:
-            return HttpResponse('username already taken')
-
-    else:
-
-        return render(request, "account_functions/create_user.html")
-
-
 def register_view(request):
     title = "Register"
     form = UserRegisterForm(request.POST or None)
@@ -56,9 +33,10 @@ def register_view(request):
         "title": title
     }
     if form.is_valid():
+        mail = form.cleaned_data.get('mail')
         password = form.cleaned_data.get('password')
-        username = form.check_username().get('username')
-        user = users(username = username, password = password)
+        username = form.check_username()
+        user = users(username = username, password = password, mail = mail)
         user.save()
 
 
@@ -79,26 +57,7 @@ def login_view(request):
             pass
     return render(request, "account_functions/login.html", {"form": form, "title" : title})
 
-### old
-def login_function(request):
-    if request.method == "POST":
-        username = request.POST['your_name']
-        password = request.POST['pwd']
-        user = authenticate(username=username, password=password)
 
-        if user is not None:
-            users.backend = 'mongoengine.django.auth.MongoEngineBackend'
-            try:
-                request.session['user'] = user
-                login(request, user)
-            except users.DoesNotExist:
-                print("error does not exist")
-            if user.is_authenticated:
-                return render(request, "account_functions/update_table.html")
-        else:
-            return HttpResponse('login failed')
-    else:
-        return render(request, "account_functions/login.html")
 
 @login_required(redirect_field_name = "account_functions/login.html")
 def user_logout(request):

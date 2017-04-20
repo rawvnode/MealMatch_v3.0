@@ -8,7 +8,9 @@ class UserLoginForm(forms.Form):
 
 class UserRegisterForm(forms.Form):
     username = forms.CharField(required=True)
-    password = forms.CharField(required=True)
+    password = forms.CharField(widget = forms.PasswordInput, required = True)
+    mail = forms.CharField(required=True)
+
 
     def check_username(self):
         username = self.cleaned_data.get('username')
