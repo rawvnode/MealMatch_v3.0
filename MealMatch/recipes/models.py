@@ -27,6 +27,11 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
     def join(reduced_result, freq):
         for item in reduced_result:
             reduced_result[item]["frequency"] = freq[item]
+            reduced_result[item]["ratio"] = round(100*freq[item]/reduced_result[item].get('ing_count'),0)
+
+
+
+
         return reduced_result
 
     def key_frequency(self): #maybe to be renamed
