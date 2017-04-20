@@ -46,36 +46,16 @@ def retrieveRecipes(request):
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
         q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
         query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
-
-        count =  mapped.objects(id__in=input).only('value').reduced_count()
-
-
-
-        start = time.time()
-        sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
-        end1 = time.time()
-        print("melantid: ", end1 - start)
+        sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
 
 
         dictlist = []
         for key, value in sorted_dict.items():
             temp = [key,value]
             dictlist.append(temp)
-
-        end = time.time()
-        print(end - start)
-
-
-
-        paginator = Paginator(dictlist, 9)  # Show 9 contacts per page
+        paginator = Paginator(dictlist, 27)  # Show 9 contacts per page
         page = request.GET.get('page', 1)
-
-        try:
-            recipes = paginator.page(page)
-        except PageNotAnInteger:
-            recipes = paginator.page(1)
-        except EmptyPage:
-            recipes = paginator.page(paginator.num_pages)
+        recipes = view_paginator(page, paginator)
         return render(request, "recipes.html", {"user_input" : input, "recipes": recipes})
     else:
         return render(request, "startpage.html")
@@ -102,17 +82,14 @@ def sanitize(user_string):
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     return user_string
 
-def recipepages(request):
 
-    page = request.GET.get('page')
+def view_paginator(page, paginator):
     try:
-        contacts = paginator.page(page)
+        recipes = paginator.page(page)
+        return recipes
     except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        contacts = paginator.page(1)
+        recipes = paginator.page(1)
+        return recipes
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        contacts = paginator.page(count)
-
-    return render(request, 'list.html', {'contacts': contacts})
-
+        recipes = paginator.page(paginator.num_pages)
+        return recipes
