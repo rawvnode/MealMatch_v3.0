@@ -9,15 +9,19 @@ from collections import OrderedDict
 class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce. Maps count with keys
 
     def get_stats(keys):
-        limitval = 120 #The amount of results to query
+
+        #number of result - (numbers of results - 100)
+        skipval = 0 #The amount of results to query
+        if (len(keys) > 120):
+            skipval = len(keys) - 120
         reduced_result = {}
         start = time.time()
-        clicks_rating = recipe.objects.skip(len(keys) - limitval).filter(id__in=keys).exclude('ingredients_complete').exclude('directions')#Exclude speeds up the query process
+        clicks_rating = recipe.objects.skip(0).filter(id__in=keys).exclude('ingredients_complete').exclude('directions')#Exclude speeds up the query process
+        for item in clicks_rating:
+            #print(item.rating)
+            reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_list), "image": item.image}
         end = time.time()
         print(end - start)
-        for item in clicks_rating:
-            print(item.rating)
-            reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_list), "image": item.image}
         return reduced_result
 
     def join(reduced_result, freq):
@@ -26,13 +30,14 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
         return reduced_result
 
     def key_frequency(self): #maybe to be renamed
+
         freq = self.item_frequencies("value") ##key frequency
         freq = OrderedDict(reversed(sorted(freq.items(),key=lambda x: (x[1])))) ##sorts by key frequency
         print(freq)
         reduced_result = mappedQuerysSet.get_stats(freq.keys())
 
         returnval = mappedQuerysSet.join(reduced_result, freq)
-        print(type(returnval))
+        #print(type(returnval))
         return returnval
 
 

@@ -31,6 +31,8 @@ def presentRecipe(request):
         print("present recipe, get request")
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
+        print(recipe_response.ingredients_complete)
+
         return render(request, "presenterarecept.html", {"recipe": recipe_response})
 
 ##Queries user inputs on database and renders a result list##
@@ -44,9 +46,9 @@ def retrieveRecipes(request):
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
         q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
         print("q1: ", q1)
-
+        #x[1]['frequency']/x[1]['ing_count'] *
         query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
-        sorted_list = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
+        sorted_list = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
         return render(request, "recipes.html", {"recipe_array": sorted_list})
     else:
         return render(request, "startpage.html")
