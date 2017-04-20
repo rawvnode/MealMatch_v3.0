@@ -12,8 +12,8 @@ class UserRegisterForm(forms.Form):
 
     def check_username(self):
         username = self.cleaned_data.get('username')
-        q1 = users.objects(username__exists = username).scalar()
-        if not q1:
+        q1 = users.objects(username__exists = username).count()
+        if q1 != 0:
             raise forms.ValidationError("This username is already taken")
         return username
 
