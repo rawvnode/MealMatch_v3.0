@@ -19,9 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DBNAME = 'test'
 _MONGODB_USER = 'fabian'
-_MONGODB_PASSWD = 'fabian'
-_MONGODB_HOST = 'Fabian-PC'
-_MONGODB_NAME = 'thedb'
+_MONGODB_PASSWD = '!Endless#1246%J'
+_MONGODB_HOST = '130.238.15.203:27017'
+_MONGODB_NAME = 'serverDB'
 _MONGODB_DATABASE_HOST = \
     'mongodb://%s:%s@%s/%s' \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
@@ -43,22 +43,35 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'recipes',
-    'account_functions',
-    'rest_framework',
-    'rest_framework_mongoengine',
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local apps
+    'recipes',
+    'account_functions',
+    
+    #third party
+    'rest_framework',
+    'rest_framework_mongoengine',
+    'crispy_forms',
+
+
+
 ]
+
+#TEMPLATE_CONTEXT_PROCESSORS = (
+#    #....
+#    'account_functions.context_processors.include_login_form'
+#)
 
 
 AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend',
 )
+MONGODBFORMS_FIELDGENERATOR = 'MealMatch.fieldgenerator.GeneratorClass'
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
 SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
@@ -80,7 +93,7 @@ ROOT_URLCONF = 'MealMatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Fabian/Documents/GitHub/mealmatch_v2.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Fabian/Desktop/mealmatch_v3.0/MealMatch/Templates/"],
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
@@ -88,6 +101,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'account_functions.context_processors.include_login_form'
             ],
         },
     },

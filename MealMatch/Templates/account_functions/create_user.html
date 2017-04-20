@@ -1,13 +1,9 @@
+{% load crispy_forms_tags %}
+
 <form action=/account_functions/create_user/ method="POST">
 {% csrf_token %}
-    <label for="mail">Your Mail: (create yourself a login)</label>
-    <input id="mail" type="text" name="mail" value="{{ current_name }}">
 
-    <label for="pwd">Pwd: </label>
-    <input id="pwd" type="text" name="pwd" value="{{ current_pwd }}">
-    <input type="submit" value="OK">
-
-    <label for="Google">Google? </label>
+    {{form | crispy}}
 
     <input id="Google" type="submit" value="OK">
 </form>

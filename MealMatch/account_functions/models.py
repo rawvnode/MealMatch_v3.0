@@ -9,7 +9,7 @@ class comments(Document):
     user_comment = StringField(required=True)
 
 class users(DynamicDocument):
-    user_name = StringField(required=True)
+    username = StringField(required=True)
     password = StringField(required=True)
     mail = EmailField(required=True)
     is_staff = BooleanField(default=False)
@@ -20,6 +20,7 @@ class users(DynamicDocument):
     comments = ListField(EmbeddedDocumentField('comments'))
     picture = StringField()
     my_info = StringField()
+    sex = StringField()
 
 
 
