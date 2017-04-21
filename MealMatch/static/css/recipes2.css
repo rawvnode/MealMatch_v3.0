@@ -35,6 +35,12 @@
     padding:0.1em
 }
 
+#ratio-bar {
+    /*background-color: rgb(189,65,4);
+    color: white;*/
+}
+
+
 #searchbar_plus {
     border-radius: 0.3em;
     background-color: green;

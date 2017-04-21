@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from mongoengine.django.auth import *
+from mongoengine.django.auth import User
 from django.contrib.auth import authenticate, login, logout
-from account_functions.models import *
 from django.contrib.auth.decorators import login_required
 from mongoengine import *
 from .forms import *
+from django.http import HttpResponseRedirect
 
 @login_required(redirect_field_name = "account_functions/login.html")
 def delete_field(request):
@@ -36,33 +36,36 @@ def register_view(request):
         mail = form.cleaned_data.get('mail')
         password = form.cleaned_data.get('password')
         username = form.check_username()
-        user = users(username = username, password = password, mail = mail)
-        user.save()
-
-
-
+        user = User.create_user(username = username, password = password)
+        user.mail = mail
     return render(request, "account_functions/create_user.html", context)
-
-
 
 
 def login_view(request):
     form = UserLoginForm(request.POST or None)
     title = "Login"
+
     if form.is_valid():
+
+        print("is valid?")
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
+        user = authenticate(username = username, password = password)
+        user.backend = 'mongoengine.django.auth.MongoEngineBackend'
+        print("login")
+        login(request, user)
+        request.session.set_expiry(60 * 60 * 1)
+        print(request.user.is_authenticated())
 
-        def clean(self, *args, **kwargs):
-            pass
-    return render(request, "account_functions/login.html", {"form": form, "title" : title})
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'), {"form": form, "title" : title})
 
 
 
 @login_required(redirect_field_name = "account_functions/login.html")
 def user_logout(request):
     logout(request)
-    return render(request, "account_functions/login.html")
+    print("logged out?")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(redirect_field_name = "account_functions/login.html")
 def upload_recipes(request):

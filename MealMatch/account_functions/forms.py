@@ -1,9 +1,25 @@
 from django import forms
 from .models import *
+from mongoengine.django.auth import *
+from django.contrib.auth import authenticate, login, logout
 
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget = forms.PasswordInput)
+
+
+    def clean(self):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+        user = authenticate(username = username, password = password)
+        if username and password:
+            if not user:
+                raise forms.ValidationError("Wrong user or password")
+            if not user.check_password(password):
+                raise forms.ValidationError("Wrong user or password")
+            print("return me outside, how bout that")
+        return super(UserLoginForm, self).clean()
+
 
 
 class UserRegisterForm(forms.Form):
@@ -14,10 +30,16 @@ class UserRegisterForm(forms.Form):
 
     def check_username(self):
         username = self.cleaned_data.get('username')
-        q1 = users.objects(username__exists = username).count()
-        if q1 != 0:
+        try:
+            q1 = User.objects.get(username=username)
             raise forms.ValidationError("This username is already taken")
-        return username
+        except DoesNotExist: #if no users in the database exist with that particular username
+            print("test")
+            return username
+
+
+
+
 
 
 

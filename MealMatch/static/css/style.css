@@ -48,7 +48,10 @@ h2 {
     background-color: #fff !important;
 }
 
-
+#user_logged_in{
+    background-color: rgb(189,65,4) !important;
+    color: white !important;
+}
 
 .navbar-brand {
     padding: 0.2em;
@@ -66,16 +69,18 @@ footer .glyphicon{
     color: rgb(189,65,4);
 }
 
+
 /***  ***/
 
 /*** ID ***/
 
 #facebook:hover{
     color: #fff !important;
-    background-color:#496ebc !important; 
+    background-color:#496ebc !important;
 }
-#menu {
-    color: rgb(189,64,4)
+
+.menu {
+    color: rgb(189,64,4) !important;
 }
 
 #login-dp {

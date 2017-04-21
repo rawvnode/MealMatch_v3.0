@@ -17,13 +17,20 @@ from collections import OrderedDict
 import math
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from account_functions.views import *
+from django.http import HttpResponseRedirect, HttpResponse
+
 
 
 
 ############# VIEW FUNCTIONS #####################
 def startpage(request):
-    print("fucking starpage")
-    return render(request, "startpage.html")
+    print(request.method)
+    if (request.method == "GET"):
+        print("fucking starpage")
+        return render(request, "startpage.html")
+
+
 
 
 ##Queries and renders a recipe when a recipe in the result list is clicked##
