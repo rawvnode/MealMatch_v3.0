@@ -21,6 +21,7 @@ class users(DynamicDocument):
     picture = StringField()
     my_info = StringField()
     sex = StringField()
+    Pantry = ListField(default= ['Salt', 'Sea salt', 'Pepper','White pepper', 'Vinegar', 'Flour', 'Oil', 'Sugar', 'Pasta', 'Baking powder', 'Soy sauce', 'Broth', 'Honey', 'Tomato purée', 'Cinnamon', 'Oregano', 'Curry'])
 
 
 
