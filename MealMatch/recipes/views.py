@@ -46,6 +46,7 @@ def presentRecipe(request):
 def retrieveRecipes(request):
     if request.method == "GET":
         raw_input = request.path[17:].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
+
         input = []
         for element in raw_input:
             input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
