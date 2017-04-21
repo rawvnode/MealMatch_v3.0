@@ -1,0 +1,20 @@
+1. kolla vad rad 61 returnerar 
+
+Ändra i/sätta prints i:
+django/contrib/auth/__init__.py rad 150
+
+2. Kolla user_id i get_user antar för värde
+django/contrib/auth/__init__.py rad 150
+
+3. Kolla vad user = backend.get_user()
+
+http://stackoverflow.com/questions/35617361/using-sessions-with-mongoengine-in-django-1-9 [allmänt]
+
+https://github.com/MongoEngine/django-mongoengine/issues/48 [specifik om _meta]
+
+User._meta.pk = User._fields["id"]
+User._meta.pk.value_to_string = lambda obj: smart_text(obj.pk)
+
+
+http://stackoverflow.com/questions/235950/how-to-lookup-django-session-for-a-particular-user
+
