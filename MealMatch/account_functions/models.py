@@ -8,7 +8,7 @@ class comments(Document):
     recipe_id = StringField(required=True)
     user_comment = StringField(required=True)
 
-class users(DynamicDocument):
+class User(DynamicDocument):
     username = StringField(required=True)
     password = StringField(required=True)
     mail = EmailField(required=True)

@@ -32,15 +32,40 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right" id="navText">
+                    <!--rename from id to class -->
                     <li><a id="admin_menu" href="">ADMIN</a></li>
                     <li><a id="admin_menu" href="">EDIT RECIPES</a></li>
                     <li><a id="admin_menu" href="">EDIT USERS</a></li>
                     <li><a id="admin_menu" href="">SETTINGS</a></li>
                     <li id="admin_menu">|<br>|<br>|</li>
-                    <li><a id="menu" href="/recipes.html">RECIPES</a></li>
-                    <li><a id="menu" onclick="putInList()">UNIT CONVERSION</a></li>
+
+                    <li><a class="menu" href="/recipes.html">RECIPES</a></li>
+                    {% if user.is_authenticated %}
                     <li class="dropdown">
-                        <a id="menu" href="#" class="dropdown-toggle" data-toggle="dropdown">LOGIN<span class="caret"></span></a>
+                        <a class="menu dropdown-toggle menu" data-toggle="dropdown" id ="user_logged_in">{{user}}<span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="loggedin-dp">
+                                <li><div class="form-group">
+
+                                     <form class="form" role="form" method="post" action="{% url 'account_functions:logout' %}" accept-charset="UTF-8" id="logout-nav">
+                                        {% csrf_token %}
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Logout</button>
+                                        </div>
+                                    </form>
+
+
+
+
+                                </div></li>
+                            </ul>
+
+                    </li>
+
+                    {%endif%}
+                    {% if not user.is_authenticated %}
+                    <li class="dropdown">
+                        <a id="menu" href="#" class="dropdown-toggle menu" data-toggle="dropdown">LOGIN<span class="caret"></span></a>
                         <ul class="dropdown-menu" id="login-dp">
                             <li>
                                 <div class="login">
@@ -52,13 +77,13 @@
                                     </div>
                                     or
 
-                                    <form class="form" role="form" method="post" action="/" accept-charset="UTF-8" id="login-nav">
+                                    <form class="form" role="form" method="post" action="/account_functions/login" accept-charset="UTF-8" id="login-nav">
                                         {% csrf_token %}
 
                                         {{form}}
 
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                                         </div>
                                     </form>
 
@@ -69,6 +94,7 @@
                             </li>
                         </ul>
                     </li>
+                    {%endif%}
                 </ul>
             </div>
         </div>
