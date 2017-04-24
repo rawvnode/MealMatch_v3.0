@@ -46,25 +46,30 @@ def presentRecipe(request):
 def retrieveRecipes(request):
     if request.method == "GET":
         raw_input = request.path[17:].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
-
         input = []
         for element in raw_input:
             input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
-        ## **COMMENT** ##
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
+<<<<<<< HEAD
+=======
         #q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
         query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
         sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
-
-
         dictlist = []
         for key, value in sorted_dict.items():
             temp = [key,value]
             dictlist.append(temp)
-        paginator = Paginator(dictlist, 27)  # Show 9 contacts per page
+        paginator = Paginator(dictlist, 12)  # Show 9 contacts per page
         page = request.GET.get('page', 1)
+
+
+
+
         recipes = view_paginator(page, paginator)
-        return render(request, "recipes.html", {"user_input" : input, "recipes": recipes})
+        page_range = paginateSlice(3, recipes, paginator)
+
+        return render(request, "recipes.html", {"user_input" : input, "recipes": recipes, "page_range" : page_range, "num_pages": paginator.num_pages})
     else:
         return render(request, "startpage.html")
 
@@ -101,3 +106,16 @@ def view_paginator(page, paginator):
     except EmptyPage:
         recipes = paginator.page(paginator.num_pages)
         return recipes
+
+
+def paginateSlice(page_numbers, recipes, paginator):
+    index = recipes.number - 1 # edited to something easier without index
+    # This value is maximum index of your pages, so the last page - 1
+    max_index = len(paginator.page_range)
+    # You want a range of 7, so lets calculate where to slice the list
+    start_index = index - page_numbers + 1 if index >= page_numbers else 0
+    end_index = index + page_numbers if index <= max_index - page_numbers else max_index
+    # My new page range
+    page_range = paginator.page_range[start_index:end_index]
+
+    return page_range

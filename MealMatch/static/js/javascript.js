@@ -26,7 +26,11 @@ function setURL() {
         ingredientArray[i] = ingredientArray[i].replace(/\s/g, "_");
         action = action  + ingredientArray[i] + "&"
         $(".ing_form").attr("action", action)
+<<<<<<< HEAD
+
+=======
     //window.alert($( ".ing_form" ).attr("action"))
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
 }
 }
 
@@ -203,13 +207,10 @@ function extractRecipe(recipe){
        console.log(recipe.tags)
 }
 
-/*$(document).ready(function(){
-        /*$("#recipe_box").click(function(){
-
-            ///var val = $(this).children();
-            var val = $(this).find(":input").triggerHandler("click")
-            window.alert(val)
-            $(".single_recipe").submit(val)
-
-        });
-    });*/
+$(function () {
+    $("#clickme").toggle(function () {
+        $(this).parent().animate({left:'0px'}, {queue: false, duration: 500});
+    }, function () {
+        $(this).parent().animate({left:'-282px'}, {queue: false, duration: 500});
+    });
+});

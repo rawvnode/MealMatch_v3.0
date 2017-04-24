@@ -46,8 +46,11 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
 ### Django ###
 *.log
 *.pot
@@ -60,4 +63,8 @@ media
 # User-specific stuff pycharm:
 .idea/**/workspace.xml
 .idea/**/tasks.xml
+<<<<<<< HEAD
 .idea/dictionaries
+=======
+.idea/dictionaries
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c

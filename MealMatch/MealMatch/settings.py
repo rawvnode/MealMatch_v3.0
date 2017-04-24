@@ -42,7 +42,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
+
 INSTALLED_APPS = [
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -52,7 +55,7 @@ INSTALLED_APPS = [
     # local apps
     'recipes',
     'account_functions',
-    
+
     #third party
     'rest_framework',
     'rest_framework_mongoengine',
@@ -71,6 +74,12 @@ INSTALLED_APPS = [
 AUTHENTICATION_BACKENDS = (
     'mongoengine.django.auth.MongoEngineBackend',
 )
+
+
+
+#MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
+
+
 MONGODBFORMS_FIELDGENERATOR = 'MealMatch.fieldgenerator.GeneratorClass'
 
 SESSION_ENGINE = 'mongoengine.django.sessions'
@@ -82,9 +91,10 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'MealMatch.urls'
@@ -93,15 +103,17 @@ ROOT_URLCONF = 'MealMatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Fabian/Desktop/mealmatch_v3.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Axel/Desktop/projekt/mealmatch_v3.0/MealMatch/Templates/"],
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
+                'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'account_functions.context_processors.include_login_form'
+                'account_functions.context_processors.include_login_form',
+                'account_functions.context_processors.is_logged_in'
             ],
         },
     },
