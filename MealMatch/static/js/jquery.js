@@ -48,3 +48,10 @@ $('a.pagerlink').click(function() {
     var id = $(this).attr('id');
     alert(id);
 });*/
+$(function () {
+    $("#clickme").toggle(function () {
+        $(this).parent().animate({left:'0px'}, {queue: false, duration: 500});
+    }, function () {
+        $(this).parent().animate({left:'-280px'}, {queue: false, duration: 500});
+    });
+});
