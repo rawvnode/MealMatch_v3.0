@@ -131,6 +131,7 @@ class Permission(Document):
         return (self.codename,) + self.content_type.natural_key()
     natural_key.dependencies = ['contenttypes.contenttype']
 
+    
 class Group(Document):
     """Groups are a generic way of categorizing users to apply permissions,
     or some other label, to those users. A user can belong to any number of
