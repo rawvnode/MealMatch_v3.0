@@ -87,7 +87,7 @@ footer .glyphicon{
     min-width: 250px;
     padding: 14px 14px 0;
     overflow:hidden;
-    background-color:rgba(250,250,250,0.8);
+    background-color:rgba(250,250,250,0.8) ;
 }
 
 #login-dp .help-block {

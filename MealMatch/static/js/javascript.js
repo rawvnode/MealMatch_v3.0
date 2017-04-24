@@ -26,7 +26,7 @@ function setURL() {
         ingredientArray[i] = ingredientArray[i].replace(/\s/g, "_");
         action = action  + ingredientArray[i] + "&"
         $(".ing_form").attr("action", action)
-    window.alert($( ".ing_form" ).attr("action"))
+    //window.alert($( ".ing_form" ).attr("action"))
 }
 }
 

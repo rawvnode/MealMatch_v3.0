@@ -52,7 +52,7 @@ def retrieveRecipes(request):
             input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
         ## **COMMENT** ##
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
-        q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
+        #q1 = mapped.objects(id__in=input).only('value')#.item_frequencies('value')
         query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
         sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
 
