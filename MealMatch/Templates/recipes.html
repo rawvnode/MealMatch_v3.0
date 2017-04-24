@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href='{% static "css/recipes2.css"%}'>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Sidebar/menu -->
 <div class="startPage w3-white">
 <div class="w3-white w3-content" style="max-width:1600px">
@@ -35,7 +36,7 @@
                                                 <script addItemMyIng({{input}})> </script>
 
 
-                                                <li id="item"+lastid class="list-group-item">{{input}}
+                                                <li id="item" class="list-group-item">{{input}}
                                                     <span class="pull-right">
                                                     <button id="removeButton" onclick="removeIngredient(input)">X</button></span>
                                                 </li>
@@ -64,7 +65,7 @@
         <header id="portfolio">
             <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
             <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-            <div class="w3-container">
+            <div class="w3-container" style = "padding-top: .5em;">
                 <h1><b>Matched recipes</b></h1>
                 <div class="w3-section w3-bottombar w3-padding-16">
                     <span class="w3-margin-right">Filter:</span>
@@ -84,12 +85,13 @@
                     {% csrf_token %}
                 <div class="w3-third w3-container w3-margin-bottom" data-id ={{item|first}}>
                 <input type="image" name="ind_recipe" class= "recipe_image" value = "" src={{item.1.image }} style="width:100%; height:auto;" >
-                <div class="w3-container w3-white">
+                <div class="w3-container w3-white" >
 
                     <p><b>{{item.1.title}}</b></p>
+
                     <p>{{item.1.frequency}} out of {{item.1.ing_count}} </p>
-                    <div class="w3-grey">
-                        <div class="w3-container w3-dark-grey w3-center" id="ratio-bar" style="width:{{item.1.ratio}}%;">{{item.1.ratio}}%</div>
+                    <div class="w3-grey w3-round-xlarge">
+                        <div class="w3-container w3-deep-orange w3-center w3-round-xlarge progress-bar-striped" id="ratio-bar" style="width:{{item.1.ratio}}%;">{{item.1.ratio}}%</div>
                     </div>
                 </div>
                 </div>
