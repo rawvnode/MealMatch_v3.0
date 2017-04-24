@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d39405f-fc2a-49f6-8088-c62200a87efa" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MealMatch/static/images/filter.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MealMatch/static/images/ingredients.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MealMatch/static/images/ingredientstighter.png" />
@@ -18,6 +19,20 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/css/recipes2.css" afterPath="$PROJECT_DIR$/MealMatch/static/css/recipes2.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/js/javascript.js" afterPath="$PROJECT_DIR$/MealMatch/static/js/javascript.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/js/jquery.js" afterPath="$PROJECT_DIR$/MealMatch/static/js/jquery.js" />
+=======
+      <change type="DELETED" beforePath="$PROJECT_DIR$/auth.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html" afterPath="$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/Templates/recipes.html" afterPath="$PROJECT_DIR$/MealMatch/Templates/recipes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/Templates/startpage.html" afterPath="$PROJECT_DIR$/MealMatch/Templates/startpage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/recipes/models.py" afterPath="$PROJECT_DIR$/MealMatch/recipes/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/recipes/views.py" afterPath="$PROJECT_DIR$/MealMatch/recipes/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/css/index.css" afterPath="$PROJECT_DIR$/MealMatch/static/css/index.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css" afterPath="$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/css/recipes2.css" afterPath="$PROJECT_DIR$/MealMatch/static/css/recipes2.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/css/style.css" afterPath="$PROJECT_DIR$/MealMatch/static/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MealMatch/static/js/javascript.js" afterPath="$PROJECT_DIR$/MealMatch/static/js/javascript.js" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,6 +50,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="recipes.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MealMatch/Templates/recipes.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,21 +67,60 @@
                 <marker date="1493041899685" expanded="false" signature="4126:4137" ph="..." />
                 <marker date="1493041899685" expanded="false" signature="5640:5664" ph="..." />
                 <marker date="1493041899685" expanded="true" signature="6108:6140" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recipes2.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MealMatch/static/css/recipes2.css">
+=======
+      <file leaf-file-name="javascript.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/static/js/javascript.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="90" column="30" lean-forward="false" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
+            <state relative-caret-position="85">
+              <caret line="161" column="48" lean-forward="true" selection-start-line="161" selection-start-column="48" selection-end-line="161" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="recipes.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/Templates/recipes.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1157">
+              <caret line="131" column="27" lean-forward="true" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ol#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#a#0;n#header#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#header#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="recipes2.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/static/css/recipes2.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="90" column="30" lean-forward="false" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
+=======
+      <file leaf-file-name="presenterarecept.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="79" column="14" lean-forward="false" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MealMatch/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -91,13 +146,23 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="331">
               <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+=======
+      <file leaf-file-name="presenterarecept.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="701">
+              <caret line="107" column="49" lean-forward="false" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MealMatch/MealMatch/urls.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -105,6 +170,65 @@
               <caret line="0" column="7" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
               <folding>
                 <element signature="e#35#76#0" expanded="true" />
+=======
+      <file leaf-file-name="startpage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/Templates/startpage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-16">
+              <caret line="10" column="77" lean-forward="false" selection-start-line="10" selection-start-column="77" selection-end-line="10" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/static/css/index.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="87" lean-forward="false" selection-start-line="9" selection-start-column="87" selection-end-line="9" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/static/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="89" column="42" lean-forward="false" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="recipes2.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/static/css/recipes2.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="395">
+              <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MealMatch/recipes/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="17" column="149" lean-forward="false" selection-start-line="17" selection-start-column="149" selection-end-line="17" selection-end-column="149" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MealMatch/recipes/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="64" column="41" lean-forward="true" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
               </folding>
             </state>
           </provider>
@@ -162,10 +286,25 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
+=======
+      <find>prevent</find>
+      <find>preve</find>
+      <find>setCo</find>
+      <find>search_bar</find>
+      <find>ingredient</find>
+      <find>ingredientarray</find>
+      <find>join</find>
+      <find>template</find>
+      <find>login</find>
+      <find>block</find>
+      <find>endfor</find>
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
       <find>dark-grey</find>
       <find>form</find>
       <find>print</find>
       <find>auto</find>
+<<<<<<< HEAD
       <find>create_user</find>
       <find>sign i</find>
       <find>get_user_sess</find>
@@ -192,6 +331,23 @@
       <find>user_input</find>
       <find>overflow</find>
       <find>title_text</find>
+=======
+      <find>image</find>
+      <find>star</find>
+      <find>fi</find>
+      <find>filo</find>
+      <find>window</find>
+      <find>additem</find>
+      <find>ing_count</find>
+      <find>ra</find>
+      <find>rating</find>
+      <find>padd</find>
+      <find>ing</find>
+      <find>we spe</find>
+      <find>ingredients_</find>
+      <find>ingredients</find>
+      <find>list</find>
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -216,24 +372,30 @@
         <option value="$PROJECT_DIR$/../testenv/MealMatch/static/css/recipes.css" />
         <option value="$PROJECT_DIR$/../testenv/Lib/site-packages/bson/viewReverted.py" />
         <option value="$PROJECT_DIR$/MealMatch/static/css/user.css" />
-        <option value="$PROJECT_DIR$/MealMatch/static/css/index.css" />
-        <option value="$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css" />
         <option value="$PROJECT_DIR$/../testenv/Lib/site-packages/mongoengine/base/fields.py" />
         <option value="$PROJECT_DIR$/MealMatch/recipes/oldview.py" />
-        <option value="$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html" />
         <option value="$PROJECT_DIR$/MealMatch/recipes/migrations/serializers.py" />
         <option value="$PROJECT_DIR$/MealMatch/MealMatch/viewsets.py" />
         <option value="$PROJECT_DIR$/MealMatch/recipes/viewsets.py" />
         <option value="$PROJECT_DIR$/MealMatch/recipes/serializers.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/MealMatch/Templates/startpage.html" />
+=======
+        <option value="$PROJECT_DIR$/MealMatch/MealMatch/urls.py" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
         <option value="$PROJECT_DIR$/MealMatch/recipes/urls.py" />
         <option value="$PROJECT_DIR$/MealMatch/MapReduce/mapreduce.js" />
         <option value="$PROJECT_DIR$/MealMatch/Templates/account_functions/login.html" />
         <option value="$PROJECT_DIR$/MealMatch/Templates/account_functions/create_user.html" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/MealMatch/account_functions/urls.py" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
         <option value="$PROJECT_DIR$/MealMatch/account_functions/viewsold.py" />
         <option value="$PROJECT_DIR$/MealMatch/account_functions/models.py" />
         <option value="$PROJECT_DIR$/MealMatch/account_functions/forms.py" />
         <option value="$PROJECT_DIR$/MealMatch/account_functions/context_processors.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/MealMatch/static/css/style.css" />
         <option value="$PROJECT_DIR$/MealMatch/MealMatch/settings.py" />
         <option value="$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/django/contrib/auth/__init__.py" />
@@ -249,6 +411,19 @@
         <option value="$PROJECT_DIR$/MealMatch/static/css/recipes2.css" />
         <option value="$PROJECT_DIR$/MealMatch/recipes/views.py" />
         <option value="$PROJECT_DIR$/MealMatch/Templates/recipes.html" />
+=======
+        <option value="$PROJECT_DIR$/MealMatch/account_functions/models.py" />
+        <option value="$PROJECT_DIR$/MealMatch/static/css/style.css" />
+        <option value="$PROJECT_DIR$/MealMatch/static/css/recipes2.css" />
+        <option value="$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css" />
+        <option value="$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html" />
+        <option value="$PROJECT_DIR$/MealMatch/Templates/recipes.html" />
+        <option value="$PROJECT_DIR$/MealMatch/static/css/index.css" />
+        <option value="$PROJECT_DIR$/MealMatch/Templates/startpage.html" />
+        <option value="$PROJECT_DIR$/MealMatch/static/js/javascript.js" />
+        <option value="$PROJECT_DIR$/MealMatch/recipes/views.py" />
+        <option value="$PROJECT_DIR$/MealMatch/recipes/models.py" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
       </list>
     </option>
   </component>
@@ -378,10 +553,13 @@
               <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
             <PATH_ELEMENT>
               <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+=======
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -939,20 +1117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-663">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/recipes/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -975,6 +1139,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MealMatch/MapReduce/mapreduce.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -984,6 +1149,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/Templates/account_functions/login.html">
+=======
+    <entry file="file://$PROJECT_DIR$/../testenv/Lib/site-packages/mongoengine/base/fields.py">
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
@@ -997,6 +1165,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MealMatch/recipes/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -1026,6 +1195,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../django-mongoengine/example/tumblelog/tumblelog/settings.py">
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/MapReduce/mapreduce.js">
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
           <caret line="128" column="36" lean-forward="true" selection-start-line="128" selection-start-column="36" selection-end-line="128" selection-end-column="36" />
@@ -1041,6 +1213,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/django/contrib/auth/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="485">
@@ -1050,6 +1223,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/account_functions/models.py">
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/MealMatch/urls.py">
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
@@ -1095,6 +1271,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/site-packages/mongoengine/django/auth.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1122,6 +1299,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/recipes/models.py">
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/account_functions/viewsold.py">
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="29" column="101" lean-forward="false" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
@@ -1139,6 +1319,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MealMatch/MealMatch/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1177,18 +1358,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="91" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="91" />
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/account_functions/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="76" lean-forward="false" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#24#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/account_functions/context_processors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="36" lean-forward="true" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/account_functions/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="217" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="217" />
+          <folding>
+            <marker date="1492775269676" expanded="true" signature="262:955" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/css/recipes.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="162" column="1" lean-forward="false" selection-start-line="162" selection-start-column="1" selection-end-line="162" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="52" column="27" lean-forward="false" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
+        <state relative-caret-position="493">
+          <caret line="89" column="42" lean-forward="false" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/css/recipes2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="52" column="27" lean-forward="false" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="87" lean-forward="false" selection-start-line="9" selection-start-column="87" selection-end-line="9" selection-end-column="87" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MealMatch/static/js/javascript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="605">
@@ -1201,28 +1440,103 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-519">
           <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/js/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="33" lean-forward="false" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/Templates/presenterarecept.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="701">
+          <caret line="107" column="49" lean-forward="false" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/css/presenterarecept.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="79" column="14" lean-forward="false" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/Templates/startpage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="10" column="77" lean-forward="false" selection-start-line="10" selection-start-column="77" selection-end-line="10" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/account_functions/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="47" column="23" lean-forward="true" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/static/css/recipes2.css">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="358">
           <caret line="90" column="30" lean-forward="false" selection-start-line="90" selection-start-column="30" selection-end-line="90" selection-end-column="30" />
+          <folding />
+=======
+        <state relative-caret-position="1157">
+          <caret line="131" column="27" lean-forward="true" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ol#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#nav#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#header#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#header#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MealMatch/static/js/javascript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="161" column="48" lean-forward="true" selection-start-line="161" selection-start-column="48" selection-end-line="161" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MealMatch/recipes/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="331">
           <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+=======
+        <state relative-caret-position="510">
+          <caret line="64" column="41" lean-forward="true" selection-start-line="64" selection-start-column="41" selection-end-line="64" selection-end-column="41" />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/MealMatch/Templates/recipes.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
@@ -1239,6 +1553,13 @@
             <marker date="1493041899685" expanded="false" signature="5640:5664" ph="..." />
             <marker date="1493041899685" expanded="true" signature="6108:6140" ph="..." />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/MealMatch/recipes/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" column="149" lean-forward="false" selection-start-line="17" selection-start-column="149" selection-end-line="17" selection-end-column="149" />
+          <folding />
+>>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
         </state>
       </provider>
     </entry>

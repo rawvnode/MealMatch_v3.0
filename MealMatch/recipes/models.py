@@ -10,16 +10,12 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
 
     def get_stats(keys):
 
-        #number of result - (numbers of results - 100)
-        skipval = 0 #The amount of results to query
-        if (len(keys) > 120):
-            skipval = len(keys) - 120
         reduced_result = {}
         start = time.time()
-        clicks_rating = recipe.objects.skip(0).filter(id__in=keys).exclude('ingredients_complete').exclude('directions')#Exclude speeds up the query process
+        clicks_rating = recipe.objects.filter(id__in=keys).exclude('ingredients_list').exclude('directions')#Exclude speeds up the query process
         for item in clicks_rating:
             #print(item.rating)
-            reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_list), "image": item.image}
+            reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_complete), "image": item.image}
         end = time.time()
         print(end - start)
         return reduced_result

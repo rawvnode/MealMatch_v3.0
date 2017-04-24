@@ -2,111 +2,165 @@
 {% block content %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href='{% static "css/presenterarecept.css"%}'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <div class="presenteraRecept text-center">
-        <div class="container" id="presentation">
-            <header class="list-item_header" id="recept_header">
-                <div class="col-sm-4" id="food_image">
-                    <img src="../../static/images/background.jpg" id=recipeimg>
-                </div>
-                <div class="col-sm-8" id="food_rating">
 
-                    <h1>TITLE</h1>
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"><h7>Andreas Samuelsson</h7></span>
-                    <div class="rating">
+<style>
+.star-icon.half:before {
+    color: black;
+    content: '\2605'; /* Full star in UTF8 */
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    text-shadow: 0 0 2px rgba(0,0,0,0.7);
+}
+.star-icon.full:before {
+    color: black;
+    content: '\2605'; /* Full star in UTF8 */
+    position: absolute;
+    left: 0;
+    text-shadow: 0 0 2px rgba(0,0,0,0.7);
+ }
+.star-icon {
+    color: #ddd;
+    font-size: 34px;
+    position: relative;
+}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.mySlides {display:none}
+</style>
+
+
+
+<body class="w3-content w3-border-left w3-border-right">
+
+
+
+
+
+
+
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-white" style="margin-left:100px; margin-top:80px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:80px"></div>
+
+  <!-- Slideshow Header -->
+  <div class="w3-container" id="apartment">
+    <h2 class="w3-text">{{recipe.title}}</h2>
+  </div>
+
+
+  <div class="w3-row w3-large">
+      <div class="w3-half">
+      	<img src={{recipe.image}} style="width:90%;margin-bottom:-6px">
+         <div class="w3-row w3-large">
+
+      <div class="w3-col s3">
+      	<i class="fa fa-heart w3-margin" aria-hidden="true"></i>
+      </div>
+      <div class="w3-col s3">
+      <i class="fa fa-share-alt w3-margin" aria-hidden="true"></i>
+      </div>
+      <div class="w3-col s3">
+      <i class="fa fa-flag w3-margin" aria-hidden="true"></i>
+      </div>
+      <div class="w3-col s3">
+      <i class="fa fa-comment w3-margin" aria-hidden="true"></i>
+      </div>
+   <div class="w3-half">
+        <i class="fa fa-clock-o fa-2x w3-margin" aria-hidden="true"></i>
+        {{recipe.time}}
+      </div>
+
+      <div class="w3-half">
+        <i class="fa fa-cutlery fa-2x w3-margin" aria-hidden="true"></i>
+        {{recipe.servings}}
+      </div>
+             <div class="rating w3-margin-left">
                         <span>☆</span>
                         <span>☆</span>
                         <span>☆</span>
                         <span>☆</span>
                         <span>☆</span>
                     </div>
-                </div>
-            </header>
-            <br>
-            <div class="icons">
-                <div class="icon like">
-                    <span class="glyphicon glyphicon-heart" aria-hidden="true"><h9>Save</h9></span>
-                </div>
-                <div class="icon share">
-                    <span class="glyphicon glyphicon-share" aria-hidden="true"><h9>Share</h9></span>
-                </div>
-                <div class="icon rate">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"><h9>Rate</h9></span>
-                </div>
-                <div class="icon comment">
-                    <span class="glyphicon glyphicon-comment" aria-hidden="true"><h9>Comment</h9></span>
-                </div>
-
-            </div>
-            <br>
-            <main class="ingredinstruct">
-                <div class="col-sm-4" id="food_ing">
-                    <h3>INGREDIENTS</h3>
-                    <span class="glyphicon glyphicon-cutlery" aria-hidden="true"><h8>4</h8></span><br><br>
-                    <input type="checkbox" name="Mjöl" value="Car" checked> Mjöl<br>
-                    <input type="checkbox" name="Mjöl" value="Car" checked> Socker<br>
-                    <input type="checkbox" name="Mjöl" value="Car"> Butter<br>
-                    <input type="checkbox" name="Mjöl" value="Car" checked> Mjöl<br>
-                    <input type="checkbox" name="Mjöl" value="Car" checked> Mjöl<br>
-                </div>
-                <div class="col-sm-8" id="food_inst">
-                    {% if recipe %}
-
-
-                    <h3>{{recipe.title}}</h3>
-                    {% endif %}
-                    <ol>
-                        <li>Blanda kaffe med mjöl</li>
-                        <li>Kör i kadffebryggare</li>
-                        <li>Blanda med mjölk</li>
-                    </ol>
-                    <br>
-                    <c class="tags">Mjölkfritt</c>
-                </div>
-            </main>
-            <br>
-            <div class="icons_comment">
-                <h1>Comments</h1>
-                <header class="media">
-                <div class="media-left media-top">
-                    <span id="comment_user" class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                </div>
-                <div class="media-body"><textarea class="form-control" id="commentsfield" name="comments" placeholder="Comment" rows="4"></textarea><br>
-                    <div class="row">
-                        <div class="col-sm-12 form-group">
-                            <button class="btn btn-default pull-left" type="submit">Send</button>
-                        </div>
-                    </div>
-                    </div>
-                </header>
-                <hr>
-                <div class="media">
-                    <div class="media-left media-middle">
-                        <img src="../../static/images/andreas.jpg" class="media-object" style="width:80px">
-                    </div>
-                    <div class="media-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-                        <p>Datum 2017-04-11</p>
-                    </div>
-                </div>
-                <hr>
-                <div class="media">
-                    <div class="media-left media-middle">
-                        <img src="../../static/images/axel.jpg" class="media-object" style="width:80px">
-                    </div>
-                    <div class="media-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p>Datum 2017-04-11</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
+
+
+      </div>
+
+
+
+
+      <div class="w3-third w3-margin-left">
+
+
+       <h5><strong>Ingredients</strong></h5>
+    <div class="w3-row w3-large">
+      <div class="w3-col s12">
+          {% for ingredient in recipe.ingredients_complete %}
+                <p>{{ingredient}}</p>
+            {%endfor%}
+
+      </div>
+
+    </div>
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+  <div class="w3-margin">
+
+    <h5><strong>Preparation</strong></h5>
+    <div class="w3-row w3-large">
+         {% for direction in recipe.directions %}
+      <div class="w3-row w3-large">
+
+
+        <p>{{forloop.counter}}. {{direction}}</p>
+      </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <h5><strong>Tags</strong></h5>
+    {%for tag in recipe.tags%}
+    <p>{{tag}}</p>
+    {%endfor%}
+      <hr>
+
+   </div>
+
+
+
+  </div>
+  <hr>
+
+
+
+<!-- End page content -->
+</div>
+
+
+
+
+
+
+</body>
 
 
 {% endblock %}
