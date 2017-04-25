@@ -128,11 +128,32 @@
   
 }
 
+.title_text {
+    width: 100%;
+    /*white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;*/
+
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+
 
 h9 {
     font-size: 0.5em;
     margin: 1em;
 }
+
+h5 {
+    font-family: "Raleway", sans-serif !important;
+}
+
+p {
+font-family: "Raleway", sans-serif !important;
+}
+
+
 
 #recept_header { 
     overflow: hidden;

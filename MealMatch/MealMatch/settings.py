@@ -103,7 +103,7 @@ ROOT_URLCONF = 'MealMatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Axel/Desktop/projekt/mealmatch_v3.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Fabian/Desktop/MealMatch_v3.0/MealMatch/Templates/"],
         'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
