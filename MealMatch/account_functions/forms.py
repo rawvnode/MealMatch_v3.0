@@ -17,7 +17,6 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError("Wrong user or password")
             if not user.check_password(password):
                 raise forms.ValidationError("Wrong user or password")
-            print("return me outside, how bout that")
         return super(UserLoginForm, self).clean()
 
 

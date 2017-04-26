@@ -26,11 +26,7 @@ function setURL() {
         ingredientArray[i] = ingredientArray[i].replace(/\s/g, "_");
         action = action  + ingredientArray[i] + "&"
         $(".ing_form").attr("action", action)
-<<<<<<< HEAD
 
-=======
-    //window.alert($( ".ing_form" ).attr("action"))
->>>>>>> 05994cf6c464801c7fcafd7fffd1e9c38258da5c
 }
 }
 
