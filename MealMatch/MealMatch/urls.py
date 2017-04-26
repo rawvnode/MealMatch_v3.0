@@ -20,8 +20,14 @@ urlpatterns = [
     url(r'^', include("recipes.urls")), #varför har vi två länkar som inklucerar recipes?
 
     ##API urls
-    url(r'^api/', include(router.urls, namespace = 'api') )
+    url(r'^api/', include(router.urls, namespace = 'api') ),
+
+    ##social
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 
 ]
 
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'recipes'

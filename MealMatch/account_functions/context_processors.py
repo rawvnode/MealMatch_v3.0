@@ -9,4 +9,9 @@ def include_login_form(request):
 
 
 def is_logged_in(request):
+    #import ipdb;
+    #ipdb.set_trace()
+
+    print("cookie ", request.user)
+
     return{'user': request.user}

@@ -42,7 +42,7 @@
                     <li><a class="menu" href="/recipes.html">RECIPES</a></li>
                     {% if user.is_authenticated %}
                     <li class="dropdown">
-                        <a class="menu dropdown-toggle menu" data-toggle="dropdown" id ="user_logged_in">{{user}}<span class="caret"></span></a>
+                        <a class="menu dropdown-toggle menu" data-toggle="dropdown" id ="user_logged_in">{{user.picture}}<span class="caret"></span></a>
                             <ul class="dropdown-menu" id="loggedin-dp">
                                 <li><div class="form-group">
 
@@ -71,8 +71,8 @@
                                 <div class="login">
                                     <p>Login via</p>
                                     <div class="social-buttons">
-                                        <a class="btn btn-block btn-social btn-facebook" id="facebook" href="www.facebook.com"><span class="fa fa-facebook"></span>acebook</a>
-
+                                        <!--<a class="btn btn-block btn-social btn-facebook" id="facebook" href="www.facebook.com"><span class="fa fa-facebook"></span>acebook</a>-->
+                                        <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
 
                                     </div>
                                     or

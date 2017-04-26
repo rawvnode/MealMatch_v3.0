@@ -60,10 +60,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_mongoengine',
     'crispy_forms',
-
+    #'social_django_ongoengine',
+    'social_django',
 
 
 ]
+
+SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
 
 #TEMPLATE_CONTEXT_PROCESSORS = (
 #    #....
@@ -72,17 +81,21 @@ INSTALLED_APPS = [
 
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
     'mongoengine.django.auth.MongoEngineBackend',
+
+
+    'django.contrib.auth.backends.ModelBackend',
+
 )
 
 
 
-#MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
 
 
 MONGODBFORMS_FIELDGENERATOR = 'MealMatch.fieldgenerator.GeneratorClass'
 
-SESSION_ENGINE = 'mongoengine.django.sessions'
+#SESSION_ENGINE = 'mongoengine.django.sessions'
 SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
 MIDDLEWARE_CLASSES = [
@@ -94,7 +107,7 @@ MIDDLEWARE_CLASSES = [
 
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'MealMatch.urls'
@@ -104,7 +117,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ["C:/Users/Fabian/Desktop/MealMatch_v3.0/MealMatch/Templates/"],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
@@ -113,7 +126,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'account_functions.context_processors.include_login_form',
-                'account_functions.context_processors.is_logged_in'
+                'account_functions.context_processors.is_logged_in',
+
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
@@ -126,8 +142,8 @@ WSGI_APPLICATION = 'MealMatch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': ''
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -177,3 +193,8 @@ STATICFILES_DIRS = [
     #'/static/css/',
 # ]
 ]
+
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '765337320295594'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '05d2d4760e77455f4d14b11f4359966f' # Secret key
