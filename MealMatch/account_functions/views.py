@@ -37,7 +37,7 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         username = form.check_username()
         user = User.create_user(username = username, password = password)
-        user.mail = mail
+
     return render(request, "account_functions/create_user.html", context)
 
 
