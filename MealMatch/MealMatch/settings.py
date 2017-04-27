@@ -58,8 +58,8 @@ INSTALLED_APPS = [
     'account_functions',
 
     #third party
-    'rest_framework',
-    'rest_framework_mongoengine',
+    #'rest_framework',
+    #'rest_framework_mongoengine',
     'crispy_forms',
     #'social_django_ongoengine',
     'social_django',
@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 
 ]
 
-SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
+
 
 
 ### Facebook login settings
@@ -80,7 +80,6 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
 
 
-SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [('gender', 'gender')]
 
 
 
@@ -155,7 +154,7 @@ SOCIAL_AUTH_PIPELINE = (
 MONGODBFORMS_FIELDGENERATOR = 'MealMatch.fieldgenerator.GeneratorClass'
 
 #SESSION_ENGINE = 'mongoengine.django.sessions'
-SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
+#SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -175,7 +174,7 @@ ROOT_URLCONF = 'MealMatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Fabian/Desktop/MealMatch_v3.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Sofia/Desktop/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
