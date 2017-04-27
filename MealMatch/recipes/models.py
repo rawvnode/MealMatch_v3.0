@@ -71,6 +71,9 @@ class comments(Document):
     username = StringField()
     user_comment = StringField()
 
+
+
+
 class recipe(DynamicDocument):
     title = StringField(required=True)
     time = StringField()

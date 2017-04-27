@@ -5,6 +5,14 @@
     
 }
 
+#id_comment{
+
+    height : 100px;
+    max-width: 80%;
+
+}
+
+
 .presenteraRecept{
     /*background-image: linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.2)), url("../images/background.jpg");*/
     background-size: cover;
@@ -80,6 +88,7 @@
   font-size: 3em;
   text-align: left;
 }
+
 .rating > span {
   display: inline-block;
   position: relative;
@@ -106,7 +115,7 @@
 
 .icon h9{
     display:table-cell; 
-    vertical-align: middle
+    vertical-align: middle;
 }
 
 .icons {
@@ -163,9 +172,7 @@ font-family: "Raleway", sans-serif !important;
     
 }
 
-.row {
-    
-}
+
 
 
 

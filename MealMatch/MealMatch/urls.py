@@ -2,6 +2,7 @@
 """
 from django.conf.urls import include, url
 from rest_framework_mongoengine import routers
+from django.contrib import admin
 
 # from MealMatch.recipes.viewsets import viewsets
 from recipes.viewsets import *
@@ -25,6 +26,9 @@ urlpatterns = [
     ##social
     url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 
+
+    ##admin
+    url(r'^admin/', include(admin.site.urls))
 ]
 
 

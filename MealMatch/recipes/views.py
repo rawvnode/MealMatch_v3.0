@@ -19,6 +19,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from account_functions.views import *
 from django.http import HttpResponseRedirect, HttpResponse
+from .forms import CommentForm
 
 
 
@@ -40,7 +41,7 @@ def presentRecipe(request):
         print("present recipe, get request")
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
-        return render(request, "presenterarecept.html", {"recipe": recipe_response})
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "commentform" : CommentForm})
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request):
