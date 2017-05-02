@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 
 ]
 
-SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
+#SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
 
 
 ### Facebook login settings

@@ -3,6 +3,7 @@ import mongoengine
 import datetime
 from django.db import models
 from django.contrib import admin
+import datetime
 
 # Create your models here.
 #class comments(Document):
@@ -30,11 +31,12 @@ class user_test(models.Model):
 class usersAdmin(admin.ModelAdmin):
     pass
 
-class Profile(Document):
+class Profile(DynamicDocument):
+    user_id_reference = IntField(unique=True)
     full_name = StringField()
     first_name = StringField()
     last_name = StringField()
-    id = ObjectIdField(primary_key=True)
+    date = DateTimeField(default=datetime.datetime.now())
     facebook_id = IntField()
     favorites = ListField()
     my_recipies = ListField()
