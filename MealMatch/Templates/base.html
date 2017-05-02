@@ -13,6 +13,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link rel="stylesheet" type="text/css" href='{% static "css/style.css"%}'>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" rel="stylesheet">
         <!--<link rel="stylesheet" type="text/css" href='{% static "css/user.css"%}'> -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src='{% static "js/javascript.js"%}'></script>
@@ -80,7 +81,7 @@
                                     <form class="form" role="form" method="post" action="/account_functions/login" accept-charset="UTF-8" id="login-nav">
                                         {% csrf_token %}
 
-                                        {{form}}
+                                        {{loginForm}}
 
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -89,7 +90,7 @@
 
                                 </div>
                                 <div class="bottom text-center">
-                                    <a href="#"><b>Sign up</b></a>
+                                    <a href="/account_functions/create_user.html"><b>Sign up</b></a>
                                 </div>
                             </li>
                         </ul>
