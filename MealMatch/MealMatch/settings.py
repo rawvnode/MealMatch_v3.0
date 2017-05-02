@@ -66,7 +66,7 @@ INSTALLED_APPS = [
 
 
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 
 
@@ -174,7 +174,7 @@ ROOT_URLCONF = 'MealMatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Sofia/Desktop/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Axel/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
