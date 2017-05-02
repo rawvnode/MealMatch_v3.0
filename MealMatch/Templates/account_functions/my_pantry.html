@@ -1,18 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load staticfiles %}
-
-
 <link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
-        <div class="startPage">
+<link rel="stylesheet" type="text/css" href='{% static "css/pantry.css"%}'>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-            <div class="container_logo">
-                <img src="../../static/images/logo.png" alt="Logo" width="100%" height="auto">
+
+<div class="pantryPage">
+
+
+            <div class="container-fluid">
+
+
+
+
+            <div class="w3-row w3-padding header">
+                <div class="container_logo w3-center">
+                <img src="../../static/images/logo.png" alt="Logo" width="40%" height="auto">
 
             </div>
-            <h2 id="slogan">Enter your ingredients and we will find you a match</h2>
-                <div class="container_searchbar">
-                    <form class="search_bar w3-padding" action="/recipes/" method="POST">
+                     <h2 id="slogan">Virtual pantry</h2>
+                </div>
+
+            <div class="w3-card w3-padding">
+
+
+
+
+
+
+                <div class="container_searchbar" >
+                    <form class="search_bar" action="/recipes/" method="POST">
                         {% csrf_token %}
                         <div class="input-group">
                             <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
@@ -32,6 +50,9 @@
                     </form>
                 </div>
             <div class="container_ingredients">
+
+                <h2 id="slogan2">Added groceries:</h2>
+
 
 
                 <form class = "ing_form" action="/recipes/recipes/" method="GET" >
@@ -57,9 +78,6 @@
 
 
                             </div>
-                            <div class="center_button">
-                                  <input type="submit" class="btn" id="matchme" value = "Match me(al)" onsubmit ="setURL()">
-                            </div>
 
 
 
@@ -70,13 +88,13 @@
 
                 </div>
 
+
                 </form>
+                </div>
             </div>
-
-
         </div>
 
 
-
+</div>
 
 {% endblock %}

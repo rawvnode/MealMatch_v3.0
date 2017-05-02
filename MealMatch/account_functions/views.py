@@ -25,7 +25,14 @@ from django.http import HttpResponseRedirect
 #         return render(request,"account_functions/update_table.html")
 
 
+
+def my_pantry(request):
+    return render(request,"account_functions/my_pantry.html")
+
+
+
 def login_view(request):
+
 
     next = request.GET.get('next')
     title = "Login"

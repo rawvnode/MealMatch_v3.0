@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'RammettoOne'; /*a name to be used later*/
+    src: url('../font/RammettoOne-Regular.ttf'); /*URL to font*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-family:  "Raleway", sans-serif !important;
+}
+
+.pantryPage {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("../images/recipes-background.jpeg");
+    background-size: cover;
+    padding-top: 7em;
+    height: 97%;
+    padding-bottom: 3em;
+
+
+}
+
+.input-group {
+    margin-top: 1em;
+}
+
+#slogan {
+    font-family: "RammettoOne" !important;
+    font-size: 25px;
+    color: rgb(75, 75, 75)
+}
+
+
+
+
+
+
+@media screen and (max-width: 700px) {
+    .w3-card {
+        background-color: rgba(255, 255, 255, 0.5);
+        height: 100%;
+        max-height: 700px;
+        font-size: 10px !important;
+}
+
+    h2 {
+        font-size: 21px !important;
+        font-weight:normal !important;
+    }
+
+    .pantryPage {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("../images/recipes-background.jpeg");
+        background-size: cover;
+        padding-top: 4em;
+        height: 95%;
+        padding-bottom: 3em;
+
+
+    }
+
+    #slogan {
+    font-family: "RammettoOne" !important;
+    font-size: 12px !important;
+    color: rgb(75, 75, 75)
+}
+
+
+
+}
+
+
+
+
+.w3-card {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 90%;
+    max-height: 600px;
+}
+
+.container-fluid {
+    width:100%;
+    max-width:700px;
+}
+
+
