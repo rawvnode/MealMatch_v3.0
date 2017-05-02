@@ -7,22 +7,27 @@ from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
 
-@login_required(redirect_field_name = "account_functions/login.html")
-def delete_field(request):
-    if request.method == "POST":
-        users.objects(username= request.POST['your_name']).delete()
-        return render(request, "account_functions/delete_field.html")
-    else:
-        return render(request, "account_functions/delete_field.html")
+# @login_required(redirect_field_name = "account_functions/login.html")
+# def delete_field(request):
+#     if request.method == "POST":
+#         users.objects(username= request.POST['your_name']).delete()
+#         return render(request, "account_functions/delete_field.html")
+#     else:
+#         return render(request, "account_functions/delete_field.html")
+#
+#
+# @login_required(redirect_field_name = "account_functions/login.html")
+# def update_table(request):   #change profile settings
+#     if request.method == "POST":
+#         users.objects(username =  request.POST['old_name']).update(set__username = request.POST['new_name'])
+#         return HttpResponse("You renamed your account to:",request.POST['new_name'] )
+#     else:
+#         return render(request,"account_functions/update_table.html")
 
 
-@login_required(redirect_field_name = "account_functions/login.html")
-def update_table(request):   #change profile settings
-    if request.method == "POST":
-        users.objects(username =  request.POST['old_name']).update(set__username = request.POST['new_name'])
-        return HttpResponse("You renamed your account to:",request.POST['new_name'] )
-    else:
-        return render(request,"account_functions/update_table.html")
+def my_pantry(request):
+    return render(request,"account_functions/my_pantry.html")
+
 
 
 def register_view(request):
