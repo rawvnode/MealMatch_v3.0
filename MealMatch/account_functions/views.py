@@ -7,22 +7,22 @@ from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
 
-@login_required(redirect_field_name = "account_functions/login.html")
-def delete_field(request):
-    if request.method == "POST":
-        users.objects(username= request.POST['your_name']).delete()
-        return render(request, "account_functions/delete_field.html")
-    else:
-        return render(request, "account_functions/delete_field.html")
-
-
-@login_required(redirect_field_name = "account_functions/login.html")
-def update_table(request):   #change profile settings
-    if request.method == "POST":
-        users.objects(username =  request.POST['old_name']).update(set__username = request.POST['new_name'])
-        return HttpResponse("You renamed your account to:",request.POST['new_name'] )
-    else:
-        return render(request,"account_functions/update_table.html")
+#@login_required(redirect_field_name = "account_functions/login.html")
+#def delete_field(request):
+#    if request.method == "POST":
+#        users.objects(username= request.POST['your_name']).delete()
+#        return render(request, "account_functions/delete_field.html")
+#    else:
+#        return render(request, "account_functions/delete_field.html")
+#
+#
+#@login_required(redirect_field_name = "account_functions/login.html")
+#def update_table(request):   #change profile settings
+#    if request.method == "POST":
+#        users.objects(username =  request.POST['old_name']).update(set__username = request.POST['new_name'])
+#        return HttpResponse("You renamed your account to:",request.POST['new_name'] )
+#    else:
+#        return render(request,"account_functions/update_table.html")
 
 
 def register_view(request):
@@ -82,3 +82,22 @@ def user_page(request):
     # funktioner till vanlig användare
     return
 
+#@login_required(redirect_field_name = "account_functions/add_recipe.html")
+def add_recipe(request):
+    form = AddRecipeForm(request.POST or None)
+    print('form',form)
+    title = 'Add recipe'
+    context = {
+        "form": form,
+        "title": title
+    }
+    if form.is_valid():
+        title_recipe = form.cleaned_data.get('title')
+        preperation_time = form.cleaned_data.get('preperation_time')
+        servings = form.check_username('servings')
+        directions = form.check_username('directions')
+        amount = form.check_username('amount')
+        unit = form.check_username('unit')
+        category = form.check_username('category')
+        picture_url = form.check_username('picture_url')
+    return render(request, "account_functions/add_recipe.html", context)
