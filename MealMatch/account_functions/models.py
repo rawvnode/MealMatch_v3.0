@@ -12,13 +12,20 @@ import datetime
 
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import *
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-@admin.register(User)
-class usersAdmin(admin.ModelAdmin):
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_filter = ['is_staff']
+    pass
+
 
 
 class user_test(models.Model):
@@ -27,9 +34,7 @@ class user_test(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
-@admin.register(user_test)
-class usersAdmin(admin.ModelAdmin):
-    pass
+
 
 class Profile(DynamicDocument):
     user_id_reference = IntField(unique=True)
