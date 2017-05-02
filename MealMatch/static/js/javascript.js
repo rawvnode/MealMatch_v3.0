@@ -210,3 +210,4 @@ $(function () {
         $(this).parent().animate({left:'-282px'}, {queue: false, duration: 500});
     });
 });
+
