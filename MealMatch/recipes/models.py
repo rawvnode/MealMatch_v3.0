@@ -1,8 +1,10 @@
 from mongoengine import *
 from mongoengine import queryset_manager
 import time
+from django import forms
 from .models import *
 from collections import OrderedDict
+from datetime import datetime
 
 
  ##### CUSTOM QUERYSETS #####
@@ -67,11 +69,13 @@ class rating(Document):
     user_rated = StringField(required=True)
     recipe_rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
 
-class comments(Document):
-    username = StringField()
-    user_comment = StringField()
 
 
+class Comment(EmbeddedDocument):
+    created_at = DateTimeField(default = datetime.now, required=True)
+    author = StringField(verbose_name="Name", max_length=255, required=True)
+    email  = EmailField(verbose_name="Email")
+    body = StringField(verbose_name="Comment", required=True)
 
 
 class recipe(DynamicDocument):
@@ -86,7 +90,7 @@ class recipe(DynamicDocument):
     clicks = IntField(required=True, default=1)
     relevance = IntField()
     author = StringField(default='By MealMatch')
-    comments = ListField(EmbeddedDocumentField('comments'))
+    comments = ListField(EmbeddedDocumentField('Comment'))
     pictures = StringField()
     id = ObjectIdField(primary_key=True)
 
@@ -97,6 +101,8 @@ class recipe(DynamicDocument):
         print("ordering")
         return queryset.order_by("-clicks")
 
+#class Recipes(models.Model):
+        #user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 
 ## mapped models ##
 class mapped_id(Document):

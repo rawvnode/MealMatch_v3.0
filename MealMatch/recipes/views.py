@@ -26,25 +26,21 @@ from .forms import CommentForm
 
 ############# VIEW FUNCTIONS #####################
 def startpage(request):
-    print(request.method)
     if (request.method == "GET"):
-        print("fucking starpage")
         return render(request, "startpage.html")
-
 
 
 
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 def presentRecipe(request):
-    print("present recipe: ", request.method)
     if request.method == "GET": #When the page is retrieved
-        print("present recipe, get request")
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
         return render(request, "presenterarecept.html", {"recipe": recipe_response, "commentform" : CommentForm})
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request):
+    print("hej")
     if request.method == "GET":
         raw_input = request.path[17:].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
         input = []
@@ -117,3 +113,30 @@ def paginateSlice(page_numbers, recipes, paginator):
     page_range = paginator.page_range[start_index:end_index]
 
     return page_range
+
+
+def hej(request):
+    print("################################################################")
+    return
+
+def comment_recipe(request):
+
+    form = CommentForm(request.POST or None)
+    title = 'Add comment'
+    context = {
+        "form": form,
+        "title": title
+    }
+    # req_id = request.sessions["req_id"]
+    print("PATH IS#################################### ", request.path[-24:])
+    if form.is_valid():
+        print("PATH IS ", request.path[-24:])
+        # text_comment = form.cleaned_data.get('title')
+        #
+        #
+        # recipe_response = recipe.objects.get(_id=ObjectId(req_id))  # Runs query with the request ID
+        # recipe_response.comments = [request.]
+        # recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe)
+        # recipe_saving.save()
+    return render(request, "recipescomment.html", context)
+
