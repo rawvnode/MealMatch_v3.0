@@ -88,7 +88,7 @@ class recipe(DynamicDocument):
     author = StringField(default='By MealMatch')
     comments = ListField(EmbeddedDocumentField('comments'))
     pictures = StringField()
-    id = ObjectIdField(primary_key=True)
+    #id = ObjectIdField(primary_key=True)
 
     meta = {'strict': False}  # What is this?
 

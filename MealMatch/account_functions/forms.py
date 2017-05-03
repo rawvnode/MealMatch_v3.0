@@ -23,6 +23,38 @@ class UserLoginForm(forms.Form):
 
 
 
+
+class UserRegisterForm(forms.Form):
+    username = forms.CharField(required=True)
+    password = forms.CharField(widget = forms.PasswordInput, required = True)
+    mail = forms.CharField(required=True)
+
+
+    def check_username(self):
+        username = self.cleaned_data.get('username')
+        try:
+            q1 = User.objects.get(username=username)
+            raise forms.ValidationError("This username is already taken")
+        except DoesNotExist: #if no users in the database exist with that particular username
+            print("test")
+            return username
+
+class AddRecipeForm(forms.Form):
+    title = forms.CharField()
+    #preperation_time = forms.CharField()
+    #servings = forms.CharField()
+    directions = forms.CharField()
+    #ingredients = forms.CharField()
+    #amount = forms.CharField()
+    #unit = forms.ChoiceField(choices=[(x, x) for x in range(1, 32)])
+    category = forms.CharField()
+    #picture_url = forms.URLField()
+#
+
+
+
+
+
 # class UserRegisterForm(forms.Form):
 #     username = forms.CharField(required=True)
 #     password = forms.CharField(widget = forms.PasswordInput, required = True)
@@ -73,3 +105,4 @@ class UserRegisterForm(forms.ModelForm):
         if email_qs.exists():
             raise forms.ValidationError("This email has already been registered")
         return email
+
