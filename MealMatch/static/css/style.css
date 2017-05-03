@@ -4,9 +4,12 @@
 
 
 /*** TEXT-STYLE ***/
+
+
+
 @font-face {
     font-family: 'RammettoOne'; /*a name to be used later*/
-    src: url('/font/RammettoOne-Regular.ttf'); /*URL to font*/
+    src: url('../font/RammettoOne-Regular.ttf'); /*URL to font*/
 }
 h2 {
     color: rgb(75,75,75);
@@ -30,7 +33,7 @@ h2 {
 /*** Navigation bar, at top of every site ***/
 .navbar {
     margin-bottom: 0;
-    background-color: rgba(250,250,250,0.9);
+    background-color: rgb(250,250,250);
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
