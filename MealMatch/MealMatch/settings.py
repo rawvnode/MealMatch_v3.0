@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.admin.apps.SimpleAdminConfig',
 
     # local apps
+    'comments',
     'recipes',
+
     'account_functions',
 
     #third party
