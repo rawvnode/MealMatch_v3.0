@@ -40,11 +40,11 @@ class AddRecipeForm(forms.Form):
     title = forms.CharField()
     #preperation_time = forms.CharField()
     #servings = forms.CharField()
-    #directions = forms.CharField()
+    directions = forms.CharField()
     #ingredients = forms.CharField()
     #amount = forms.CharField()
     #unit = forms.ChoiceField(choices=[(x, x) for x in range(1, 32)])
-    #category = forms.CharField()
+    category = forms.CharField()
     #picture_url = forms.URLField()
 #
 

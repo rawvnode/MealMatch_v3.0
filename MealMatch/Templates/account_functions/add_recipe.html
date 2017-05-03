@@ -1,10 +1,11 @@
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href='{% static "css/add_recipe.css"%}'>
 
-
-
+<div class="add_recipe">
     <link rel="stylesheet" type="text/css" href='{% static "css/recipes.css"%}'>
 
 
@@ -16,6 +17,8 @@
 
             <input type="submit" value="OK">
     </form>
+
+    </div>
 
 
 

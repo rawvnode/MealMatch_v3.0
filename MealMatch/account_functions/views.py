@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
+from recipes.models import recipe
 
 #@login_required(redirect_field_name = "account_functions/login.html")
 #def delete_field(request):
@@ -81,11 +82,12 @@ def admin_page(request):
 def user_page(request):
     # funktioner till vanlig användare
     return
-
+def handle_bad_input_from_users(bad_string):
+    good_string = bad_string.split(":")
+    return good_string
 #@login_required(redirect_field_name = "account_functions/add_recipe.html")
 def add_recipe(request):
     form = AddRecipeForm(request.POST or None)
-    print('form',form)
     title = 'Add recipe'
     context = {
         "form": form,
@@ -93,11 +95,14 @@ def add_recipe(request):
     }
     if form.is_valid():
         title_recipe = form.cleaned_data.get('title')
-        preperation_time = form.cleaned_data.get('preperation_time')
-        servings = form.check_username('servings')
-        directions = form.check_username('directions')
-        amount = form.check_username('amount')
-        unit = form.check_username('unit')
-        category = form.check_username('category')
-        picture_url = form.check_username('picture_url')
+        #preperation_time = form.cleaned_data.get('preperation_time')
+        #servings = form.check_username('servings')
+        directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
+        #amount = form.check_username('amount')
+        #unit = form.check_username('unit')
+        category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
+        #picture_url = form.check_username('picture_url')
+
+        recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe)
+        recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
