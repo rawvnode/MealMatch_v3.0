@@ -40,44 +40,53 @@
 
 <div class="startPage w3-white">
     <div id="slideout">
+
     <div id="slidecontent">
         <div class="my_ingredients">
                         <div class="panel-group">
                             <div class="panel-default">
                                     <div class="panel-header">
-                                    <button class="button" id="searchbar_plus" onclick="addItem()" value="Add" style="float: right">
+                                    <button class="button" id="searchbar_plus" onclick="addItemMyIng()" value="Add" style="float: right">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                     <div style="overflow: hidden; padding-right: .5em;">
                                         <input type="text" id="ingredient-form" id="add" class="form-control" size="50" placeholder="Add ingredient..." required style="width:100%">
                                     </div>
 
-                                    <div class="panel-body">
-                                        <div class="input-group">
-                                            <ol id="ingredients" style="font-size: 0.7em" ;>
+
+                                        <div class="panel-body">
+
+                                            <ul id="ingredients" class="w3-ul" style="font-size: 0.7em" ;>
+
                                                 {% for input in user_input %}
-                                                <script addItemMyIng({{input}})> </script>
+
+                                                    <li class="list-group-item" id ="itembefore{{forloop.counter0}}">{{input}}
+                                                     <span class="pull-right">
+                                                    <button id="removeButton" onclick="removeIngredient('itembefore{{forloop.counter0}}')"> <i class="fa fa-remove"></i>   </button></span>
+
+                                                    </li>
 
 
-                                                <li id="item" class="list-group-item">{{input}}
-                                                    <span class="pull-right">
-                                                    <button id="removeButton" onclick="removeIngredient(input)">X</button></span>
-                                                </li>
+
+
                                                 {% endfor %}
 
-                                            </ol>
+
+                                            </ul>
+
                                         </div>
 
                                     </div>
-                                    </div>
-                                    <div><button type="button" class="btn" id="matchme" style="margin-left: 20%;">Match me</button></div>
+
+                                    <div><button type="button" class="btn" id="matchme" style="margin-left: 20%;">Refresh</button></div>
                             </div>
                         </div>
             </div>
     </div>
-    <div id="clickme">
+        <div id="clickme">
         Ingredients
-    </div>
+    	</div>
+
 </div>
 </div>
 

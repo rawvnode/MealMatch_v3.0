@@ -55,7 +55,6 @@ def my_pantry(request):
 def login_view(request):
 
 
-    next = request.GET.get('next')
     title = "Login"
     form = UserLoginForm(request.POST or None)
 
@@ -63,16 +62,13 @@ def login_view(request):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(username = username, password = password)
-        #user.backend = 'mongoengine.django.auth.MongoEngineBackend'
-        #print("login")
-        login(request, user)
-        #if next:
-            #return redirect(next)
-        return redirect("/")
-        #request.session.set_expiry(60 * 60 * 1)
-        #print(request.user.is_authenticated())
 
-    return render("startpage.html", {"form": form, "title" : title})
+        login(request, user)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+    #return render("startpage.html", {"form": form, "title" : title})
 
 def register_view(request):
     next = request.GET.get('next')
@@ -84,14 +80,10 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
-        #username = form.check_username()
-        #user = User.create_user(username = username, password = password)
-        #mail = form.cleaned_data.get('mail')
+
 
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        #if next:
-         #   return redirect(next)
         return redirect("/")
 
     context = {
