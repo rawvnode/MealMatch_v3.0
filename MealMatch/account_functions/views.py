@@ -119,9 +119,15 @@ def admin_page(request):
 def user_page(request):
     # funktioner till vanlig användare
     return
-def handle_bad_input_from_users(bad_string):
-    good_string = bad_string.split(":")
-    return good_string
+
+def split_string_ingridients(string):
+    list = string.split(":")
+    return list
+
+def split_string_directions(string):
+    list = string.split(".")
+    return list
+
 #@login_required(redirect_field_name = "account_functions/add_recipe.html")
 def add_recipe(request):
     form = AddRecipeForm(request.POST or None)
@@ -132,15 +138,14 @@ def add_recipe(request):
     }
     if form.is_valid():
         title_recipe = form.cleaned_data.get('title')
-        #preperation_time = form.cleaned_data.get('preperation_time')
-        #servings = form.check_username('servings')
-        directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
-        #amount = form.check_username('amount')
-        #unit = form.check_username('unit')
-        category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
-        #picture_url = form.check_username('picture_url')
+        preperation_time = form.cleaned_data.get('preperation_time')
+        servings_recipe = form.cleaned_data.get('servings')
+        directions_recipe = split_string_directions((form.cleaned_data.get('directions')))
+        category_recipe = split_string_ingridients(form.cleaned_data.get('category'))
+        ingridients_recipe = split_string_ingridients(form.cleaned_data.get("ingredients"))
+        picture_url = form.cleaned_data.get('picture_url')
 
-        recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe)
+        recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe, pictures = picture_url, servings =servings_recipe, time = preperation_time )
         recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
 

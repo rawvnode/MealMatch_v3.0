@@ -39,17 +39,19 @@ class UserRegisterForm(forms.Form):
             print("test")
             return username
 
+
+#class Addingridient(forms.ModelForm):
+#    ingridient = forms.CharField()
+
 class AddRecipeForm(forms.Form):
-    title = forms.CharField()
-    #preperation_time = forms.CharField()
-    #servings = forms.CharField()
-    directions = forms.CharField()
-    #ingredients = forms.CharField()
-    #amount = forms.CharField()
-    #unit = forms.ChoiceField(choices=[(x, x) for x in range(1, 32)])
-    category = forms.CharField()
-    #picture_url = forms.URLField()
-#
+    title = forms.CharField(label ='Title')
+    directions = forms.CharField(widget = forms.Textarea(attrs={'placeholder': 'Please enter the description of how to make your recipe'}), label = 'Description')
+    ingredients = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Please enter the ingridients for the recipe with the corresponding amount, seperate each ingridient with a " : "'}), label = 'Ingridients and amount', help_text = '2 gallons of milk : 1kg of flour : 1 tablespoon of salt, for example.' )
+    category = forms.CharField(required=False,label = 'Category',widget=forms.TextInput(attrs={'placeholder': 'Please enter the category/categorys that your recipe belongs to, seperate each category with a " : " '}), help_text = 'Mexican : Bread : Medeteranian, for example')
+    picture_url = forms.URLField(required=False, label = 'Picture',widget=forms.TextInput(attrs={'placeholder': 'Please enter the url for the picture dsiplaying your recipe'}))
+    preperation_time = forms.CharField(required=False, label = 'Preperation time',widget=forms.TextInput(attrs={'placeholder': 'Please enter the preparation time with given unit'}), help_text = '1h and 20min, for example')
+    servings = forms.IntegerField(required=False, label = 'Servings with the given amount of ingredients')
+
 
 
 

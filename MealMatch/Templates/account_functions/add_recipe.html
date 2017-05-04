@@ -5,7 +5,8 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href='{% static "css/add_recipe.css"%}'>
 
-<div class="add_recipe">
+<div class="container-fluid">
+    <h2>Add new recipe</h2>
     <link rel="stylesheet" type="text/css" href='{% static "css/recipes.css"%}'>
 
 
@@ -15,7 +16,7 @@
 
    {{ form|crispy }}
 
-            <input type="submit" value="OK">
+            <input type="submit" value="Upload your recipe">
     </form>
 
     </div>
