@@ -45,17 +45,19 @@ from recipes.models import recipe
 #         return render(request,"account_functions/update_table.html")
 
 
-
-
+@login_required
 def my_pantry(request):
-    return render(request,"account_functions/my_pantry.html")
+
+    user_id = request.user.id
+    user_profile = Profile.objects.get(user_id_reference = user_id)
+    my_pantry = user_profile.Pantry
+    return render(request,"account_functions/my_pantry.html", {"pantry": my_pantry})
 
 
 
 def login_view(request):
 
 
-    next = request.GET.get('next')
     title = "Login"
     form = UserLoginForm(request.POST or None)
 
@@ -63,16 +65,13 @@ def login_view(request):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(username = username, password = password)
-        #user.backend = 'mongoengine.django.auth.MongoEngineBackend'
-        #print("login")
-        login(request, user)
-        #if next:
-            #return redirect(next)
-        return redirect("/")
-        #request.session.set_expiry(60 * 60 * 1)
-        #print(request.user.is_authenticated())
 
-    return render("startpage.html", {"form": form, "title" : title})
+        login(request, user)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+    #return render("startpage.html", {"form": form, "title" : title})
 
 def register_view(request):
     next = request.GET.get('next')
@@ -84,14 +83,10 @@ def register_view(request):
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
-        #username = form.check_username()
-        #user = User.create_user(username = username, password = password)
-        #mail = form.cleaned_data.get('mail')
+
 
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        #if next:
-         #   return redirect(next)
         return redirect("/")
 
     context = {

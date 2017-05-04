@@ -1,24 +1,17 @@
-from django.shortcuts import render
-from mongoengine import *
-from django.http import HttpResponse
+
 from .models import *
-from pymongo import *
-import sys
-from django.core import serializers
+from  account_functions.models import Profile
+
 from django.http import JsonResponse
 from bson.json_util import dumps
 import re
-from bson.objectid import ObjectId
-import bson
-from django.core import serializers
-import json
-import time
+
 from collections import OrderedDict
-import math
+from bson.objectid import ObjectId
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from account_functions.context_processors import get_user
 from account_functions.views import *
-from django.http import HttpResponseRedirect, HttpResponse
+
 from .forms import CommentForm
 
 
@@ -26,27 +19,59 @@ from .forms import CommentForm
 
 ############# VIEW FUNCTIONS #####################
 def startpage(request):
-    print(request.method)
     if (request.method == "GET"):
-        print("fucking starpage")
         return render(request, "startpage.html")
-
 
 
 
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 def presentRecipe(request):
-    print("present recipe: ", request.method)
+    print(request.method)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+
+            recipe_id = request.path[-24:]
+            try:
+                mongouser = Profile.objects.get(user_id_reference=request.user.id)
+                recipe_response = recipe.objects.get(_id=ObjectId(recipe_id))
+            except:
+                pass  # display modal saying "could not comment"
+            else:
+                print(form.cleaned_data.get("comment"))
+                comment = Comment(author=mongouser.id, body=form.cleaned_data.get("comment"),
+                                  username=request.user.username)
+                recipe_response.update(add_to_set__comment=comment)
+                recipe_response.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
     if request.method == "GET": #When the page is retrieved
-        print("present recipe, get request")
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "commentform" : CommentForm})
+
+        try:
+            comments_query = recipe_response.comment #check if recipe has comments
+        except:
+            comments = None
+        else:
+            comments = getComments(comments_query)
+
+
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm})
+
+
+
+
+
+
+
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request):
+    print("hej")
     if request.method == "GET":
-        raw_input = request.path[17:].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
+        raw_input = request.path[17:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
         input = []
         for element in raw_input:
             input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
@@ -86,6 +111,10 @@ def autocorrect(request):
         return render(request, "startpage.html") #if there is no input, do as before
 
 
+
+
+
+
 ############# HELPER FUNCTIONS #############
 def sanitize(user_string):
     user_string = re.sub("_", " ", user_string)  # Converts underscore to whitespace
@@ -93,6 +122,19 @@ def sanitize(user_string):
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     return user_string
 
+
+def getComments(comments_query):
+    comments = []
+    for comment in comments_query:
+        try:
+            user = Profile.objects.get(_id=comment.author) #ensure user exists
+        except:
+            pass #else, throw comment away
+        else:
+            comment = comment.to_mongo().to_dict()
+            comment['picture'] = user.picture
+            comments.append(comment)
+    return comments
 
 def view_paginator(page, paginator):
     try:
@@ -117,3 +159,6 @@ def paginateSlice(page_numbers, recipes, paginator):
     page_range = paginator.page_range[start_index:end_index]
 
     return page_range
+
+
+

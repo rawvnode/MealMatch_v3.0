@@ -55,6 +55,29 @@ function setURL() {
     });
 }
 
+function ajax_pantry_func(){
+    var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
+    //console.log(csrftoken)
+    var inputs = $('#ingredient-form').val()
+//    console.log(inputs);
+
+    $.ajax({ //do an ajax request, since default prevented
+        url : "edit_pantry/", // the endpoint
+        type : "POST", // http method
+        data : {csrfmiddlewaretoken: csrftoken, input: inputs},// data sent with the post request
+        dataType: "json",
+        // handle a successful response
+        success : function(array){
+            console.log(array);
+            array = JSON.parse(array);
+            automatiskKomplettering(array);
+
+        }
+        // handle a non-successful response
+        //error :"",
+    });
+}
+
  // Other functions
 
  function getCookie(name) { //function that returns a cookie
@@ -86,33 +109,103 @@ function setCookies(){
     }
 // Adds the ingredient list from the startpage, to the filter on the left side, after a matching has been done
 function addItemMyIng() {
+    var ing = "ing";
+    var li = document.createElement("li");
+    var input = document.getElementById("ingredient-form");
+        if (input.value.length > 0){
 
-     input_array = getCookie('input').split(',')
-     console.log(input_array)
-    input_array.forEach(function(element){
 
-            var li = document.createElement("li");
-            li.innerHTML = element;
-            li.setAttribute('id', "item"+ lastid, 'class', 'list-group-item');
+            //funktionsanrop till något som städar bort ogiltiga tecken
+
+
+            ingredientArray.push(input.value);
+            li.innerHTML = ingredientArray[(ingredientArray.length - 1)];
+
+
+
+
+            li.setAttribute('id', "item"+ lastid);
+            li.setAttribute('class', 'list-group-item');
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');
             li.appendChild(removeSpan);
-            console.log(document.getElementById("ingredients"));
+
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
             removeButton.appendChild(document.createTextNode('X'));
             removeButton.setAttribute("id","removeButton" );
             removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
             removeSpan.appendChild(removeButton);
-            input_array.value = "";
+
+            input.value = "";
+
+
+
             lastid += 1;
-    })
+        }
 
-
-}
+    }
 // Adds ingredient to search list, on startpage
 var lastid = 0;
-function addItem(){
+function addItem(length){
+
+        Lastid = length;
+        var ing = "ing";
+        var li = document.createElement("li");
+        var input = document.getElementById("ingredient-form");
+
+        if (input.value.length > 0){
+
+
+            //funktionsanrop till något som städar bort ogiltiga tecken
+
+
+            ingredientArray.push(input.value);
+            li.innerHTML = ingredientArray[(ingredientArray.length - 1)];
+
+
+
+
+            li.setAttribute('id', "item"+ lastid, 'class', 'list-group-item');
+            var removeSpan = document.createElement('span');
+            removeSpan.setAttribute('class','pull-right');
+            li.appendChild(removeSpan);
+
+            document.getElementById("ingredients").appendChild(li);
+            var removeButton = document.createElement('button');
+            removeButton.appendChild(document.createTextNode('X'));
+            removeButton.setAttribute("id","removeButton" );
+            removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
+            removeSpan.appendChild(removeButton);
+
+            input.value = "";
+
+             // document.querySelector(".column_remove").appendChild(removeButton);
+
+            lastid += 1;
+        }
+    }
+
+
+function removeIngredient(itemid){
+     console.log(document.getElementById(itemid));
+     var item2 = document.getElementById(itemid).textContent;
+     var res = item2.slice(0, (item2.length-1));
+     console.log(res);
+
+     for (i = 0; i < (ingredientArray.length - 1); i++){
+        if (ingredientArray[i] == res){
+            ingredientArray.splice(i,1);
+            }
+     }
+
+     var item = document.getElementById(itemid);
+     console.log("ta bort:" + item.value);
+     document.getElementById('ingredients').removeChild(item);
+
+}
+
+function addItemPantry(){
 
 
 
@@ -156,23 +249,6 @@ function addItem(){
         }
     }
 
-function removeIngredient(itemid){
-     console.log(document.getElementById(itemid).textContent);
-     var item2 = document.getElementById(itemid).textContent;
-     var res = item2.slice(0, (item2.length-1));
-     console.log(res);
-
-     for (i = 0; i < (ingredientArray.length - 1); i++){
-        if (ingredientArray[i] == res){
-            ingredientArray.splice(i,1);
-            }
-     }
-
-     var item = document.getElementById(itemid);
-     console.log("ta bort:" + item.value);
-     document.getElementById('ingredients').removeChild(item);
-
-}
 function automatiskKomplettering(array){
         //console.log(array);
 

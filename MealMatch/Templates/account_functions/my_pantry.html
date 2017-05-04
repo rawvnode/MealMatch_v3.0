@@ -22,7 +22,7 @@
                      <h2 id="slogan">Virtual pantry</h2>
                 </div>
 
-            <div class="w3-card w3-padding">
+            <div class="w3-card w3-padding card-searchbar">
 
 
 
@@ -30,12 +30,12 @@
 
 
                 <div class="container_searchbar" >
-                    <form class="search_bar" action="/recipes/" method="POST">
+                    <form class="search_bar" action="my_pantry" method="POST">
                         {% csrf_token %}
                         <div class="input-group">
                             <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
 
-                                <button class="button" id="searchbar_plus" value="Add" onclick = "addItem()">
+                                <button class="button" id="searchbar_plus" value="Add" onclick = "addItemPantry()">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
 
@@ -49,7 +49,11 @@
                         </div>
                     </form>
                 </div>
-            <div class="container_ingredients">
+            </div>
+
+
+             <div class="w3-card w3-padding">
+
 
                 <h2 id="slogan2">Added groceries:</h2>
 
@@ -70,8 +74,9 @@
 
                             <div class="container">
                                 <ol class="list-group" id="ingredients" style="font-size: 1.7em";>
-
-
+                                {% for item in pantry %}
+                                    <li>{{item}}</li>
+                                {% endfor %}
                                 </ol>
 
 
@@ -91,7 +96,7 @@
 
                 </form>
                 </div>
-            </div>
+
         </div>
 
 

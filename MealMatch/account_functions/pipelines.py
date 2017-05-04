@@ -16,7 +16,7 @@ def user_profile(backend, details, response, uid, user, *args, **kwargs):
         create_user(details, response, uid, user)
 
     elif check_existance(user):
-        update(details, response, uid, user)
+        update_user(details, response, uid, user)
     pass
 
 

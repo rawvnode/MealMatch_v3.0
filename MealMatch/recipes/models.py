@@ -1,8 +1,11 @@
 from mongoengine import *
 from mongoengine import queryset_manager
 import time
+from django import forms
 from .models import *
 from collections import OrderedDict
+from datetime import datetime
+from django.contrib import admin
 
 
  ##### CUSTOM QUERYSETS #####
@@ -67,26 +70,36 @@ class rating(Document):
     user_rated = StringField(required=True)
     recipe_rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
 
-class comments(Document):
-    username = StringField()
-    user_comment = StringField()
 
 
+
+
+
+class Comment(EmbeddedDocument):
+    created_at = DateTimeField(default = datetime.now, required=True)
+    author = ObjectIdField(required=True)
+    #email  = EmailField(verbose_name="Email")
+    username = StringField(verbose_name="Username", max_length=255, required=True)
+    body = StringField(verbose_name="Comment", required=True)
+
+# @admin.register(Comment)
+# class CommentAdmin(admin.ModelAdmin):
+#     pass
 
 
 class recipe(DynamicDocument):
     title = StringField(required=True)
     time = StringField()
-    servings = IntField()
+    servings = StringField()
     directions = ListField(required=True)
     ingredients_list = ListField()
     ingredients_complete = ListField()
     rating = ListField(EmbeddedDocumentField('rating'))  # has to be 1 by default
-    category = ListField(required=True)
-    clicks = IntField(required=True, default=1)
+    category = ListField()
+    clicks = IntField(default=1)
     relevance = IntField()
     author = StringField(default='By MealMatch')
-    comments = ListField(EmbeddedDocumentField('comments'))
+    comments = ListField(EmbeddedDocumentField('Comment'))
     pictures = StringField()
     #id = ObjectIdField(primary_key=True)
 
@@ -97,6 +110,8 @@ class recipe(DynamicDocument):
         print("ordering")
         return queryset.order_by("-clicks")
 
+#class Recipes(models.Model):
+        #user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 
 ## mapped models ##
 class mapped_id(Document):
