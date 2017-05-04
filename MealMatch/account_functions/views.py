@@ -6,45 +6,11 @@ from django.contrib.auth.decorators import login_required
 from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
-
 from recipes.models import recipe
-
-#@login_required(redirect_field_name = "account_functions/login.html")
-#def delete_field(request):
-#    if request.method == "POST":
-#        users.objects(username= request.POST['your_name']).delete()
-#        return render(request, "account_functions/delete_field.html")
-#    else:
-#        return render(request, "account_functions/delete_field.html")
-#
-#
-#@login_required(redirect_field_name = "account_functions/login.html")
-#def update_table(request):   #change profile settings
-#    if request.method == "POST":
-#        users.objects(username =  request.POST['old_name']).update(set__username = request.POST['new_name'])
-#        return HttpResponse("You renamed your account to:",request.POST['new_name'] )
-#    else:
-#        return render(request,"account_functions/update_table.html")
+import re
 
 
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def delete_field(request):
-#     if request.method == "POST":
-#         users.objects(username= request.POST['your_name']).delete()
-#         return render(request, "account_functions/delete_field.html")
-#     else:
-#         return render(request, "account_functions/delete_field.html")
-#
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def update_table(request):   #change profile settings
-#     if request.method == "POST":
-#         users.objects(username =  request.POST['old_name']).update(set__username = request.POST['new_name'])
-#         return HttpResponse("You renamed your account to:",request.POST['new_name'] )
-#     else:
-#         return render(request,"account_functions/update_table.html")
-
-
+#### pantry function ###
 @login_required
 def my_pantry(request):
 
@@ -53,7 +19,20 @@ def my_pantry(request):
     my_pantry = user_profile.Pantry
     return render(request,"account_functions/my_pantry.html", {"pantry": my_pantry})
 
+def editpantry(request):
+    input = sanitize_pantry(request.POST.getlist('input[]', ""))
+    if (len(input) > 0):
+        user_id = request.user.id
+        user_profile = Profile.objects.get(user_id_reference=user_id)
+        user_profile.Pantry = input
+        user_profile.save()
 
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+### user auth functions ###
 
 def login_view(request):
 
@@ -70,8 +49,6 @@ def login_view(request):
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
-    #return render("startpage.html", {"form": form, "title" : title})
 
 def register_view(request):
     next = request.GET.get('next')
@@ -98,31 +75,17 @@ def register_view(request):
 
 
 
-
 def logout_view(request):
     logout(request)
-
     print("logged out?")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-@login_required(redirect_field_name = "account_functions/login.html")
-def upload_recipes(request):
-    # ladda upp ett recept till databasen
-    return
+### Add recipe functions ####
 
-@login_required(redirect_field_name = "account_functions/login.html")
-def admin_page(request):
-    # funktioner till admin
-    return
-
-@login_required(redirect_field_name = "account_functions/login.html")
-def user_page(request):
-    # funktioner till vanlig användare
-    return
 def handle_bad_input_from_users(bad_string):
     good_string = bad_string.split(":")
     return good_string
-#@login_required(redirect_field_name = "account_functions/add_recipe.html")
+
 def add_recipe(request):
     form = AddRecipeForm(request.POST or None)
     title = 'Add recipe'
@@ -144,28 +107,16 @@ def add_recipe(request):
         recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
 
-    return redirect("/")
 
+###############HELPER FUNCTIONS################
 
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def user_logout(request):
-#     logout(request)
-#     print("logged out?")
-#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def upload_recipes(request):
-#     # ladda upp ett recept till databasen
-#     return
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def admin_page(request):
-#     # funktioner till admin
-#     return
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def user_page(request):
-#     # funktioner till vanlig användare
-#     return
+def sanitize_pantry(list):
+    print("#############", list)
+    for index in range(len(list)):
 
+        if list[index][-1] == "X":
+            list[index] = list[index][:-1]
+        list[index] = list[index].replace("\n","")
+        list[index] = list[index].replace("  ", "") #RÖR EJ; MAGI
 
+    return list

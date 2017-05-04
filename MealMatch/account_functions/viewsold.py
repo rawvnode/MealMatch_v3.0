@@ -40,3 +40,17 @@ def login_function(request):
             return HttpResponse('login failed')
     else:
         return render(request, "account_functions/login.html")
+
+    login_required(redirect_field_name="account_functions/login.html")
+
+def upload_recipes(request):
+    # ladda upp ett recept till databasen
+    return
+@login_required(redirect_field_name="account_functions/login.html")
+def admin_page(request):
+    # funktioner till admin
+    return
+@login_required(redirect_field_name="account_functions/login.html")
+def user_page(request):
+    # funktioner till vanlig användare
+    return

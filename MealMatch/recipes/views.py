@@ -160,5 +160,3 @@ def paginateSlice(page_numbers, recipes, paginator):
 
     return page_range
 
-
-

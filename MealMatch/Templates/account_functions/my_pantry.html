@@ -4,21 +4,23 @@
 <link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/pantry.css"%}'>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href='{% static "css/modal.css"%}'>
+
 
 
 <div class="pantryPage">
 
 
-            <div class="container-fluid">
+            <div class="container-fluid pantry-container">
 
 
 
 
-            <div class="w3-row w3-padding header">
-                <div class="container_logo w3-center">
+          <!--  <div class="w3-row w3-padding header w3-center w3-hide-small">
+
                 <img src="../../static/images/logo.png" alt="Logo" width="40%" height="auto">
 
-            </div>
+
                      <h2 id="slogan">Virtual pantry</h2>
                 </div>
 
@@ -29,38 +31,55 @@
 
 
 
-                <div class="container_searchbar" >
-                    <form class="search_bar" action="my_pantry" method="POST">
-                        {% csrf_token %}
-                        <div class="input-group">
-                            <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
 
-                                <button class="button" id="searchbar_plus" value="Add" onclick = "addItemPantry()">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
 
-                                <!--<<button type="button" class="btn btn-info dropdown-toggle" id="alternatives" data-toggle="dropdown">Alternatives
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                    <li><a href="#">Vegetarian</a></li>
-                                    <li><a href="#">Gluten free</a></li>
-                                    <li><a href="#">Laktos free</a></li>
-                            </ul>-->
-                        </div>
-                    </form>
+
+
+            </div>-->
+
+                <div class="w3-row w3-padding header w3-center w3-hide-small">
+
+                <img src="../../static/images/logo.png" alt="Logo" width="40%" height="auto">
+
+
+
                 </div>
-            </div>
-
-
-             <div class="w3-card w3-padding">
-
-
-                <h2 id="slogan2">Added groceries:</h2>
+                 <h3 id="slogan">Virtual pantry</h3>
 
 
 
-                <form class = "ing_form" action="/recipes/recipes/" method="GET" >
-                    {% csrf_token %}
+
+
+
+                    <form class="search_bar" action="my_pantry" method="POST">
+                           {% csrf_token %}
+                           <div class="input-group">
+                               <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
+
+                                   <button class="button" id="searchbar_plus_pantry" value="Add">
+                                       <span class="glyphicon glyphicon-plus"></span>
+                                   </button>
+
+                                   <!--<<button type="button" class="btn btn-info dropdown-toggle" id="alternatives" data-toggle="dropdown">Alternatives
+                                   <span class="caret"></span></button>
+                               <ul class="dropdown-menu">
+                                       <li><a href="#">Vegetarian</a></li>
+                                       <li><a href="#">Gluten free</a></li>
+                                       <li><a href="#">Laktos free</a></li>
+                               </ul>-->
+                           </div>
+                       </form>
+
+
+                <div class="w3-card">
+
+                <hr>
+                <h3 class = "w3-center" id="added" >Added items:</h3>
+
+
+
+                <!--<form class = "ing_form" action="/recipes/recipes/" method="GET" >
+                    {% csrf_token %}-->
 
 
 
@@ -68,21 +87,26 @@
 
 
 
-                    <div class="column_ingredients col-sm-11">
 
 
 
-                            <div class="container">
-                                <ol class="list-group" id="ingredients" style="font-size: 1.7em";>
+
+
+                    <div class="list_of_ingredients">
+                                <ul class="w3-ul" id="ingredients">
                                 {% for item in pantry %}
-                                    <li>{{item}}</li>
+
+                                    <li class="list-group-item" id ="itembefore{{forloop.counter0}}">{{item}}
+                                        <span class="pull-right">
+                                            <button class="removeButton_pantry"> <i class="fa fa-remove"></i>   </button></span>
+                                    </li>
                                 {% endfor %}
-                                </ol>
+                                </ul>
 
 
 
 
-                            </div>
+
 
 
 
@@ -91,10 +115,25 @@
 
                         </div>-->
 
-                </div>
 
 
-                </form>
+
+                <!-- Trigger/Open The Modal -->
+                    <button id="myBtn">Open Modal</button>
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                        <span class="close">&times;</span>
+
+                          
+
+                      </div>
+
+                    </div>
+                    <script src='{% static "js/modal.js"%}'></script>
                 </div>
 
         </div>
