@@ -27,6 +27,10 @@
 
 .panel-default {
     padding:0.5em;
+    height: 20em;
+    overflow: auto;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .title_text {
@@ -106,6 +110,7 @@
     width: 283px;
     background: rgba(250,250,250,1);
     border-top-right-radius: 0.5em;
+
 }
 
 #currentPage{

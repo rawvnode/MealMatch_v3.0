@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.admin.apps.SimpleAdminConfig',
 
     # local apps
+
     'recipes',
+
     'account_functions',
 
     #third party
@@ -184,7 +186,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'account_functions.context_processors.include_login_form',
-                'account_functions.context_processors.is_logged_in',
+                'account_functions.context_processors.get_user',
 
                 'social_django.context_processors.backends',  # <--
                 'social_django.context_processors.login_redirect', # <--
