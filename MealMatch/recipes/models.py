@@ -5,6 +5,7 @@ from django import forms
 from .models import *
 from collections import OrderedDict
 from datetime import datetime
+from django.contrib import admin
 
 
  ##### CUSTOM QUERYSETS #####
@@ -71,23 +72,31 @@ class rating(Document):
 
 
 
+
+
+
 class Comment(EmbeddedDocument):
     created_at = DateTimeField(default = datetime.now, required=True)
-    author = StringField(verbose_name="Name", max_length=255, required=True)
-    email  = EmailField(verbose_name="Email")
+    author = ObjectIdField(required=True)
+    #email  = EmailField(verbose_name="Email")
+    username = StringField(verbose_name="Username", max_length=255, required=True)
     body = StringField(verbose_name="Comment", required=True)
+
+# @admin.register(Comment)
+# class CommentAdmin(admin.ModelAdmin):
+#     pass
 
 
 class recipe(DynamicDocument):
     title = StringField(required=True)
     time = StringField()
-    servings = IntField()
+    servings = StringField()
     directions = ListField(required=True)
     ingredients_list = ListField()
     ingredients_complete = ListField()
     rating = ListField(EmbeddedDocumentField('rating'))  # has to be 1 by default
-    category = ListField(required=True)
-    clicks = IntField(required=True, default=1)
+    category = ListField()
+    clicks = IntField(default=1)
     relevance = IntField()
     author = StringField(default='By MealMatch')
     comments = ListField(EmbeddedDocumentField('Comment'))
