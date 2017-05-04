@@ -15,7 +15,7 @@
 }
 
 
-function makeCookie{
+function makeCookie(){
     document.cookie=[{"ingredients": "m"}]//; expires= Fri, 07 Apr 2017 12:00:00 UTC; path=/"
     var x = document.cookie;
     console.log(x)

@@ -45,10 +45,13 @@ from recipes.models import recipe
 #         return render(request,"account_functions/update_table.html")
 
 
-
-
+@login_required
 def my_pantry(request):
-    return render(request,"account_functions/my_pantry.html")
+
+    user_id = request.user.id
+    user_profile = Profile.objects.get(user_id_reference = user_id)
+    my_pantry = user_profile.Pantry
+    return render(request,"account_functions/my_pantry.html", {"pantry": my_pantry})
 
 
 
