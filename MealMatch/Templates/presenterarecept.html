@@ -152,6 +152,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <form class = "ing_form" action="/recipes/presenterarecept/{{recipe.id}}" method="POST" >
             {% csrf_token %}
             {{commentform}}
+            <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
              <input type="submit" class="btn" id="comment_button" value = "Post comment">
         </form>
     </div>

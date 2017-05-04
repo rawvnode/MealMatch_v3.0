@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
+from .decorators import check_recaptcha
 
 from recipes.models import recipe
 
@@ -72,13 +73,13 @@ def login_view(request):
 
 
     #return render("startpage.html", {"form": form, "title" : title})
-
+@check_recaptcha
 def register_view(request):
     next = request.GET.get('next')
     title = "Register"
     form = UserRegisterForm(request.POST or None)
 
-    if form.is_valid():
+    if form.is_valid() and request.recaptcha_is_valid:
         user = form.save(commit=False)
         password = form.cleaned_data.get('password')
         user.set_password(password)
@@ -129,6 +130,7 @@ def split_string_directions(string):
     return list
 
 #@login_required(redirect_field_name = "account_functions/add_recipe.html")
+@check_recaptcha
 def add_recipe(request):
     form = AddRecipeForm(request.POST or None)
     title = 'Add recipe'
@@ -136,7 +138,7 @@ def add_recipe(request):
         "form": form,
         "title": title
     }
-    if form.is_valid():
+    if form.is_valid() and request.recaptcha_is_valid:
         title_recipe = form.cleaned_data.get('title')
         preperation_time = form.cleaned_data.get('preperation_time')
         servings_recipe = form.cleaned_data.get('servings')
@@ -150,27 +152,4 @@ def add_recipe(request):
     return render(request, "account_functions/add_recipe.html", context)
 
     return redirect("/")
-
-
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def user_logout(request):
-#     logout(request)
-#     print("logged out?")
-#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def upload_recipes(request):
-#     # ladda upp ett recept till databasen
-#     return
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def admin_page(request):
-#     # funktioner till admin
-#     return
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def user_page(request):
-#     # funktioner till vanlig användare
-#     return
-
 
