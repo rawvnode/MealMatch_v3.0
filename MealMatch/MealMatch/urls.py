@@ -17,6 +17,7 @@ urlpatterns = [
 
     ##main application urls
     url(r'^recipes/', include("recipes.urls")),
+    url(r'^about/', include("contact.urls")),
     url(r'^account_functions/', include("account_functions.urls", namespace = "account_functions")),
     url(r'^', include("recipes.urls")), #varför har vi två länkar som inklucerar recipes?
 
