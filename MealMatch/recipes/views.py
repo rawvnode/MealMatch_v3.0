@@ -27,10 +27,10 @@ def startpage(request):
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
 def presentRecipe(request):
-    print(request.method)
+
     if request.method == "POST":
         form = CommentForm(request.POST)
-        print(form.is_valid())
+
         if form.is_valid() and request.recaptcha_is_valid:
 
             recipe_id = request.path[-24:]
@@ -40,7 +40,7 @@ def presentRecipe(request):
             except:
                 pass  # display modal saying "could not comment"
             else:
-                print(form.cleaned_data.get("comment"))
+
                 comment = Comment(author=mongouser.id, body=form.cleaned_data.get("comment"),
                                   username=request.user.username)
                 recipe_response.update(add_to_set__comment=comment)
@@ -70,7 +70,7 @@ def presentRecipe(request):
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request):
-    print("hej")
+
     if request.method == "GET":
         raw_input = request.path[17:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
         input = []

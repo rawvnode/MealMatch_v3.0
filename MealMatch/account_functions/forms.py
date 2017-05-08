@@ -36,7 +36,7 @@ class UserRegisterForm(forms.Form):
             q1 = User.objects.get(username=username)
             raise forms.ValidationError("This username is already taken")
         except DoesNotExist: #if no users in the database exist with that particular username
-            print("test")
+
             return username
 
 
