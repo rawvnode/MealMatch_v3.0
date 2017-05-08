@@ -17,15 +17,15 @@ from django.contrib.auth.models import *
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
-@admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
-    pass
-
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_filter = ['is_staff']
-    pass
+#
+# @admin.register(Group)
+# class GroupAdmin(admin.ModelAdmin):
+#     pass
+#
+# @admin.register(User)
+# class UserAdmin(admin.ModelAdmin):
+#     list_filter = ['is_staff']
+#     pass
 
 
 

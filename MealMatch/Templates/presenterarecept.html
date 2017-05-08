@@ -162,8 +162,12 @@
         <form class="ing_form text-center" action="/recipes/presenterarecept/{{recipe.id}}" method="POST">
             {% csrf_token %}
             {{commentform}}
+
+            
             <br>
+            <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
             <input type="submit" class="btn" id="comment_button" value="Post comment">
+
         </form>
 
         {%endif%}

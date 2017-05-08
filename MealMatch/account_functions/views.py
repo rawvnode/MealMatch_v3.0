@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
+from .decorators import check_recaptcha
+from django.core.mail import send_mail
+from django.conf import settings
+from datetime import datetime, date
 
 from recipes.models import recipe
 
@@ -45,10 +49,13 @@ from recipes.models import recipe
 #         return render(request,"account_functions/update_table.html")
 
 
-
-
+@login_required
 def my_pantry(request):
-    return render(request,"account_functions/my_pantry.html")
+
+    user_id = request.user.id
+    user_profile = Profile.objects.get(user_id_reference = user_id)
+    my_pantry = user_profile.Pantry
+    return render(request,"account_functions/my_pantry.html", {"pantry": my_pantry})
 
 
 
@@ -69,13 +76,13 @@ def login_view(request):
 
 
     #return render("startpage.html", {"form": form, "title" : title})
-
+@check_recaptcha
 def register_view(request):
     next = request.GET.get('next')
     title = "Register"
     form = UserRegisterForm(request.POST or None)
 
-    if form.is_valid():
+    if form.is_valid() and request.recaptcha_is_valid:
         user = form.save(commit=False)
         password = form.cleaned_data.get('password')
         user.set_password(password)
@@ -99,7 +106,7 @@ def register_view(request):
 def logout_view(request):
     logout(request)
 
-    print("logged out?")
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(redirect_field_name = "account_functions/login.html")
@@ -116,10 +123,17 @@ def admin_page(request):
 def user_page(request):
     # funktioner till vanlig användare
     return
-def handle_bad_input_from_users(bad_string):
-    good_string = bad_string.split(":")
-    return good_string
+
+def split_string_ingridients(string):
+    list = string.split(":")
+    return list
+
+def split_string_directions(string):
+    list = string.split(".")
+    return list
+
 #@login_required(redirect_field_name = "account_functions/add_recipe.html")
+@check_recaptcha
 def add_recipe(request):
     form = AddRecipeForm(request.POST or None)
     title = 'Add recipe'
@@ -127,42 +141,42 @@ def add_recipe(request):
         "form": form,
         "title": title
     }
-    if form.is_valid():
+    if form.is_valid() and request.recaptcha_is_valid:
         title_recipe = form.cleaned_data.get('title')
-        #preperation_time = form.cleaned_data.get('preperation_time')
-        #servings = form.check_username('servings')
-        directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
-        #amount = form.check_username('amount')
-        #unit = form.check_username('unit')
-        category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
-        #picture_url = form.check_username('picture_url')
+        preperation_time = form.cleaned_data.get('preperation_time')
+        servings_recipe = form.cleaned_data.get('servings')
+        directions_recipe = split_string_directions((form.cleaned_data.get('directions')))
+        category_recipe = split_string_ingridients(form.cleaned_data.get('category'))
+        ingridients_recipe = split_string_ingridients(form.cleaned_data.get("ingredients"))
+        picture_url = form.cleaned_data.get('picture_url')
 
-        recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe)
+        recipe_saving = recipe(title = title_recipe,directions= directions_recipe,category = category_recipe, pictures = picture_url, servings =servings_recipe, time = preperation_time )
         recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
 
     return redirect("/")
 
 
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def user_logout(request):
-#     logout(request)
-#     print("logged out?")
-#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def upload_recipes(request):
-#     # ladda upp ett recept till databasen
-#     return
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def admin_page(request):
-#     # funktioner till admin
-#     return
-#
-# @login_required(redirect_field_name = "account_functions/login.html")
-# def user_page(request):
-#     # funktioner till vanlig användare
-#     return
+def create_profile(request):
+    first_name = request.POST['firstname']
+    last_name = request.POST['lastname']
+    full_name = first_name+last_name
+    gender = request.POST['gender']
+    birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
+
+    user_id = request.user.id
+    #country = request.POST['country']
+    picture = 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png'
+    current_date = date.today()
+
+    age = (current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
 
 
+    user_profile = Profile(first_name = first_name, last_name = last_name, full_name = full_name, sex = gender, age = age, user_id_reference = user_id, picture = picture)
+    user_profile.save()
+
+    return redirect("/account_functions/my_pantry.html")
+
+
+def user_profile(request):
+    return render(request, "account_functions/user_profile.html")

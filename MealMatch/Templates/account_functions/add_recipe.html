@@ -4,9 +4,12 @@
 {% block content %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href='{% static "css/add_recipe.css"%}'>
+<link rel="stylesheet" type="text/css" href='{% static "css/recipes.css"%}'>
+<link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
+<div class="startPage" style="padding-top:0;">
+<div class="container-fluid">
+    <h2>Add new recipe</h2>
 
-<div class="add_recipe">
-    <link rel="stylesheet" type="text/css" href='{% static "css/recipes.css"%}'>
 
 
 
@@ -15,9 +18,10 @@
 
    {{ form|crispy }}
 
-            <input type="submit" value="OK">
+            <input type="submit" value="Upload your recipe">
     </form>
 
+    </div>
     </div>
 
 

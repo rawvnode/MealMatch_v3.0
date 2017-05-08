@@ -17,10 +17,10 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
         start = time.time()
         clicks_rating = recipe.objects.filter(id__in=keys).exclude('ingredients_list').exclude('directions')#Exclude speeds up the query process
         for item in clicks_rating:
-            #print(item.rating)
+
             reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_complete), "image": item.image}
         end = time.time()
-        print(end - start)
+
         return reduced_result
 
     def join(reduced_result, freq):
@@ -45,7 +45,7 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
         reduced_result = mappedQuerysSet.get_stats(query_keys)
 
         returnval = mappedQuerysSet.join(reduced_result, freq)
-        #print(type(returnval))
+
         return returnval
 
 
@@ -107,7 +107,7 @@ class recipe(DynamicDocument):
 
     @queryset_manager
     def objects(self, queryset): #sets default ordering when calling 'objects' on a collection
-        print("ordering")
+
         return queryset.order_by("-clicks")
 
 #class Recipes(models.Model):

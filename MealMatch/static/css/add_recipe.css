@@ -1,6 +1,16 @@
 
+@font-face {
+    font-family: 'RammettoOne'; /*a name to be used later*/
+    src: url('../font/RammettoOne-Regular.ttf'); /*URL to font*/
+}
 
 
-.add_recipe {
+.container-fluid {
     padding-top: 5em;
+    max-width: 700px;
+}
+h2{
+    font-family: 'RammettoOne'!important;
+    font-size: 2em;
+
 }
