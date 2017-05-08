@@ -106,7 +106,7 @@ def register_view(request):
 def logout_view(request):
     logout(request)
 
-    print("logged out?")
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(redirect_field_name = "account_functions/login.html")
