@@ -80,6 +80,8 @@ function ajax_pantry_func(){
 
  // Other functions
 
+
+
  function getCookie(name) { //function that returns a cookie
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {

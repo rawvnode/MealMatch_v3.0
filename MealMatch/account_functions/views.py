@@ -166,7 +166,7 @@ def create_profile(request):
 
     user_id = request.user.id
     #country = request.POST['country']
-    picture = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+    picture = 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png'
     current_date = date.today()
 
     age = (current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
@@ -176,3 +176,7 @@ def create_profile(request):
     user_profile.save()
 
     return redirect("/account_functions/my_pantry.html")
+
+
+def user_profile(request):
+    return render(request, "account_functions/user_profile.html")
