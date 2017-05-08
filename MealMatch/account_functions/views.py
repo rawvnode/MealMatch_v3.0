@@ -7,6 +7,9 @@ from mongoengine import *
 from .forms import *
 from django.http import HttpResponseRedirect
 from .decorators import check_recaptcha
+from django.core.mail import send_mail
+from django.conf import settings
+from datetime import datetime, date
 
 from recipes.models import recipe
 
@@ -147,9 +150,29 @@ def add_recipe(request):
         ingridients_recipe = split_string_ingridients(form.cleaned_data.get("ingredients"))
         picture_url = form.cleaned_data.get('picture_url')
 
-        recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe, pictures = picture_url, servings =servings_recipe, time = preperation_time )
+        recipe_saving = recipe(title = title_recipe,directions= directions_recipe,category = category_recipe, pictures = picture_url, servings =servings_recipe, time = preperation_time )
         recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
 
     return redirect("/")
 
+
+def create_profile(request):
+    first_name = request.POST['firstname']
+    last_name = request.POST['lastname']
+    full_name = first_name+last_name
+    gender = request.POST['gender']
+    birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
+
+    user_id = request.user.id
+    #country = request.POST['country']
+    picture = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+    current_date = date.today()
+
+    age = (current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
+
+
+    user_profile = Profile(first_name = first_name, last_name = last_name, full_name = full_name, sex = gender, age = age, user_id_reference = user_id, picture = picture)
+    user_profile.save()
+
+    return redirect("/account_functions/my_pantry.html")

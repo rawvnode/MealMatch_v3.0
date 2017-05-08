@@ -1,6 +1,10 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
 {% load staticfiles %}
+
+{% block content %}
+
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" type="text/css" href='{% static "css/recipes2.css"%}'>
@@ -33,14 +37,14 @@
             </header>
             {% load crispy_forms_tags %}
 
-            <form action=/account_functions/create_user/ method="POST">
+            <form action="." method="POST">
                 {% csrf_token %}
 
                 {{form | crispy}}
 
                 <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
 
-                <input id="Google" type="submit" value="Sign up">
+                <input id="Google" type="submit" value="{% trans 'Sign up' %}">
             </form>
         </div>
 
@@ -48,3 +52,19 @@
 
 </div>
 {% endblock %}
+
+
+
+
+
+
+<!--<hr/>-->
+<!--<div class='row'>-->
+<!--<div class='col-sm-6 col-sm-offset-3 text-align-center'>-->
+<!--<p>Need to <a href="{% url 'auth_login' %}">Login</a>?</p>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+

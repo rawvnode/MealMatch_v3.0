@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import mongoengine
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -45,18 +47,19 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
-
+    'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin.apps.SimpleAdminConfig',
+    #'django.contrib.admin.apps.SimpleAdminConfig',
 
     # local apps
 
     'recipes',
-
+    'registration',
     'account_functions',
 
     #third party
@@ -261,3 +264,17 @@ STATICFILES_DIRS = [
 SOCIAL_AUTH_FACEBOOK_KEY = '765337320295594'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '05d2d4760e77455f4d14b11f4359966f' # Secret key
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LfO9h8UAAAAAGLDvbC8ZRaCKLOxANsR3O7EZNxC'
+
+# EMAIL AUTHENTICATION
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'confirmation.mealmatch@gmail.com'
+EMAIL_HOST_PASSWORD = 'hallongr8'
+EMAIL_PORT = 587
+
+#DJANGO REGISTRATION SETTINGS#
+ACCOUNT_ACTIVATION_DAYS = 1
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+LOGIN_REDIRECT_URL = "/"

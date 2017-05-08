@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 <html>
     <head>
@@ -31,7 +32,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img src="../../static/images/logo.png"></a>
+                <a class="navbar-brand" href="/"><img src='{% static "images/logo.png"%}'></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right" id="navText">
@@ -49,7 +50,7 @@
                             <ul class="dropdown-menu" id="loggedin-dp">
                                 <li><div class="form-group">
 
-                                     <form class="form" role="form" method="post" action="{% url 'account_functions:logout' %}" accept-charset="UTF-8" id="logout-nav">
+                                     <form class="form" role="form" method="post" action="{% url 'auth_logout' %}" accept-charset="UTF-8" id="logout-nav">
                                         {% csrf_token %}
 
                                         <div class="form-group">
@@ -81,19 +82,23 @@
                                     </div>
                                     or
 
-                                    <form class="form" role="form" method="post" action="/account_functions/login" accept-charset="UTF-8" id="login-nav">
+                                    <form class="form" role="form" method="POST" action="{% url 'auth_login' %}" accept-charset="UTF-8" id="login-nav">
                                         {% csrf_token %}
-
-                                        {{loginForm}}
-
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                            <input type="text" class="form-control" name="username" placeholder="Username"/>
+
                                         </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" name="password" placeholder="Password"/>
+
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                                     </form>
 
                                 </div>
+                                <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
                                 <div class="bottom text-center">
-                                    <a href="/account_functions/create_user.html"><b>Sign up</b></a>
+                                    <a href="{% url 'registration_register' %}"><b>Sign up</b></a>
                                 </div>
                             </li>
                         </ul>
