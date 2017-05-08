@@ -3,10 +3,12 @@
 {% load staticfiles %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
+<div class="startPage">
 <div class="w3-row w3-padding-64">
 <div class="col-sm-6 col-sm-offset-3 w3-padding-64 ">
 
-<p>{% trans "Your account is now activated. Add additional information below." %}</p>
+<h4>{% trans "Your account is now activated. Add additional information below." %}</h4>
   <form class="form" role="form" method="POST" action="/profile/" accept-charset="UTF-8" id="login-nav">
       {% csrf_token %}
       <div class="form-group">
@@ -295,6 +297,7 @@
 
 
 </form>
+</div>
 </div>
     </div>
 {% endblock %}
