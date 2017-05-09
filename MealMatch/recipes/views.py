@@ -174,7 +174,7 @@ def get_ratings(id):
     ratings = recipe.objects.get(_id = ObjectId(id)).ratings
 
 
-    print ('vad är ratings? ' , ratings )
+    print('vad är ratings? ',ratings )
     sum = 0
     for item in ratings:
         print('vad är detta? ',item)
@@ -186,7 +186,6 @@ def get_ratings(id):
     return rating
 
 def starrating(request):
-
     recipe_use = recipe.objects.get(_id=ObjectId(request.POST['recipe_id']))
     print('recipe_use', recipe_use)
     recipe_use.rating.append(request.POST['rating'])
