@@ -108,3 +108,4 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("This email has already been registered")
         return email
 
+

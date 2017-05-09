@@ -1,4 +1,5 @@
 var ingredientArray = [];
+var lastid = 0;
 
 // Listeenes
 
@@ -19,6 +20,34 @@ var ingredientArray = [];
  });
 
 
+ $(function(){
+ $( "#searchbar_plus_pantry" ).click(function( event ) {
+
+     addItemPantry()
+     ajax_pantry_func()
+
+    });
+ });
+
+ $(function(){
+ $( ".removeButton_pantry" ).click(function( event ) {
+
+
+     removeIngredient($(this).parent().parent().attr('id'))
+     ajax_pantry_func()
+
+    });
+ });
+
+
+
+
+
+
+
+
+
+
 //Setter function
 function setURL() {
     for (var i in ingredientArray){
@@ -34,9 +63,9 @@ function setURL() {
  //Ajax functions
  function ajax_func(){
     var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
-    //console.log(csrftoken)
+
     var inputs = $('#ingredient-form').val()
-//    console.log(inputs);
+
 
     $.ajax({ //do an ajax request, since default prevented
         url : "autocorrect/", // the endpoint
@@ -45,7 +74,7 @@ function setURL() {
         dataType: "json",
         // handle a successful response
         success : function(array){
-            console.log(array);
+
             array = JSON.parse(array);
             automatiskKomplettering(array);
 
@@ -58,23 +87,23 @@ function setURL() {
 function ajax_pantry_func(){
     var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
     //console.log(csrftoken)
-    var inputs = $('#ingredient-form').val()
-//    console.log(inputs);
+
+    var input = [];
+
+    $('#ingredients li').each(function(){
+       input.push($(this).text())
+
+
+    });
+
+
+   console.log(input);
 
     $.ajax({ //do an ajax request, since default prevented
         url : "edit_pantry/", // the endpoint
         type : "POST", // http method
-        data : {csrfmiddlewaretoken: csrftoken, input: inputs},// data sent with the post request
-        dataType: "json",
-        // handle a successful response
-        success : function(array){
-            console.log(array);
-            array = JSON.parse(array);
-            automatiskKomplettering(array);
+        data : {csrfmiddlewaretoken: csrftoken, input: input},// data sent with the post request
 
-        }
-        // handle a non-successful response
-        //error :"",
     });
 }
 
@@ -103,7 +132,7 @@ function ajax_pantry_func(){
 
 
 function setCookies(){
-    window.alert("hej")
+
     document.cookie = "input =" + ingredientArray;
 
 
@@ -134,7 +163,10 @@ function addItemMyIng() {
 
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
-            removeButton.appendChild(document.createTextNode('X'));
+            var remove_glyph = document.createElement('i');
+            window.alert(remove_glyph)
+            remove_glyph.setAttribute('class', 'fa fa-remove');
+            removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("id","removeButton" );
             removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
             removeSpan.appendChild(removeButton);
@@ -148,7 +180,8 @@ function addItemMyIng() {
 
     }
 // Adds ingredient to search list, on startpage
-var lastid = 0;
+
+
 function addItem(length){
 
         Lastid = length;
@@ -175,7 +208,9 @@ function addItem(length){
 
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
-            removeButton.appendChild(document.createTextNode('X'));
+            var remove_glyph = document.createElement('i');
+            remove_glyph.setAttribute('class', 'fa fa-remove');
+            removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("id","removeButton" );
             removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
             removeSpan.appendChild(removeButton);
@@ -190,10 +225,10 @@ function addItem(length){
 
 
 function removeIngredient(itemid){
-     console.log(document.getElementById(itemid));
+
      var item2 = document.getElementById(itemid).textContent;
      var res = item2.slice(0, (item2.length-1));
-     console.log(res);
+
 
      for (i = 0; i < (ingredientArray.length - 1); i++){
         if (ingredientArray[i] == res){
@@ -202,22 +237,18 @@ function removeIngredient(itemid){
      }
 
      var item = document.getElementById(itemid);
-     console.log("ta bort:" + item.value);
+
      document.getElementById('ingredients').removeChild(item);
 
 }
 
+
 function addItemPantry(){
 
+ var ing = "ing";
+    var li = document.createElement("li");
 
-
-        var ing = "ing";
-        var li = document.createElement("li");
-        var input = document.getElementById("ingredient-form");
-
-
-
-        //if(":" in input remove....)
+    var input = document.getElementById("ingredient-form");
 
         if (input.value.length > 0){
 
@@ -231,28 +262,34 @@ function addItemPantry(){
 
 
 
-            li.setAttribute('id', "item"+ lastid, 'class', 'list-group-item');
+            li.setAttribute('id', "item"+ lastid);
+            li.setAttribute('class', 'list-group-item');
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');
             li.appendChild(removeSpan);
 
+
+
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
-            removeButton.appendChild(document.createTextNode('X'));
-            removeButton.setAttribute("id","removeButton" );
-            removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
+            var remove_glyph = document.createElement('i');
+            remove_glyph.setAttribute('class', 'fa fa-remove');
+            removeButton.appendChild(remove_glyph);
+            removeButton.setAttribute("class","removeButton_pantry" );
+            removeButton.setAttribute('onClick', 'removeIngredient_pantry("' + 'item' + lastid + '")');
+
             removeSpan.appendChild(removeButton);
 
             input.value = "";
 
-             // document.querySelector(".column_remove").appendChild(removeButton);
+
 
             lastid += 1;
         }
     }
 
 function automatiskKomplettering(array){
-        //console.log(array);
+
 
         var availableTags = array
         $( "#ingredient-form" ).autocomplete({
@@ -264,22 +301,13 @@ function automatiskKomplettering(array){
 function putInList(){
 
     var ing = document.getElementById("item0").childNodes.item(0).nodeValue;
- console.log(ing)
+
 //     ing = document.getElementById("item1").childNodes.item(0).nodeValue;
 
 
 }
 
-function extractRecipe(recipe){
 
-
-       console.log(recipe.title)
-       console.log(recipe.ingredients_list)
-       console.log(recipe.sevings)
-       console.log(recipe.directions)
-       console.log(recipe.author)
-       console.log(recipe.tags)
-}
 
 $(function () {
     $("#clickme").toggle(function () {
@@ -289,3 +317,64 @@ $(function () {
     });
 });
 
+function removeIngredient_pantry(itemid){
+
+     var item2 = document.getElementById(itemid).textContent;
+     var res = item2.slice(0, (item2.length-1));
+
+
+     for (i = 0; i < (ingredientArray.length - 1); i++){
+        if (ingredientArray[i] == res){
+            ingredientArray.splice(i,1);
+            }
+     }
+
+     var item = document.getElementById(itemid);
+
+     document.getElementById('ingredients').removeChild(item);
+     ajax_pantry_func();
+
+
+}
+
+
+
+
+// MAGUC STARS
+var global_id;
+
+$(document).ready(function(){
+
+		$('.stars').on('click', function(e){
+			$('.stars').not(this).prop('disabled', true);
+             var csrftoken = getCookie('csrftoken');
+
+		    window.alert(global_id)
+		$.ajax({ //do an ajax request, since default prevented
+        url : "starrating/", // the endpoint
+        type : "POST", // http method
+        data : {csrfmiddlewaretoken: csrftoken, rating: this.value, recipe_id : global_id},// data sent with the post request
+        // handle a non-successful response
+        //error :"",
+            });
+    });
+ });
+
+
+function star_rating(rating, id){
+    global_id = id;
+
+    rating = parseInt(rating);
+
+    $( ".stars" ).each(function(i,item) {
+        if(parseInt(item.value) === rating){
+            $(item).prop('checked', true)
+        }
+
+    });
+
+
+
+    //for(var i = 0; i < 5; i++ ){
+
+    }

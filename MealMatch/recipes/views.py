@@ -27,7 +27,6 @@ def startpage(request):
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
 def presentRecipe(request):
-
     if request.method == "POST":
         form = CommentForm(request.POST)
 
@@ -51,6 +50,14 @@ def presentRecipe(request):
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
 
+
+
+        try:
+            recipe_rating = get_ratings(req_id)
+        except:
+            recipe_rating = 1
+            print('bajsrating')
+
         try:
             comments_query = recipe_response.comment #check if recipe has comments
         except:
@@ -58,8 +65,8 @@ def presentRecipe(request):
         else:
             comments = getComments(comments_query)
 
-
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm})
+        print('vad skickar u? ', recipe_rating)
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating})
 
 
 
@@ -161,5 +168,26 @@ def paginateSlice(page_numbers, recipes, paginator):
 
     return page_range
 
+def get_ratings(id):
+
+    ratings = recipe.objects.get(_id = ObjectId(id)).ratings
 
 
+    print ('vad är ratings? ' , ratings )
+    sum = 0
+    for item in ratings:
+        print('vad är detta? ',item)
+        sum =+ item
+    rating = sum/len(ratings)
+    print('rating ', rating)
+
+
+    return rating
+
+def starrating(request):
+
+    recipe_use = recipe.objects.get(_id=ObjectId(request.POST['recipe_id']))
+    print('recipe_use', recipe_use)
+    recipe_use.rating.append(request.POST['rating'])
+    print('bajs', request.POST['rating'] )
+    recipe.save()

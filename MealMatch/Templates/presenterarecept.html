@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load staticfiles %}
+
+
 <link rel="stylesheet" type="text/css" href='{% static "css/presenterarecept.css"%}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap_style.css"%}'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!--<link rel="stylesheet" href="font-awesome.min.css">-->
 
 
 <style>
@@ -42,10 +46,17 @@
         display: none
     }
 </style>
+<script>
+    var rating = "{{rating}}";
+    var id = "{{recipe.id}}";
+</script>
+
+
 
 
 <!-- !PAGE CONTENT! -->
-<div class="background">
+<div class="background" onload="star_rating(rating,id)">
+
 
 
     <div id="main" class="container text-left container_about">
@@ -53,11 +64,26 @@
 
         <!-- first grid -->
 
-
         <div class="w3-row">
             <div class="w3-half container w3-left w3-margin-bottom" style="height:auto">
                 <h3>{{recipe.title}}</h3>
                 <div class=" row">
+
+
+             <form class="rating w3-margin-left" id="ratingdiv" >
+                    <input type="radio" id="st1" value="5"name ="star" class="stars" checked=false />
+                    <label for="st1"></label>
+                    <input type="radio" id="st2" value="4" name ="star" class="stars"checked=false />
+                    <label for="st2"></label>
+                    <input type="radio" id="st3" value="3" name ="star" class="stars" checked=false/>
+                    <label for="st3"></label>
+                    <input type="radio" id="st4" value="2" name ="star" class="stars" checked=false/>
+                    <label for="st4"></label>
+                    <input type="radio" id="st5" value="1"name ="star" class="stars"checked=false/>
+                    <label for="st5"></label>
+             </form>
+
+
 
                     <div class="rating w3-margin-left">
                         <span>☆</span>
@@ -75,7 +101,6 @@
                         <i class="fa fa-cutlery fa-2x w3-margin" aria-hidden="true"></i>
                         {{recipe.servings}}
                     </div>
-
 
                     <div id="" class="white">
                         <div id="" class="container text-left container_about">
@@ -101,9 +126,7 @@
         </div>
 
         <!-- Slideshow Header -->
-
     </div>
-
 </div>
 
 <div id="" class = "background">
@@ -111,9 +134,6 @@
     </div>
 </div>
 
-
-
-</div>
 <div id="instructions" class="bg-1">
     <div id="" class="container text-center container_about bg-1">
 
