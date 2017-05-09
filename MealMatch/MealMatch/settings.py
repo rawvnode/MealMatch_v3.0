@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin.apps.SimpleAdminConfig',
+    'star_ratings',
 
     # local apps
 
@@ -84,7 +85,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
 
 
 
-
+STAR_RATINGS_ANONYMOUS = False
 
 
 
@@ -190,6 +191,7 @@ TEMPLATES = [
 
                 'social_django.context_processors.backends',  # <--
                 'social_django.context_processors.login_redirect', # <--
+                'django.core.context_processors.request',
             ],
         },
     },

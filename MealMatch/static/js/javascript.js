@@ -161,7 +161,10 @@ function addItemMyIng() {
 
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
-            removeButton.appendChild(document.createTextNode('X'));
+            var remove_glyph = document.createElement('i');
+            window.alert(remove_glyph)
+            remove_glyph.setAttribute('class', 'fa fa-remove');
+            removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("id","removeButton" );
             removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
             removeSpan.appendChild(removeButton);
@@ -203,7 +206,9 @@ function addItem(length){
 
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
-            removeButton.appendChild(document.createTextNode('X'));
+            var remove_glyph = document.createElement('i');
+            remove_glyph.setAttribute('class', 'fa fa-remove');
+            removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("id","removeButton" );
             removeButton.setAttribute('onClick', 'removeIngredient("' + 'item' + lastid + '")');
             removeSpan.appendChild(removeButton);
@@ -265,7 +270,9 @@ function addItemPantry(){
 
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
-            removeButton.appendChild(document.createTextNode('X'));
+            var remove_glyph = document.createElement('i');
+            remove_glyph.setAttribute('class', 'fa fa-remove');
+            removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("class","removeButton_pantry" );
             removeButton.setAttribute('onClick', 'removeIngredient_pantry("' + 'item' + lastid + '")');
 
@@ -327,3 +334,45 @@ function removeIngredient_pantry(itemid){
 
 
 }
+
+
+
+
+// MAGUC STARS
+var global_id;
+
+$(document).ready(function(){
+
+		$('.stars').on('click', function(e){
+			$('.stars').not(this).prop('disabled', true);
+             var csrftoken = getCookie('csrftoken');
+
+		    window.alert(global_id)
+		$.ajax({ //do an ajax request, since default prevented
+        url : "starrating/", // the endpoint
+        type : "POST", // http method
+        data : {csrfmiddlewaretoken: csrftoken, rating: this.value, recipe_id : global_id},// data sent with the post request
+        // handle a non-successful response
+        //error :"",
+            });
+    });
+ });
+
+
+function star_rating(rating, id){
+    global_id = id;
+
+    rating = parseInt(rating);
+
+    $( ".stars" ).each(function(i,item) {
+        if(parseInt(item.value) === rating){
+            $(item).prop('checked', true)
+        }
+
+    });
+
+
+
+    //for(var i = 0; i < 5; i++ ){
+
+    }

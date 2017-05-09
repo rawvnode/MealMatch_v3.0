@@ -29,6 +29,7 @@ urlpatterns = [
 
     ##admin
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
 
 
 ]

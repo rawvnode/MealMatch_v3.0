@@ -66,9 +66,13 @@ class ingredients(Document):
     amount = ListField(required=True)
     type = ListField(required=True)
 
-class rating(Document):
-    user_rated = StringField(required=True)
-    recipe_rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
+class rating(EmbeddedDocument):
+    user = ObjectIdField(required = True)
+    rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
+
+    class Meta:
+        fields = ['user' 'rating']
+
 
 
 
@@ -126,6 +130,8 @@ class mapped(Document):
 class food_ref(Document):
     food = StringField(required=True)
     # _id = StringField(primary_key=True)
+
+
 
 
 

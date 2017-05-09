@@ -103,7 +103,7 @@ def add_recipe(request):
         category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
         #picture_url = form.check_username('picture_url')
 
-        recipe_saving=  recipe(title = title_recipe,directions= directions_recipe,category = category_recipe)
+        recipe_saving = recipe(title = title_recipe,directions= directions_recipe,category = category_recipe)
         recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
 
@@ -111,7 +111,6 @@ def add_recipe(request):
 ###############HELPER FUNCTIONS################
 
 def sanitize_pantry(list):
-    print("#############", list)
     for index in range(len(list)):
 
         if list[index][-1] == "X":
@@ -120,3 +119,4 @@ def sanitize_pantry(list):
         list[index] = list[index].replace("  ", "") #RÖR EJ; MAGI
 
     return list
+
