@@ -45,6 +45,12 @@ def presentRecipe(request):
                 recipe_response.update(add_to_set__comment=comment)
                 recipe_response.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    elif not request.recaptcha_is_valid:
+
+
+        pass
+
+
 
     if request.method == "GET": #When the page is retrieved
         req_id = request.path[-24:] #Extracts the id from the path
