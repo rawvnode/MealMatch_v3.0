@@ -56,6 +56,10 @@ label:hover:before {
 }
 
 
+hr {
+    color: white;
+    background-color: white;
+}
 .presenteraRecept{
     /*background-image: linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.2)), url("../images/background.jpg");*/
     background-size: cover;
@@ -65,7 +69,12 @@ label:hover:before {
     padding-bottom: 7em;
 }
 
+.orange {
+    background-color: rgb(189,64,4);
+    color: antiquewhite;
 
+
+}
 
 #food_image {
     width: 30%;
@@ -73,6 +82,20 @@ label:hover:before {
     display: block;
     padding-bottom: 50em;
     margin-bottom: -50em;
+}
+#tag{
+    padding: 0.1em;
+    background-color: rgb(189,64,4);
+    display: inline;
+    border-radius: 0.2em;
+    font-size:1em;
+    color: antiquewhite;
+
+
+}
+#icons{
+    background-color: rgb(189,64,4);
+    border-radius: 0.2em;
 }
 
 #food_rating {
@@ -128,7 +151,7 @@ label:hover:before {
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
-  font-size: 3em;
+  font-size: 1.5em;
   text-align: left;
 }
 
@@ -171,7 +194,11 @@ label:hover:before {
 .glyphicon-star {
     font-size: 2.3em;
 }
+#main{
+    padding-bottom: 22px !important;
 
+
+}
 .icon h9{
     display:table-cell; 
     vertical-align: middle;
@@ -233,6 +260,10 @@ font-family: "Raleway", sans-serif !important;
 
 
 
+.background{
+
+    background-color: rgba(240,234,227,0.5);
+}
 
 
 .tags {

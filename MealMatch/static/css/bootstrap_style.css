@@ -10,8 +10,14 @@ body {
   }
   .container_about {
       padding-top: 80px;
-      padding-bottom: 120px;
-      max-width: 1200px !important;
+      /*padding-bottom: 120px;*/
+      max-width: 1000px !important;
+  }
+
+  .container_icons {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      max-width: 1000px !important;
   }
 
 .container_footer{
@@ -33,6 +39,7 @@ body {
       width: 100%; /* Set width to 100% */
       margin: auto;
   }
+
   .carousel-caption h3 {
       color: #fff !important;
   }
@@ -46,6 +53,7 @@ body {
   .bg-1 {
       background: #2d2d30;
       color: #bdbdbd;
+
   }
 
   .white h2{
