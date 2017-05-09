@@ -180,7 +180,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
-        'DIRS': ["C:/Users/Fabian/Desktop/MealMatch_v3.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Axel/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -207,8 +207,12 @@ WSGI_APPLICATION = 'MealMatch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME' : 'mealmatch',
+        'USER': 'axel',
+        'PASSWORD': 'Flodhast1337',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

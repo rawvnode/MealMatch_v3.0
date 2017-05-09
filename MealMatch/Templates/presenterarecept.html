@@ -77,8 +77,8 @@
                     </div>
 
 
-                    <div id="" class="white">
-                        <div id="" class="container text-left container_about">
+                    <div class="white">
+                        <div class="container text-left container_about">
                             <hr>
                             <h5><strong>Tags</strong></h5>
                             {%for tag in recipe.tags%}
@@ -94,7 +94,8 @@
             <div class="w3-half white w3-center w3-margin-bottom" style="height:auto">
 
 
-                <img src={{recipe.image}} style="width:auto; max-height: 90%; max-width:100%; border-radius:0.1em; box-shadow: 0px 0px 20px #888888;">
+                <img src={{recipe.image}}
+                     style="width:auto; max-height: 90%; max-width:100%; border-radius:0.1em; box-shadow: 0px 0px 20px #888888;">
 
 
             </div>
@@ -106,16 +107,14 @@
 
 </div>
 
-<div id="" class = "background">
+<div class="background">
     <div class="w3-padding" style="background-color: rgb(169,64,4);">
     </div>
 </div>
 
 
-
-</div>
 <div id="instructions" class="bg-1">
-    <div id="" class="container text-center container_about bg-1">
+    <div class="container text-center container_about bg-1">
 
         <div class="col-sm-4 text-left">
 
@@ -145,47 +144,56 @@
 </div>
 
 
-<div id="" class = "background">
-<div id="" class = "background">
-    <div class="w3-padding" style="background-color: rgb(169,64,4);">
-    </div>
-</div>
-
-
-
-{% if user.is_authenticated %}
 <div id="" class="background">
-    <div id="" class="container container_about">
-
-
-        <h3 class="w3-padding-24 w3-text-dark-grey text-center">Make your comments here {{mongouser.full_name}}:</h3>
-        <form class="ing_form text-center" action="/recipes/presenterarecept/{{recipe.id}}" method="POST">
-            {% csrf_token %}
-            {{commentform}}
-
-            
-            <br>
-            <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
-            <input type="submit" class="btn" id="comment_button" value="Post comment">
-
-        </form>
-
-        {%endif%}
-
-        <hr>
-        <div class="w3-margin">
-            <h3 class="w3-padding-24 w3-text-dark-grey">Comments</h3>
-            {%for comment in comments %}
-            <img src="{{comment.picture}}" alt="Avatar" class="w3-left w3-margin-right" style="height:80px">
-            <p><span class="w3-large w3-margin-right">{{comment.username}}</span> <span
-                    class="w3-right">{{comment.created_at}}</span></p>
-            <p>{{comment.body}}</p>
-            <hr>
-            {% endfor %}
-
+    <div id="" class="background">
+        <div class="w3-padding" style="background-color: rgb(169,64,4);">
         </div>
     </div>
+
+
+    {% if user.is_authenticated %}
+    <div id="" class="background">
+        <div id="" class="container container_about">
+
+
+            <h3 class="w3-padding-24 w3-text-dark-grey">Make your comments here
+                {{mongouser.full_name}}:</h3>
+
+            <form class="ing_form" action="/recipes/presenterarecept/{{recipe.id}}" method="POST">
+                {% csrf_token %}
+
+
+
+                    {{commentform}}
+
+
+                <br>
+                  <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
+                <input type="submit" class="btn " id="comment_button" value="Post comment">
+
+
+
+
+            </form>
+
+            {%endif%}
+
+            <hr>
+            <div class="w3-margin">
+                <h3 class="w3-padding-24 w3-text-dark-grey">Comments</h3>
+                {%for comment in comments %}
+                <img src="{{comment.picture}}" alt="Avatar" class="w3-left w3-margin-right" style="height:80px">
+                <p><span class="w3-large w3-margin-right">{{comment.username}}</span> <span
+                        class="w3-right">{{comment.created_at}}</span></p>
+                <p>{{comment.body}}</p>
+                <hr>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
-{% endblock %}
+    {% endblock %}

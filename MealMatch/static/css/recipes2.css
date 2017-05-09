@@ -23,6 +23,7 @@
     }
 .startPage {
     background-size: cover;
+    padding-top: 4em;
 }
 
 .panel-default {
@@ -117,4 +118,7 @@
     background-color: rgba(189,64,4,0.8);
     border-radius: 2em;
 
+}
+.btn{
+    background-color: rgb(189,64,4) !important;
 }
