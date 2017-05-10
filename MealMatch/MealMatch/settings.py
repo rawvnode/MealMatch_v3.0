@@ -90,10 +90,6 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
 
 
 
-
-
-
-
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
    # 'mongoengine.django.auth.MongoEngineBackend',

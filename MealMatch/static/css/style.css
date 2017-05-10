@@ -12,7 +12,7 @@
     src: url('../font/RammettoOne-Regular.ttf'); /*URL to font*/
 }
 h2 {
-    color: rgb(75,75,75);
+    color: rgb(75,75,75)!important;
 }
 
 /*** CLASS ***/
@@ -161,7 +161,7 @@ footer .glyphicon{
     min-width: 15em;
     letter-spacing: normal;
     background-color:#3b5998;
-    color: #fff; 
+    color: #fff !important;
 }
 
 #login-dp .form-group {

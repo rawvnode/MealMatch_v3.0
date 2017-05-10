@@ -16,6 +16,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <link rel="stylesheet" type="text/css" href='{% static "css/style.css"%}'>
+        <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap_style.css"%}'>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css" rel="stylesheet">
         <!--<link rel="stylesheet" type="text/css" href='{% static "css/user.css"%}'> -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -152,7 +153,11 @@
                                     <li>
 
                                          <!--href="{% url 'about' %}"-->
-                                        <a target="_blank" href="https://www.instagram.com/meal.match/">Food inspo</a>
+                                        <a target="_blank" href="https://www.instagram.com/meal.match/">Instagram</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'about' %}">About us</a>
+
                                     </li>
                                     <li>
                                         <a href="{% url 'about' %}#QUESTIONS">FAQ</a>
@@ -168,12 +173,9 @@
                                         <a href="{% url 'about' %}#CONTACTUS">Contact us</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'about' %}">Advertisement</a>
+                                        <a href="{% url 'about' %}#BUSINESS">Business enquiries</a>
                                     </li>
-                                    <li>
-                                        <a href="{% url 'about' %}">About us</a>
 
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-4 hidden-xs">

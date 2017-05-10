@@ -141,3 +141,6 @@ body {
   textarea {
       resize: none;
   }
+  .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img{
+      height: 100%;
+  }

@@ -68,12 +68,16 @@ class ingredients(Document):
     amount = ListField(required=True)
     type = ListField(required=True)
 
+
+
 class rating(EmbeddedDocument):
     user = IntField(required = True)
     rating = IntField()
 
     class Meta:
         fields = ['user' 'rating']
+
+
 
 
 class Comment(EmbeddedDocument):

@@ -129,13 +129,15 @@ def add_recipe(request):
     if form.is_valid() and request.recaptcha_is_valid:
         title_recipe = form.cleaned_data.get('title')
 
-    # preperation_time = form.cleaned_data.get('preperation_time')
-    # servings = form.check_username('servings')
+
+        # preperation_time = form.cleaned_data.get('preperation_time')
+        # servings = form.check_username('servings')
         directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
-    # amount = form.check_username('amount')
-    # unit = form.check_username('unit')
+        # amount = form.check_username('amount')
+        # unit = form.check_username('unit')
         category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
-    # picture_url = form.check_username('picture_url')
+        # picture_url = form.check_username('picture_url')
+
 
         recipe_saving = recipe(title=title_recipe, directions=directions_recipe, category=category_recipe)
         recipe_saving.save()

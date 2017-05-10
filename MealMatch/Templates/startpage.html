@@ -4,15 +4,21 @@
 
 
 <link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
-        <div class="startPage">
-            <div class="container-fluid startPageContainer">
-            <div class="container_logo w3-hide-small">
+        <div class="startPage1">
+            <div class="container_logo container-fluid w3-hide-small" style="max-width:700px; padding-top: 3em;">
+
                 <img src="../../static/images/logo.png" alt="Logo" width="100%" height="auto">
+                 <h2 id="slogan">Let's find your perfect match!</h2>
+
 
             </div>
-            <h2 id="slogan">Let's find your perfect match!</h2>
+            <div class="container-fluid startPageContainer">
+
+
                 <div class="container_searchbar">
+
                     <form class="search_bar" action="/recipes/" method="POST">
+
                         {% csrf_token %}
                         <div class="input-group">
                             <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
@@ -37,6 +43,7 @@
                 <form class = "ing_form" action="/recipes/recipes/" method="GET" >
                     {% csrf_token %}
 
+
                      <div class="form-group">
                          <div class="center_button">
                          <input type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" value = "Match me(al)" onsubmit ="setURL()">
@@ -47,6 +54,7 @@
                              {% endif %}
                      </div>
                      </div>
+
 
 
 
