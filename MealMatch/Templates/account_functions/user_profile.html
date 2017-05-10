@@ -4,7 +4,8 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-
+<link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
+<div class="startPage">
 <!-- Page Container -->
 <div class="w3-content w3-margin-top w3-padding-64" style="max-width:1400px;">
 
@@ -53,6 +54,42 @@
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
           <h1 data-toggle="collapse" data-target="#profile" class="w3-large"><b><i class="fa fa-cog fa-fw w3-margin-right w3-text-teal"></i>Change profile settings</b></h1>
           <div id="profile" class="collapse">
+              <form class="form" role="form" method="POST" action="/profile/DADAD" accept-charset="UTF-8" id="login-nav">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      <label for="firstname">First name</label>
+                      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name"/>
+
+                  </div>
+                  <div class="form-group">
+                      <label for="firstname">Last name</label>
+                      <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name"/>
+                  </div>
+
+
+
+
+                  <div class="form-group">
+                      <label for="gender">Gender</label><br>
+              <input id="gender" type="radio" name="gender" value="male"> Male<br>
+              <input type="radio" name="gender" value="female"> Female<br>
+              <input type="radio" name="gender" value="other"> Other
+                  </div>
+
+
+                   <div class="form-group">
+                 <label for="bday">Birthday</label><br>
+              <input id="bday" type="date" name="bday">
+                   </div>
+
+                  <button type="submit" class="btn btn-primary btn-block">Save profile</button>
+            </form>
+
+
+
+
+
+
 
           </div>
 
@@ -71,6 +108,7 @@
   </div>
 
   <!-- End Page Container -->
+</div>
 </div>
 
  {% endblock %}

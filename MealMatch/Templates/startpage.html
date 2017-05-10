@@ -42,14 +42,21 @@
 
                 <form class = "ing_form" action="/recipes/recipes/" method="GET" >
                     {% csrf_token %}
-                    <div class="center_button color-button">
-
-                            <input type="submit" class="btn w3-ripple matchbutton w3-blue-grey" id="matchme" value = "Match me(al)" onsubmit ="setURL()">
 
 
+                     <div class="form-group">
+                         <div class="center_button">
+                         <input type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" value = "Match me(al)" onsubmit ="setURL()">
+                         <br>
+                             {% if user.is_authenticated %}
+                         <input id="checkbox1" type="checkbox" checked name="checkbox">
+                        <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
+                             {% endif %}
+                     </div>
+                     </div>
 
 
-                    </div>
+
 
 
 
