@@ -45,18 +45,14 @@
         display: none
     }
 </style>
-<script>
-    var rating = "{{rating}}";
-    var id = "{{recipe.id}}";
 
-</script>
 
 
 
 
 <!-- !PAGE CONTENT! -->
-<div class="background" onload="star_rating(rating,id)">
-    <div id="main" class="container text-left container_about">
+<div class="background">
+    <div id="main" class="container text-left container_about" >
 
                 <div class="w3-row">
                     <div class="w3-half container w3-left w3-margin-bottom" style="height:auto">
@@ -99,9 +95,9 @@
                     <label class="starlabel" for="st5"></label>
              </form>
              {% endif %}
-            <h4 ><strong>Rated by {{count_ratings}} users</strong></h4><br>
+            <p><strong>Rated by {{count_ratings}} users</strong></p><br>
              {%if not your_rating == None %}
-             <h4 ><strong>Your rated: {{your_rating}} </strong></h4>
+             <p><strong>Your rated: {{your_rating}} </strong></p>
              {% endif %}
 
 
@@ -236,6 +232,13 @@
     </div>
 
 </div>
+
+<script>
+    var rating = "{{rating}}";
+    var id = "{{recipe.id}}";
+    star_rating(rating, id);
+
+</script>
 
 
     {% endblock %}

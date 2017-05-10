@@ -381,7 +381,7 @@ function removeIngredient_pantry(itemid){
 
 
 
-// MAGUC STARS
+// MAGIC STARS
 var global_id;
 
 $(document).ready(function(){
@@ -398,7 +398,6 @@ $(document).ready(function(){
         // handle a non-successful response
         //error :"",
             });
-		window.alert(global_id)
 		//window.location.reload();
 
     });
@@ -410,9 +409,11 @@ function star_rating(rating, id){
     global_id = id;
     rating = parseInt(rating);
 
-    $( ".stars" ).each(function(i,item) {
-        if(parseInt(item.value) === rating){
-            $(item).prop('checked', true)
+    $('.stars').each(function(i,item) {
+
+        if(parseInt(this.value) === rating){
+            $(this).prop('checked', true);
+
         }
     });
     }
