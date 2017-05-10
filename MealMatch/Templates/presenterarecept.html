@@ -2,7 +2,6 @@
 {% block content %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href='{% static "css/presenterarecept.css"%}'>
-<link rel="stylesheet" type="text/css" href='{% static "css/bootstrap_style.css"%}'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -144,16 +143,17 @@
 </div>
 
 
-<div id="" class="background">
-    <div id="" class="background">
+<div class="background">
+    <div class="background">
         <div class="w3-padding" style="background-color: rgb(169,64,4);">
         </div>
     </div>
 
-
+    <div class="background">
+        <div class="container container_about">
     {% if user.is_authenticated %}
-    <div id="" class="background">
-        <div id="" class="container container_about">
+
+
 
 
             <h3 class="w3-padding-24 w3-text-dark-grey">Make your comments here
@@ -169,7 +169,7 @@
 
                 <br>
                   <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
-                <input type="submit" class="btn " id="comment_button" value="Post comment">
+                <input type="submit" class="btn w3-blue-grey" id="comment_button" value="Post comment">
 
 
 

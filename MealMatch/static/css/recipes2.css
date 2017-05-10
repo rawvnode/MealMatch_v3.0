@@ -86,6 +86,9 @@
     top: 10%;
     left:-282px;
 }
+#matchme{
+    background-color: rgb(189,64,4);
+}
 
 #clickme {
     background-color: rgb(189,64,4);
@@ -106,6 +109,11 @@
 
 }
 
+input[type="image"]:hover{
+    opacity: 0.5;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
 #slidecontent {
     float:left;
     width: 283px;
@@ -118,7 +126,4 @@
     background-color: rgba(189,64,4,0.8);
     border-radius: 2em;
 
-}
-.btn{
-    background-color: rgb(189,64,4) !important;
 }

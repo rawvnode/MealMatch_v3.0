@@ -67,8 +67,8 @@ class ingredients(Document):
     type = ListField(required=True)
 
 class rating(Document):
-    user_rated = StringField(required=True)
-    recipe_rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
+    user= StringField(required=True)
+    rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
 
 
 
