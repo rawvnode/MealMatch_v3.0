@@ -12,16 +12,23 @@ urlpatterns = [
     #url(r'^delete_field', views.delete_field, name = "deleteTable"),
     #url(r'^logout', views.user_logout, name = "logout"),
     url(r'^logout', views.logout_view, name = "logout"),
+
     url(r'^create_user', views.register_view, name = "newUser"),
     url(r'^edit_pantry', views.editpantry, name="editPantry"),
+
 
     #url(r'^logout', views.user_logout, name = "logout"),
     url(r'^add_recipe', views.add_recipe, name = "addRecipe"),
 
 
     #url(r'^logout', views.user_logout, name = "logout"),
+    url(r'^user_profile', views.user_profile, name="userProfile"),
     url(r'^my_pantry', views.my_pantry, name = "myPantry"),
-    url(r'^', views.login_view, name="loginPage"),
+    #url(r'^', views.login_view, name="loginPage"),
+
+
+
+
 
 
 

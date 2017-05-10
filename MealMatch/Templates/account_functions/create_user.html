@@ -17,6 +17,9 @@
 
 
 <div class="createUserPage">
+    <header class="header-progress-bar">
+
+    </header>
 
         <div class="col-sm-6 w3-center" id="info">
             <h2 id="description">One free account to be able to save, add and share your favorite recipes</h2>
@@ -37,6 +40,8 @@
                 {% csrf_token %}
 
                 {{form | crispy}}
+
+                <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
 
                 <input id="Google" type="submit" value="Sign up">
             </form>

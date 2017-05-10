@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import mongoengine
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DBNAME = 'test'
 _MONGODB_USER = 'fabian'
 _MONGODB_PASSWD = '!Endless#1246%J'
-_MONGODB_HOST = '130.238.15.203:27017'
-_MONGODB_NAME = 'serverDB'
+_MONGODB_HOST = 'ds133321.mlab.com:33321'
+_MONGODB_NAME = 'mealmatch'
 _MONGODB_DATABASE_HOST = \
     'mongodb://%s:%s@%s/%s' \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
@@ -45,19 +47,22 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
-
+    'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin.apps.SimpleAdminConfig',
-    'star_ratings',
+
+
+
+
 
     # local apps
 
     'recipes',
-
+    'registration',
     'account_functions',
 
     #third party
@@ -85,7 +90,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
 
 
 
-STAR_RATINGS_ANONYMOUS = False
+
 
 
 
@@ -177,7 +182,9 @@ ROOT_URLCONF = 'MealMatch.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': ["C:/Users/Sofia/Desktop/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -208,6 +215,8 @@ DATABASES = {
         'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
 
 
 # Password validation
@@ -260,3 +269,18 @@ STATICFILES_DIRS = [
 
 SOCIAL_AUTH_FACEBOOK_KEY = '765337320295594'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '05d2d4760e77455f4d14b11f4359966f' # Secret key
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LfO9h8UAAAAAGLDvbC8ZRaCKLOxANsR3O7EZNxC'
+
+# EMAIL AUTHENTICATION
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'confirmation.mealmatch@gmail.com'
+EMAIL_HOST_PASSWORD = 'hallongr8'
+EMAIL_PORT = 587
+
+#DJANGO REGISTRATION SETTINGS#
+ACCOUNT_ACTIVATION_DAYS = 1
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+LOGIN_REDIRECT_URL = "/"

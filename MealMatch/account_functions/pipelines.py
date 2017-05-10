@@ -23,6 +23,7 @@ def user_profile(backend, details, response, uid, user, *args, **kwargs):
 def check_existance(user):
     try:
         nosql_user = Profile.objects.get(user_id_reference = user.id)
+
         return True
     except:
         return False

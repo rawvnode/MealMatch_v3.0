@@ -109,6 +109,8 @@ function ajax_pantry_func(){
 
  // Other functions
 
+
+
  function getCookie(name) { //function that returns a cookie
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -331,11 +333,14 @@ $(document).ready(function(){
 		$.ajax({ //do an ajax request, since default prevented
         url : "starrating/", // the endpoint
         type : "POST", // http method
+
         data : {csrfmiddlewaretoken: csrftoken, rating: this.value, recipe_id : global_id},// data sent with the post request
         // handle a non-successful response
         //error :"",
             });
-		window.location.reload();
+		window.alert(global_id)
+		//window.location.reload();
+
     });
 
  });
@@ -343,7 +348,6 @@ $(document).ready(function(){
 
 function star_rating(rating, id){
     global_id = id;
-
     rating = parseInt(rating);
 
     $( ".stars" ).each(function(i,item) {

@@ -9,7 +9,7 @@ class recipeViewSet(viewsets.ModelViewSet):
 
     lookup_field = 'id'#Oklart
     serializer_class = recipeSerializer
-    print("hej")
+
 
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class recipeViewSet(viewsets.ModelViewSet):
 class mappedViewSet(viewsets.ModelViewSet):
     #lookup_field = 'id'  # Oklart
     serializer_class = mappedSerializer
-    print("hej")
+
 
     def get_queryset(self):
         return mapped.objects().exclude('id')

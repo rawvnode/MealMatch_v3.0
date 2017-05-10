@@ -9,9 +9,12 @@ from bson.objectid import ObjectId
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from account_functions.views import *
 from .forms import CommentForm
-from tkinter import *
-import math
+
 from account_functions.context_processors import *
+
+
+from account_functions.decorators import check_recaptcha
+
 
 
 ############# VIEW FUNCTIONS #####################
@@ -21,11 +24,15 @@ def startpage(request):
 
 
 ##Queries and renders a recipe when a recipe in the result list is clicked##
+@check_recaptcha
 def presentRecipe(request):
 
     if request.method == "POST":
         form = CommentForm(request.POST)
-        if form.is_valid():
+
+        if form.is_valid() and request.recaptcha_is_valid:
+
+
             recipe_id = request.path[-24:]
             try:
                 mongouser = Profile.objects.get(user_id_reference=request.user.id)
@@ -39,6 +46,12 @@ def presentRecipe(request):
                 recipe_response.update(add_to_set__comment=comment)
                 recipe_response.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    elif not request.recaptcha_is_valid:
+
+
+        pass
+
+
 
     if request.method == "GET": #When the page is retrieved
         req_id = request.path[-24:] #Extracts the id from the path
@@ -73,6 +86,7 @@ def presentRecipe(request):
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request):
+
     if request.method == "GET":
         raw_input = request.path[17:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
         input = []
@@ -176,7 +190,7 @@ def starrating(request):
     if request.user.is_authenticated:
         recipe_use = recipe.objects.get(_id=ObjectId(request.POST['recipe_id']))# Fetch recipe from mongo matching id from ajax call
 
-
+        print("autenticated")
         ratingar = request.POST.get('rating')#Fetching set rating from user via ajax call
         int_rating = int(ratingar)# cast rating to int
         counter = 0;
@@ -186,16 +200,19 @@ def starrating(request):
 
 
         if counter == 0:
+            print("counter is good")
             input = rating(user=request.user.id,rating=int_rating)
             try:
                 recipe_use.update(add_to_set__ratings=input)
                 recipe_use.save()
+                print("try succesful")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
             except:
                 recipe_use.update(ratings=[])
                 recipe_use.save()
                 recipe_use.update(add_to_set__ratings=input)
                 recipe_use.save()
+                print("did except")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
