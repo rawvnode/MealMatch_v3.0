@@ -90,10 +90,6 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
 
 
 
-
-
-
-
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
    # 'mongoengine.django.auth.MongoEngineBackend',
@@ -183,7 +179,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
-        'DIRS': ["C:/Users/Sofia/Desktop/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
+        'DIRS': [os.path.join(BASE_DIR, "Templates/")],
 
         'APP_DIRS': True,
         'OPTIONS': {
