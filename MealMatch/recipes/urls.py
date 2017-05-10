@@ -10,6 +10,9 @@ urlpatterns = [
     url(r'^presenterarecept/starrating', views.starrating, name="starrating"),
     url(r'^presenterarecept/', views.presentRecipe, name="presenterarecept"),
 
+    url(r'^starrating', views.starrating, name="starrating"),
+    #url(r'^refresh', views.refresh, name="refresh"),
+
 
     url(r'^$', views.startpage, name = "startpage" ), #VIKTIGT ATT DENNA ÄR SIST
 
