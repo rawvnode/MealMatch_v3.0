@@ -1,20 +1,17 @@
 
 from .models import *
-from  account_functions.models import Profile
-
+from account_functions.models import Profile
 from django.http import JsonResponse
 from bson.json_util import dumps
 import re
-
 from collections import OrderedDict
 from bson.objectid import ObjectId
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from account_functions.context_processors import get_user
 from account_functions.views import *
-
 from .forms import CommentForm
-
-
+from tkinter import *
+import math
+from account_functions.context_processors import *
 
 
 ############# VIEW FUNCTIONS #####################
@@ -23,16 +20,12 @@ def startpage(request):
         return render(request, "startpage.html")
 
 
-
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 def presentRecipe(request):
-    print(request.path)
-    print("AGGEBOY")
+
     if request.method == "POST":
         form = CommentForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
-
             recipe_id = request.path[-24:]
             try:
                 mongouser = Profile.objects.get(user_id_reference=request.user.id)
@@ -40,7 +33,7 @@ def presentRecipe(request):
             except:
                 pass  # display modal saying "could not comment"
             else:
-                print(form.cleaned_data.get("comment"))
+
                 comment = Comment(author=mongouser.id, body=form.cleaned_data.get("comment"),
                                   username=request.user.username)
                 recipe_response.update(add_to_set__comment=comment)
@@ -51,14 +44,23 @@ def presentRecipe(request):
         req_id = request.path[-24:] #Extracts the id from the path
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
 
-
-
         try:
-            recipe_rating = get_ratings(req_id)
+            recipe_object = get_ratings(req_id)
+            recipe_rating = recipe_object[0]
+            count = recipe_object[1]
+            your_rating = get_user_rating(req_id, request)
         except:
-            recipe_rating = 1
-            print('bajsrating')
 
+
+
+            your_rating = None;
+            recipe_object = get_ratings(req_id)
+            if(recipe_object[0] != None):
+                recipe_rating = recipe_object[0]
+                count = recipe_object[1]
+            else:
+                recipe_rating = 0
+                count = 0
         try:
             comments_query = recipe_response.comment #check if recipe has comments
         except:
@@ -66,19 +68,11 @@ def presentRecipe(request):
         else:
             comments = getComments(comments_query)
 
-        print('vad skickar u? ', recipe_rating)
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating})
-
-
-
-
-
-
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating})
 
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request):
-    print("hej")
     if request.method == "GET":
         raw_input = request.path[17:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
         input = []
@@ -94,10 +88,6 @@ def retrieveRecipes(request):
             dictlist.append(temp)
         paginator = Paginator(dictlist, 12)  # Show 9 contacts per page
         page = request.GET.get('page', 1)
-
-
-
-
         recipes = view_paginator(page, paginator)
         page_range = paginateSlice(3, recipes, paginator)
 
@@ -109,7 +99,6 @@ def retrieveRecipes(request):
 def autocorrect(request):
     input = sanitize(request.POST['input'])  # gets the user input and sanitizses using sanitize()
     if (len(input) > 0):
-
         array = []
         foods = food_ref.objects(food__istartswith=input)  # checks if any word starts with the user input
         for element in foods:
@@ -118,9 +107,6 @@ def autocorrect(request):
         return JsonResponse(array, safe=False)  # returns a JSONResponse to client-side
     else:
         return render(request, "startpage.html") #if there is no input, do as before
-
-
-
 
 
 
@@ -173,21 +159,64 @@ def get_ratings(id):
 
     ratings = recipe.objects.get(_id = ObjectId(id)).ratings
 
-
-    print('vad är ratings? ',ratings )
     sum = 0
     for item in ratings:
-        print('vad är detta? ',item)
-        sum =+ item
-    rating = sum/len(ratings)
-    print('rating ', rating)
+        sum = sum + item.rating
 
+    if(len(ratings) > 0):
+        rating = sum/len(ratings)
+    else:
+        rating = 0
 
-    return rating
+    count = len(ratings)
+
+    return [rating, count]
 
 def starrating(request):
-    recipe_use = recipe.objects.get(_id=ObjectId(request.POST['recipe_id']))
-    print('recipe_use', recipe_use)
-    recipe_use.rating.append(request.POST['rating'])
-    print('bajs', request.POST['rating'] )
-    recipe.save()
+    if request.user.is_authenticated:
+        recipe_use = recipe.objects.get(_id=ObjectId(request.POST['recipe_id']))# Fetch recipe from mongo matching id from ajax call
+
+
+        ratingar = request.POST.get('rating')#Fetching set rating from user via ajax call
+        int_rating = int(ratingar)# cast rating to int
+        counter = 0;
+        for rating_object in recipe_use.ratings: #loop to check if user already has rated if not set rating to mongo object
+            if int(rating_object['user']) == int(request.user.id):
+                counter = counter + 1
+
+
+        if counter == 0:
+            input = rating(user=request.user.id,rating=int_rating)
+            try:
+                recipe_use.update(add_to_set__ratings=input)
+                recipe_use.save()
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            except:
+                recipe_use.update(ratings=[])
+                recipe_use.save()
+                recipe_use.update(add_to_set__ratings=input)
+                recipe_use.save()
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+        else:
+            return render_to_response(request.path, message='You, my friend, have already rated this goodie.')
+
+
+    else:
+        pass
+
+def get_user_rating(id,request):
+
+    if request.user.is_authenticated:
+        ratings = recipe.objects.get(_id=ObjectId(id)).ratings
+        usern = get_user(request)
+        for item in ratings:
+
+            if item.user == usern['mongouser'].user_id_reference:
+                your_rating = item.rating
+                return your_rating
+    else:
+
+        return None

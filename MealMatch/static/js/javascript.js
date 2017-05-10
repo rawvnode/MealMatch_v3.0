@@ -227,7 +227,6 @@ function removeIngredient(itemid){
      var item2 = document.getElementById(itemid).textContent;
      var res = item2.slice(0, (item2.length-1));
 
-
      for (i = 0; i < (ingredientArray.length - 1); i++){
         if (ingredientArray[i] == res){
             ingredientArray.splice(i,1);
@@ -252,21 +251,14 @@ function addItemPantry(){
 
 
             //funktionsanrop till något som städar bort ogiltiga tecken
-
-
             ingredientArray.push(input.value);
             li.innerHTML = ingredientArray[(ingredientArray.length - 1)];
-
-
-
 
             li.setAttribute('id', "item"+ lastid);
             li.setAttribute('class', 'list-group-item');
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');
             li.appendChild(removeSpan);
-
-
 
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
@@ -275,12 +267,8 @@ function addItemPantry(){
             removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("class","removeButton_pantry" );
             removeButton.setAttribute('onClick', 'removeIngredient_pantry("' + 'item' + lastid + '")');
-
             removeSpan.appendChild(removeButton);
-
             input.value = "";
-
-
 
             lastid += 1;
         }
@@ -301,10 +289,7 @@ function putInList(){
     var ing = document.getElementById("item0").childNodes.item(0).nodeValue;
 
 //     ing = document.getElementById("item1").childNodes.item(0).nodeValue;
-
-
 }
-
 
 
 $(function () {
@@ -320,7 +305,6 @@ function removeIngredient_pantry(itemid){
      var item2 = document.getElementById(itemid).textContent;
      var res = item2.slice(0, (item2.length-1));
 
-
      for (i = 0; i < (ingredientArray.length - 1); i++){
         if (ingredientArray[i] == res){
             ingredientArray.splice(i,1);
@@ -328,11 +312,8 @@ function removeIngredient_pantry(itemid){
      }
 
      var item = document.getElementById(itemid);
-
      document.getElementById('ingredients').removeChild(item);
      ajax_pantry_func();
-
-
 }
 
 
@@ -347,7 +328,6 @@ $(document).ready(function(){
 			$('.stars').not(this).prop('disabled', true);
              var csrftoken = getCookie('csrftoken');
 
-		    window.alert(global_id)
 		$.ajax({ //do an ajax request, since default prevented
         url : "starrating/", // the endpoint
         type : "POST", // http method
@@ -355,7 +335,9 @@ $(document).ready(function(){
         // handle a non-successful response
         //error :"",
             });
+		window.location.reload();
     });
+
  });
 
 
@@ -368,11 +350,15 @@ function star_rating(rating, id){
         if(parseInt(item.value) === rating){
             $(item).prop('checked', true)
         }
-
     });
-
-
-
-    //for(var i = 0; i < 5; i++ ){
-
     }
+
+function popup(your_rating) {
+
+    if(your_rating != "None") {
+        window.alert("Pip freeze motherfucker! You have already rated this goodie.")
+    }
+    else{
+        window.alert("Pip freeze motherfucker! You have to be logged in to rate these goodies.")
+    }
+}

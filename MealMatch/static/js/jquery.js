@@ -24,9 +24,6 @@ $(document).ready(function(){
         }
     });
 
-
-
-
    $('a').click(function(){
        $("#pager_1").hide()
        $("#pager_2").hide()
@@ -37,9 +34,6 @@ $(document).ready(function(){
            
    });
 });
-
-
-
 
 /*<a href="#" id="pager_1" class="pagerlink" >link</a>
 

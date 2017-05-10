@@ -66,7 +66,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <div class="w3-row-padding w3-large">
       <div class="w3-half">
       	<img src={{recipe.image}} style="width:100%;margin-bottom:-6px">
-         <div class="w3-row w3-large">
+         <div class="w3-row w3-large" >
 
       <div class="w3-col s3">
       	<i class="fa fa-heart w3-margin" aria-hidden="true"></i>
@@ -91,23 +91,43 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </div>
 
 
+            {%if not user.is_authenticated or your_rating != None%}
 
+             <form class="rating w3-margin-left" onclick="popup('{{your_rating}}')"id="stardiv" >
 
-
-
-
-             <form class="rating w3-margin-left" id="ratingdiv" >
-                    <input type="radio" id="st1" value="5"name ="star" class="stars" checked=false />
-                    <label for="st1"></label>
-                    <input type="radio" id="st2" value="4" name ="star" class="stars"checked=false />
-                    <label for="st2"></label>
-                    <input type="radio" id="st3" value="3" name ="star" class="stars" checked=false/>
-                    <label for="st3"></label>
-                    <input type="radio" id="st4" value="2" name ="star" class="stars" checked=false/>
-                    <label for="st4"></label>
-                    <input type="radio" id="st5" value="1"name ="star" class="stars"checked=false/>
-                    <label for="st5"></label>
+                    <input type="radio" value="5" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st1"></label>
+                    <input type="radio" value="4" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st2"></label>
+                    <input type="radio" value="3" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st3"></label>
+                    <input type="radio" value="2" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st4"></label>
+                    <input type="radio" value="1" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st5"></label>
              </form>
+
+            {% endif %}
+
+            {%if user.is_authenticated and your_rating == None%}
+             <form class="rating w3-margin-left" id="ratingdiv" >
+                    <input type="radio" id="st1" value="5"name ="star" class="stars" checked=false/>
+                    <label class="starlabel" for="st1"></label>
+                    <input type="radio" id="st2" value="4" name ="star" class="stars"checked=false/>
+                    <label class="starlabel" for="st2"></label>
+                    <input type="radio" id="st3" value="3" name ="star" class="stars" checked=false/>
+                    <label class="starlabel" for="st3"></label>
+                    <input type="radio" id="st4" value="2" name ="star" class="stars" checked=false/>
+                    <label class="starlabel" for="st4"></label>
+                    <input type="radio" id="st5" value="1"name ="star" class="stars"checked=false/>
+                    <label class="starlabel" for="st5"></label>
+             </form>
+             {% endif %}
+            <h4 ><strong>Rated by {{count_ratings}} users</strong></h4><br>
+             {%if not your_rating == None %}
+             <h4 ><strong>Your rated: {{your_rating}} </strong></h4>
+             {% endif %}
+
 
     </div>
 
