@@ -179,7 +179,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
-        'DIRS': ["C:/Users/Sofia/Desktop/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
+        'DIRS': [os.path.join(BASE_DIR, "Templates/")],
 
         'APP_DIRS': True,
         'OPTIONS': {
