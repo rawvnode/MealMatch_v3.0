@@ -130,14 +130,14 @@ def add_recipe(request):
 
     # preperation_time = form.cleaned_data.get('preperation_time')
     # servings = form.check_username('servings')
-    directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
+        directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
     # amount = form.check_username('amount')
     # unit = form.check_username('unit')
-    category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
+        category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
     # picture_url = form.check_username('picture_url')
 
-    recipe_saving = recipe(title=title_recipe, directions=directions_recipe, category=category_recipe)
-    recipe_saving.save()
+        recipe_saving = recipe(title=title_recipe, directions=directions_recipe, category=category_recipe)
+        recipe_saving.save()
     return render(request, "account_functions/add_recipe.html", context)
 
     return redirect("/")

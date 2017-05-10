@@ -39,7 +39,7 @@ urlpatterns = [
 
     url(r'^accounts/', include('registration.backends.default.urls')),
 
-    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+
 
 
 

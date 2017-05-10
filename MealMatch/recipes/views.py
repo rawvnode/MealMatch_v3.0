@@ -55,8 +55,8 @@ def presentRecipe(request):
         try:
             recipe_rating = get_ratings(req_id)
         except:
-            recipe_rating = 1
-            print('bajsrating')
+            recipe_rating = 0
+
 
         try:
             comments_query = recipe_response.comment #check if recipe has comments
@@ -65,7 +65,7 @@ def presentRecipe(request):
         else:
             comments = getComments(comments_query)
 
-        print('vad skickar u? ', recipe_rating)
+
         return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating})
 
 
@@ -76,16 +76,30 @@ def presentRecipe(request):
 
 
 ##Queries user inputs on database and renders a result list##
-def retrieveRecipes(request):
-
+def refresh(request):
     if request.method == "GET":
-        raw_input = request.path[17:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
+        print(request.GET)
+
+        return render(request, "recipes.html")
+    else:
+        return render(request, "startpage.html")
+
+def retrieveRecipes(request):
+    if request.method == "GET":
+        index = request.path.rfind("/")
+        raw_input = request.path[index+1:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
+        checkbox = request.GET.get('checkbox', False)
         input = []
+        if(request.user.is_authenticated()):
+            if(checkbox):
+                mongouser = Profile.objects.get(user_id_reference=request.user.id)
+                user_pantry = mongouser.Pantry
+                input = user_pantry
+
         for element in raw_input:
             input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
-
-        query_mapped = mapped.objects(id__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
+        query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
         sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
         dictlist = []
         for key, value in sorted_dict.items():
@@ -93,10 +107,6 @@ def retrieveRecipes(request):
             dictlist.append(temp)
         paginator = Paginator(dictlist, 12)  # Show 9 contacts per page
         page = request.GET.get('page', 1)
-
-
-
-
         recipes = view_paginator(page, paginator)
         page_range = paginateSlice(3, recipes, paginator)
 

@@ -19,6 +19,14 @@ var lastid = 0;
     });
  });
 
+ $(function(){
+ $( "#matchmerefresh" ).click(function( event ) {
+       event.preventDefault();
+       setURLRefresh();
+       $(".ing_form_refresh").submit();
+    });
+ });
+
 
  $(function(){
  $( "#searchbar_plus_pantry" ).click(function( event ) {
@@ -50,6 +58,7 @@ var lastid = 0;
 
 //Setter function
 function setURL() {
+
     for (var i in ingredientArray){
         var action = $( ".ing_form" ).attr("action")
         ingredientArray[i] = ingredientArray[i].replace(/\s/g, "_");
@@ -57,6 +66,55 @@ function setURL() {
         $(".ing_form").attr("action", action)
 
 }
+}
+
+function setURLRefresh() {
+        var lis = document.getElementById("slideIngredients").querySelectorAll("ul li");
+        list_of_ing = [];
+        for (var i = 0; i < lis.length; i++) {
+
+            if(lis[i].innerHTML.split(" ")[1] == ""){
+
+            ingredient = (lis[i].innerHTML.replace(/(\r\n|\n|\r)/,"").split(" ")[0]);
+            list_of_ing.push(ingredient);
+
+
+
+            }
+            else{
+            index = lis[i].innerHTML.split(" ")[0].indexOf("<");
+            str = lis[i].innerHTML.split(" ")[1].slice(0,index);
+
+            ing_to_push = lis[i].innerHTML.split(" ")[0] + " " + str
+             index = ing_to_push.indexOf("<");
+             ing_to_push = ing_to_push.slice(0,index)
+
+
+            list_of_ing.push(ing_to_push);}
+
+        }
+
+//    var lis = [];
+//    new_list = []
+//    var ul = document.getElementById("ingredients");
+//    var items = ul.getElementsByTagName("li");
+//    for (var i = 0; i < items.length; ++i) {
+//// note the comma to separate multiple phrases
+//    new_list.push((items[i].textContent || items[i].innerText));
+//    window.alert(new_list)
+//    }
+
+    for (var i in list_of_ing){
+        console.log(list_of_ing[i])
+
+        var action = $( ".ing_form_refresh" ).attr("action")
+
+        list_of_ing[i] = list_of_ing[i].replace(/\s/g, "_");
+        action = action  + list_of_ing[i] + "&"
+        $(".ing_form_refresh").attr("action", action)
+
+}
+
 }
 
 
@@ -143,6 +201,7 @@ function addItemMyIng() {
     var ing = "ing";
     var li = document.createElement("li");
     var input = document.getElementById("ingredient-form");
+
         if (input.value.length > 0){
 
 
@@ -150,7 +209,7 @@ function addItemMyIng() {
 
 
             ingredientArray.push(input.value);
-            li.innerHTML = ingredientArray[(ingredientArray.length - 1)];
+            li.innerHTML = ingredientArray[(ingredientArray.length-1)];
 
 
 
@@ -164,7 +223,7 @@ function addItemMyIng() {
             document.getElementById("ingredients").appendChild(li);
             var removeButton = document.createElement('button');
             var remove_glyph = document.createElement('i');
-            window.alert(remove_glyph)
+
             remove_glyph.setAttribute('class', 'fa fa-remove');
             removeButton.appendChild(remove_glyph);
             removeButton.setAttribute("id","removeButton" );
@@ -227,17 +286,15 @@ function addItem(length){
 function removeIngredient(itemid){
 
      var item2 = document.getElementById(itemid).textContent;
-     var res = item2.slice(0, (item2.length-1));
+     var res = item2.slice(0, (item2.length));
 
-
-     for (i = 0; i < (ingredientArray.length - 1); i++){
+     for (i = 0; i < (ingredientArray.length); i++){
         if (ingredientArray[i] == res){
             ingredientArray.splice(i,1);
             }
      }
 
      var item = document.getElementById(itemid);
-
      document.getElementById('ingredients').removeChild(item);
 
 }
@@ -349,7 +406,7 @@ $(document).ready(function(){
 			$('.stars').not(this).prop('disabled', true);
              var csrftoken = getCookie('csrftoken');
 
-		    window.alert(global_id)
+
 		$.ajax({ //do an ajax request, since default prevented
         url : "starrating/", // the endpoint
         type : "POST", // http method
