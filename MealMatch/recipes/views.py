@@ -58,15 +58,17 @@ def presentRecipe(request):
         recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
 
         try:
+
             recipe_object = get_ratings(req_id)
+
             recipe_rating = recipe_object[0]
             count = recipe_object[1]
             your_rating = get_user_rating(req_id, request)
+
+
         except:
 
-
-
-            your_rating = None;
+            your_rating = None
             recipe_object = get_ratings(req_id)
             if(recipe_object[0] != None):
                 recipe_rating = recipe_object[0]
