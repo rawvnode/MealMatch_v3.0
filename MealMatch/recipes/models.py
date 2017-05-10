@@ -66,6 +66,7 @@ class ingredients(Document):
     amount = ListField(required=True)
     type = ListField(required=True)
 
+
 class rating(Document):
     user= StringField(required=True)
     rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
@@ -126,6 +127,8 @@ class mapped(Document):
 class food_ref(Document):
     food = StringField(required=True)
     # _id = StringField(primary_key=True)
+
+
 
 
 
