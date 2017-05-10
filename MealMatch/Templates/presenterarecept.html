@@ -48,6 +48,7 @@
 <script>
     var rating = "{{rating}}";
     var id = "{{recipe.id}}";
+
 </script>
 
 
@@ -55,42 +56,55 @@
 
 <!-- !PAGE CONTENT! -->
 <div class="background" onload="star_rating(rating,id)">
-
-
-
     <div id="main" class="container text-left container_about">
 
-
-        <!-- first grid -->
-
-        <div class="w3-row">
-            <div class="w3-half container w3-left w3-margin-bottom" style="height:auto">
-                <h3>{{recipe.title}}</h3>
-                <div class=" row">
+                <div class="w3-row">
+                    <div class="w3-half container w3-left w3-margin-bottom" style="height:auto">
+                        <h3>{{recipe.title}}</h3>
+                        <div class=" row">
+            {%if not user.is_authenticated or your_rating != None%}
 
 
-             <form class="rating w3-margin-left" id="ratingdiv" >
-                    <input type="radio" id="st1" value="5"name ="star" class="stars" checked=false />
-                    <label for="st1"></label>
-                    <input type="radio" id="st2" value="4" name ="star" class="stars"checked=false />
-                    <label for="st2"></label>
-                    <input type="radio" id="st3" value="3" name ="star" class="stars" checked=false/>
-                    <label for="st3"></label>
-                    <input type="radio" id="st4" value="2" name ="star" class="stars" checked=false/>
-                    <label for="st4"></label>
-                    <input type="radio" id="st5" value="1"name ="star" class="stars"checked=false/>
-                    <label for="st5"></label>
+
+             <form class="rating w3-margin-left" onclick="popup('{{your_rating}}')"id="stardiv" >
+
+                    <input type="radio" value="5" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st1"></label>
+                    <input type="radio" value="4" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st2"></label>
+                    <input type="radio" value="3" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st3"></label>
+                    <input type="radio" value="2" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st4"></label>
+                    <input type="radio" value="1" name ="star" class="stars" checked=false disabled/>
+                    <label class="starlabel" for="st5"></label>
              </form>
 
+            {% endif %}
+        <!-- first grid -->
 
 
-                    <div class="rating w3-margin-left">
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                    </div>
+
+            {%if user.is_authenticated and your_rating == None%}
+             <form class="rating w3-margin-left" id="ratingdiv" >
+                    <input type="radio" id="st1" value="5"name ="star" class="stars" checked=false/>
+                    <label class="starlabel" for="st1"></label>
+                    <input type="radio" id="st2" value="4" name ="star" class="stars"checked=false/>
+                    <label class="starlabel" for="st2"></label>
+                    <input type="radio" id="st3" value="3" name ="star" class="stars" checked=false/>
+                    <label class="starlabel" for="st3"></label>
+                    <input type="radio" id="st4" value="2" name ="star" class="stars" checked=false/>
+                    <label class="starlabel" for="st4"></label>
+                    <input type="radio" id="st5" value="1"name ="star" class="stars"checked=false/>
+                    <label class="starlabel" for="st5"></label>
+             </form>
+             {% endif %}
+            <h4 ><strong>Rated by {{count_ratings}} users</strong></h4><br>
+             {%if not your_rating == None %}
+             <h4 ><strong>Your rated: {{your_rating}} </strong></h4>
+             {% endif %}
+
+
                     <div class="w3-half">
                         <i class="fa fa-clock-o fa-2x w3-margin" aria-hidden="true"></i>
                         {{recipe.time}}

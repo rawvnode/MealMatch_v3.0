@@ -18,7 +18,9 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
         clicks_rating = recipe.objects.filter(id__in=keys).exclude('ingredients_list').exclude('directions')#Exclude speeds up the query process
         for item in clicks_rating:
 
-            reduced_result[item.id] = {"clicks": item.clicks, "rating": item.rating, "title": item.title, "ing_count": len(item.ingredients_complete), "image": item.image}
+
+            reduced_result[item.id] = {"clicks": item.clicks, "rating": item.ratings, "title": item.title, "ing_count": len(item.ingredients_complete), "image": item.image}
+
         end = time.time()
 
         return reduced_result
@@ -67,11 +69,13 @@ class ingredients(Document):
     type = ListField(required=True)
 
 
-class rating(Document):
-    user= StringField(required=True)
-    rating = DecimalField(default=1, min_value=1, max_value=5, precision=4)
 
+class rating(EmbeddedDocument):
+    user = IntField(required = True)
+    rating = IntField()
 
+    class Meta:
+        fields = ['user' 'rating']
 
 
 
@@ -95,7 +99,7 @@ class recipe(DynamicDocument):
     directions = ListField(required=True)
     ingredients_list = ListField()
     ingredients_complete = ListField()
-    rating = ListField(EmbeddedDocumentField('rating'))  # has to be 1 by default
+    ratings = ListField(EmbeddedDocumentField('rating'))  # has to be 1 by default
     category = ListField()
     clicks = IntField(default=1)
     relevance = IntField()

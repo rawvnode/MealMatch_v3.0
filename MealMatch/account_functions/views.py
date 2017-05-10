@@ -55,6 +55,7 @@ def login_view(request):
         login(request, user)
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 

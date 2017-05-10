@@ -61,4 +61,6 @@ media
 .idea/**/tasks.xml
 
 .idea/dictionaries
-.idea/
+.idea
+MealMatch/account_functions/migrations/0001_initial.py
+

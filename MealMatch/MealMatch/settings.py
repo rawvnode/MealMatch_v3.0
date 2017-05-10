@@ -22,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DBNAME = 'test'
 _MONGODB_USER = 'fabian'
 _MONGODB_PASSWD = '!Endless#1246%J'
-_MONGODB_HOST = '130.238.15.203:27017'
-_MONGODB_NAME = 'serverDB'
+_MONGODB_HOST = 'ds133321.mlab.com:33321'
+_MONGODB_NAME = 'mealmatch'
 _MONGODB_DATABASE_HOST = \
     'mongodb://%s:%s@%s/%s' \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
@@ -86,6 +86,7 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/' #För att inte gå till /account/profile/_
+
 
 
 
@@ -178,7 +179,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
-        'DIRS': ["C:/Users/Axel/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
+        'DIRS': ["C:/Users/Sofia/Desktop/Projekt/MealMatch_v3.0/MealMatch/Templates/"],
 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -206,14 +207,12 @@ WSGI_APPLICATION = 'MealMatch.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME' : 'mealmatch',
-        'USER': 'axel',
-        'PASSWORD': 'Flodhast1337',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME' : os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
 
 
 # Password validation
