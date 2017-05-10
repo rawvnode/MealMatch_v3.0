@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" type="text/css" href='{% static "css/recipes2.css"%}'>
+    <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap_style.css"%}'>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -29,16 +30,9 @@
   <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
 </nav>-->
 
-
-
-
-
-
-
-
     <!-- Sidebar/menu -->
 
-<div class="startPage w3-white">
+<div class="startPage" style="background-color: rgba(240,234,227,0.5) !important;">
     <div id="slideout">
 
     <div id="slidecontent">
@@ -67,9 +61,6 @@
 
                                                     </li>
 
-
-
-
                                                 {% endfor %}
 
 
@@ -95,17 +86,12 @@
 
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-    <div class="w3-white w3-content" style="max-width:1600px; margin: auto">
+    <div class="w3-content" style="max-width:1600px; margin: auto; background-color:  rgba(240,234,227,0.5);">
     <!-- !PAGE CONTENT! -->
     <div class="w3-main" style="margin-left:100px; margin-right:100px">
 
         <!-- Header -->
         <header id="portfolio">
-
-
-
-
-
 
 
 <!--
@@ -188,11 +174,7 @@
 
                 {% endfor %}
                 </div>
-
-
         </div>--->
-
-
         <!-- Pagination -->
             <div class="w3-center w3-padding-32">
                 <div class="w3-bar">
@@ -245,5 +227,3 @@
 
 <script> addItemMyIng()</script>
 {% endblock %}
-
-
