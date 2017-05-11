@@ -10,6 +10,7 @@ $("#ingredient-form").keyup(function(event){
             $("#searchbar_plus").click();
         }else{
             if(ingredientArray.length !== 0) {
+                setURL();
                 $(".ing_form").submit();
             }
         }
