@@ -60,10 +60,9 @@ def presentRecipe(request):
         try:
 
             recipe_object = get_ratings(req_id)
-
-            recipe_rating = recipe_object[0]
-            count = recipe_object[1]
-            your_rating = get_user_rating(req_id, request)
+            recipe_rating = recipe_object[0] # Provides the rating of the recipe
+            count = recipe_object[1] # Provides the amount of people that rated the recipe
+            your_rating = get_user_rating(req_id, request) # Provides the raters rating on this certain recipe
 
 
         except:

@@ -10,6 +10,7 @@ $("#ingredient-form").keyup(function(event){
             $("#searchbar_plus").click();
         }else{
             if(ingredientArray.length !== 0) {
+                setURL();
                 $(".ing_form").submit();
             }
         }
@@ -163,6 +164,7 @@ function setURLRefresh() {
 }
 
 
+
  //Ajax functions
  function ajax_func(){
     var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
@@ -283,8 +285,8 @@ function addItemMyIng() {
             lastid += 1;
         }
         else {
-            window.alert("hej")
-            $('.ingredient-form').effect("highlight", {}, 3000);
+           //window.alert("hej")
+           //$('.ingredient-form').effect("highlight", {}, 3000);
             //do something
         }
 
@@ -293,7 +295,7 @@ function addItemMyIng() {
 
 
 function addItem(length){
-
+         //init popover,  see http://stackoverflow.com/questions/12333585/twitter-bootstrappopovers-are-not-showing-up-on-first-click-but-show-up-on-seco
         Lastid = length;
         var ing = "ing";
         var li = document.createElement("li");
@@ -332,19 +334,21 @@ function addItem(length){
             lastid += 1;
         }
         else {
+            //$('[data-toggle="popover"]').popover();
 
             $('[data-toggle="popover"]').popover({
                 placement : 'left', delay: {
                 show: "500",
                 hide: "100"
             }});
+
             $('[data-toggle="popover"]').on('shown.bs.popover',function() {
             setTimeout(function() {
             $('[data-toggle="popover"]').popover('hide');
             }, 2000);
             });
-
-            $('#ingredient-form').effect("pulsate", "slow");
+//
+            //$('#ingredient-form').effect("highlight", "slow");
             //do something
         }
     }
