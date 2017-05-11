@@ -39,7 +39,14 @@ input:checked ~ label:before {
 
 
 
-
+.container_comments{
+    max-width: 1000px !important;
+}
+.container_instructions{
+     padding-top: 40px;
+      padding-bottom: 20px;
+      max-width: 1000px !important;
+}
 
 #presentation {
     width: 90%;
@@ -53,6 +60,9 @@ input:checked ~ label:before {
     height : 100px;
     max-width: 80%;
 
+}
+.w3-margin-left{
+    display:inline-block !important;
 }
 
 
@@ -155,7 +165,7 @@ hr {
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
-  font-size: 1.5em;
+  font-size: 1.8em;
   text-align: left;
   padding-bottom: 0;
 }
@@ -181,6 +191,8 @@ hr {
     position: relative;
     color: rgb(189, 64, 4)
 }
+
+
 
 
 
