@@ -2,7 +2,41 @@ var ingredientArray = [];
 var lastid = 0;
 
 // Listeenes
+$(function(){
+$("#ingredient-form").keyup(function(event){
+    var input = document.getElementById("ingredient-form");
+    if(event.keyCode == 13){
+        if(input.value.length >0) {
+            $("#searchbar_plus").click();
+        }else{
+            if(ingredientArray.length !== 0) {
+                $(".ing_form").submit();
+            }
+        }
+    }
+    });
+});
 
+
+function autocomplete_listener(){
+
+    $(function() {
+
+        $(".ui-menu-item-wrapper").click(function (event) {
+
+
+          //$("#ingredient-form").prop("value", $(this).text());
+          //$("#searchbar_plus").click();
+          //empty_input();
+        });
+
+    });
+
+
+ }
+function empty_input() {
+     $("#ingredient-form").val('');
+}
 
  $(function(){
  $( ".search_bar" ).keyup(function( event ) {
@@ -15,6 +49,9 @@ var lastid = 0;
  $( "#matchme" ).click(function( event ) {
        event.preventDefault();
        setURL();
+
+       //funktionsanrop
+
        $(".ing_form").submit();
     });
  });
@@ -58,14 +95,22 @@ var lastid = 0;
 
 //Setter function
 function setURL() {
+    //check if textbox is empty and if not add to ing array:::
+    var input = document.getElementById("ingredient-form");
 
+        if (input.value.length > 0) {
+            ingredientArray.push(input.value);
+            window.alert(ingredientArray)
+        }
     for (var i in ingredientArray){
         var action = $( ".ing_form" ).attr("action")
         ingredientArray[i] = ingredientArray[i].replace(/\s/g, "_");
         action = action  + ingredientArray[i] + "&"
         $(".ing_form").attr("action", action)
 
-}
+    }
+
+
 }
 
 function setURLRefresh() {
@@ -364,10 +409,13 @@ function addItemPantry(){
 function automatiskKomplettering(array){
 
 
-        var availableTags = array
+        var availableTags = array;
         $( "#ingredient-form" ).autocomplete({
-        source: availableTags
+            source: availableTags,
+            autoFocus: true,
+
         });
+        autocomplete_listener();
         //$( "#ui-id-1" ).autocomplete("widget").attr("max-height", 100px);
 }
 
