@@ -291,9 +291,7 @@ function addItemMyIng() {
             lastid += 1;
         }
         else {
-           //window.alert("hej")
-           //$('.ingredient-form').effect("highlight", {}, 3000);
-            //do something
+
         }
 
     }
@@ -353,8 +351,7 @@ function addItem(length){
             $('[data-toggle="popover"]').popover('hide');
             }, 2000);
             });
-//
-            //$('#ingredient-form').effect("highlight", "slow");
+
             //do something
         }
     }

@@ -100,30 +100,28 @@ def retrieveRecipes(request):
     if request.method == "GET":
         index = request.path.rfind("/")
         raw_input = request.path[index+1:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
-        checkbox = request.GET.get('checkbox', False)
+
+
+
+        pantry = request.GET.get('checkbox', False)
         input = []
-        if(request.user.is_authenticated()):
-            if(checkbox):
-                mongouser = Profile.objects.get(user_id_reference=request.user.id)
-                user_pantry = mongouser.Pantry
-                input = user_pantry
+        if(request.user.is_authenticated() and pantry):
+            mongouser = Profile.objects.get(user_id_reference=request.user.id)
+            user_pantry = mongouser.Pantry
+            input = user_pantry
 
         for element in raw_input:
             input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
+
         query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
-        sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
 
+        dictlist = sortquery(query_mapped) #sorts the queried result
 
-        dictlist = []
-        for key, value in sorted_dict.items():
-            temp = [key,value]
-            dictlist.append(temp)
         paginator = Paginator(dictlist, 12)  # Show 9 contacts per page
         page = request.GET.get('page', 1)
         recipes = view_paginator(page, paginator)
         page_range = paginateSlice(3, recipes, paginator)
-
         return render(request, "recipes.html", {"user_input" : input, "recipes": recipes, "page_range" : page_range, "num_pages": paginator.num_pages})
     else:
         return render(request, "startpage.html")
@@ -145,10 +143,13 @@ def autocorrect(request):
 
 ############# HELPER FUNCTIONS #############
 def sanitize(user_string):
+
     user_string = re.sub("_", " ", user_string)  # Converts underscore to whitespace
     user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
-    return user_string
+    user_string.capitalize()
+    
+    return user_string.capitalize()
 
 
 def getComments(comments_query):
@@ -256,3 +257,11 @@ def get_user_rating(id,request):
     else:
 
         return None
+
+def sortquery(query_mapped):
+    sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
+    dictlist = []
+    for key, value in sorted_dict.items():
+        temp = [key,value]
+        dictlist.append(temp)
+    return dictlist
