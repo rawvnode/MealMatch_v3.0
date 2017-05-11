@@ -111,7 +111,10 @@ def retrieveRecipes(request):
             input = user_pantry
 
         for element in raw_input:
-            input.append(sanitize(element)) #Sanitizses !! IMPORTANT !!
+            if sanitize(element):
+                input.append(sanitize(element))
+
+             #Sanitizses !! IMPORTANT !!
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
 
         query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
@@ -143,7 +146,8 @@ def autocorrect(request):
 
 ############# HELPER FUNCTIONS #############
 def sanitize(user_string):
-
+    if (user_string == ""):
+        return False
     user_string = re.sub("_", " ", user_string)  # Converts underscore to whitespace
     user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
