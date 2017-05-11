@@ -398,7 +398,7 @@ $(document).ready(function(){
         // handle a non-successful response
         //error :"",
             });
-		//window.location.reload();
+		window.location.reload();
 
     });
 
@@ -421,9 +421,9 @@ function star_rating(rating, id){
 function popup(your_rating) {
 
     if(your_rating != "None") {
-        window.alert("Pip freeze motherfucker! You have already rated this goodie.")
+        window.alert("You have already rated this recipe.")
     }
     else{
-        window.alert("Pip freeze motherfucker! You have to be logged in to rate these goodies.")
+        window.alert("You have to be logged in to rate recipes.")
     }
 }
