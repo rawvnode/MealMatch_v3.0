@@ -44,93 +44,20 @@
     .mySlides {
         display: none
     }
+
+
+
+
+
+
 </style>
 
 
-
-
-
 <!-- !PAGE CONTENT! -->
-<div class="background">
-    <div id="main" class="container text-left container_about" >
+<div class="">
+    <div id="main" class="container text-left container_about background">
 
-                <div class="w3-row">
-                    <div class="w3-half container w3-left w3-margin-bottom" style="height:auto">
-                        <h3>{{recipe.title}}</h3>
-                        <div class=" row">
-            {%if not user.is_authenticated or your_rating != None%}
-
-
-
-             <form class="rating w3-margin-left" onclick="popup('{{your_rating}}')"id="stardiv" >
-
-                    <input type="radio" value="5" name ="star" class="stars" checked=false disabled/>
-                    <label class="starlabel" for="st1"></label>
-                    <input type="radio" value="4" name ="star" class="stars" checked=false disabled/>
-                    <label class="starlabel" for="st2"></label>
-                    <input type="radio" value="3" name ="star" class="stars" checked=false disabled/>
-                    <label class="starlabel" for="st3"></label>
-                    <input type="radio" value="2" name ="star" class="stars" checked=false disabled/>
-                    <label class="starlabel" for="st4"></label>
-                    <input type="radio" value="1" name ="star" class="stars" checked=false disabled/>
-                    <label class="starlabel" for="st5"></label>
-             </form>
-
-            {% endif %}
-        <!-- first grid -->
-
-
-
-            {%if user.is_authenticated and your_rating == None%}
-             <form class="rating w3-margin-left" id="ratingdiv" >
-                    <input type="radio" id="st1" value="5"name ="star" class="stars" checked=false/>
-                    <label class="starlabel" for="st1"></label>
-                    <input type="radio" id="st2" value="4" name ="star" class="stars"checked=false/>
-                    <label class="starlabel" for="st2"></label>
-                    <input type="radio" id="st3" value="3" name ="star" class="stars" checked=false/>
-                    <label class="starlabel" for="st3"></label>
-                    <input type="radio" id="st4" value="2" name ="star" class="stars" checked=false/>
-                    <label class="starlabel" for="st4"></label>
-                    <input type="radio" id="st5" value="1"name ="star" class="stars"checked=false/>
-                    <label class="starlabel" for="st5"></label>
-             </form>
-             {% endif %}
-            <p><strong>Rated by {{count_ratings}} users</strong></p><br>
-             {%if not your_rating == None %}
-             <p><strong>Your rated: {{your_rating}} </strong></p>
-             {% endif %}
-
-
-                    <div class="w3-half">
-                        <i class="fa fa-clock-o fa-2x w3-margin" aria-hidden="true"></i>
-                        {{recipe.time}}
-                    </div>
-
-                    <div class="w3-half">
-                        <i class="fa fa-cutlery fa-2x w3-margin" aria-hidden="true"></i>
-                        {{recipe.servings}}
-                    </div>
-
-
-
-                    <div class="white">
-                        <div class="container text-left container_about">
-
-                            <hr>
-                            <h5><strong>Tags</strong></h5>
-                            {%for tag in recipe.tags%}
-                            <p id="tag">{{tag}}</p>
-                            {%endfor%}
-                            <br><hr>
-                            <p>Powered by Foodista.com<br> – The Cooking Encyclopedia Everyone Can Edit</p><br>
-                            <a href={{recipe.author}}>View recipe at Foodista.com</a>
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+        <div class="w3-row">
             <div class="w3-half white w3-center w3-margin-bottom" style="height:auto">
 
 
@@ -139,24 +66,100 @@
 
 
             </div>
+            <div class="w3-half container w3-left w3-margin-bottom" style="height:auto">
+                <h3>{{recipe.title}}</h3>
+                <div class=" row">
+                    {%if not user.is_authenticated or your_rating != None%}
+
+
+                    <form class="rating w3-margin-left" onclick="popup('{{your_rating}}')" id="stardiv">
+
+                        <input type="radio" value="5" name="star" class="stars" checked=false disabled/>
+                        <label class="starlabel" for="st1"></label>
+                        <input type="radio" value="4" name="star" class="stars" checked=false disabled/>
+                        <label class="starlabel" for="st2"></label>
+                        <input type="radio" value="3" name="star" class="stars" checked=false disabled/>
+                        <label class="starlabel" for="st3"></label>
+                        <input type="radio" value="2" name="star" class="stars" checked=false disabled/>
+                        <label class="starlabel" for="st4"></label>
+                        <input type="radio" value="1" name="star" class="stars" checked=false disabled/>
+                        <label class="starlabel" for="st5"></label>
+                    </form>
+                    <p class="w3-margin-left"><strong>{{count_ratings}} ratings</strong></p><br>
+
+                    {% endif %}
+                    <!-- first grid -->
+
+
+                    {%if user.is_authenticated and your_rating == None%}
+                    <form class="rating w3-margin-left" id="ratingdiv">
+                        <input type="radio" id="st1" value="5" name="star" class="stars" checked=false/>
+                        <label class="starlabel" for="st1"></label>
+                        <input type="radio" id="st2" value="4" name="star" class="stars" checked=false/>
+                        <label class="starlabel" for="st2"></label>
+                        <input type="radio" id="st3" value="3" name="star" class="stars" checked=false/>
+                        <label class="starlabel" for="st3"></label>
+                        <input type="radio" id="st4" value="2" name="star" class="stars" checked=false/>
+                        <label class="starlabel" for="st4"></label>
+                        <input type="radio" id="st5" value="1" name="star" class="stars" checked=false/>
+                        <label class="starlabel" for="st5"></label>
+                    </form>
+                    <p class="w3-margin-left"><strong>{{count_ratings}} ratings</strong></p><br>
+
+                    {% endif %}
+
+                    {%if not your_rating == None %}
+                    <p><strong>Your rated: {{your_rating}} </strong></p>
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="w3-row w3-margin-left w3-margin-bottom">
+                        <i class="fa fa-clock-o" aria-hidden="true"> {{recipe.time}}</i>
+
+                    </div>
+                    <br>
+                    <div class="w3-row w3-margin-left w3-margin-bottom">
+                        <i class="fa fa-cutlery" aria-hidden="true"> {{recipe.servings}}</i>
+
+                    </div>
+                    <br>
+                    <div class="w3-row w3-margin-left w3-margin-bottom">
+                        <a href="#COMMENT">
+                            <i class="fa fa-comment " aria-hidden="true" id="comment"><label
+                                    for="comment">Comment</label></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="white">
+                        <div class="container text-left container_about">
+
+                            <hr>
+                            {%for tag in recipe.tags%}
+                            <p id="tag">{{tag}}</p>
+                            {%endfor%}
+                            <br>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <!-- Slideshow Header -->
     </div>
 </div>
 
-<div class="background">
-    <div class="w3-padding" style="background-color: rgb(169,64,4);">
-    </div>
-</div>
 
-<div id="instructions" class="bg-1">
-    <div class="container text-center container_about bg-1">
+<div id="instructions" class="">
+    <div class="container text-center container_instructions bg-1">
 
         <div class="col-sm-4 text-left">
 
             <h5><strong>Ingredients</strong></h5>
-            <div class="w3-row w3-large">
+            <div class="w3-row w3-medium">
                 <div class="w3-col s12">
                     {% for ingredient in recipe.ingredients_complete %}
                     <p>{{ingredient}}</p>
@@ -171,66 +174,84 @@
             <h5><strong>Preparation</strong></h5>
 
             {% for direction in recipe.directions %}
-            <div class="w3-row w3-large">
+            <div class="w3-row w3-medium">
                 <p>{{forloop.counter}}. {{direction}}</p>
             </div>
             {% endfor %}
-
+            <div class="w3-small w3-padding-24 text-right">
+                <p class=>Recipe by Foodista.com<br>– The Cooking Encyclopedia Everyone Can Edit</p>
+                <a href={{recipe.author}}>View original at Foodista.com</a>
+            </div>
         </div>
     </div>
+
 </div>
 
 
-<div class="background">
-    <div class="background">
-        <div class="w3-padding" style="background-color: rgb(169,64,4);">
-        </div>
-    </div>
-
-    <div class="background">
-        <div class="container container_about">
-    {% if user.is_authenticated %}
+<div class="">
+<A NAME="COMMENT"></A>
+    <div class="container container_comments background">
+        <div class="row">
+            <div class="col-sm-8 w3-padding-24">
+                {% if user.is_authenticated %}
 
 
+                <h3 class="w3-padding-24 w3-text-dark-grey">Make your comments here
+                    {{mongouser.full_name}}:</h3>
 
-
-            <h3 class="w3-padding-24 w3-text-dark-grey">Make your comments here
-                {{mongouser.full_name}}:</h3>
-
-            <form class="ing_form" action="/recipes/presenterarecept/{{recipe.id}}" method="POST">
-                {% csrf_token %}
-
+                <form class="ing_form" action="/recipes/presenterarecept/{{recipe.id}}" method="POST">
+                    {% csrf_token %}
 
 
                     {{commentform}}
 
 
-                <br>
-                  <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
-                <input type="submit" class="btn w3-blue-grey" id="comment_button" value="Post comment">
+                    <br>
+                    <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
+                    <input type="submit" class="btn w3-blue-grey" id="comment_button" value="Post comment">
 
 
+                </form>
+                {%endif%}
 
+                {%if not user.is_authenticated%}
+                <h3>Log in to leave a comment</h3>
+                <h5>Create an account <a href="{% url 'registration_register' %}">here</a></h5>
+                {% endif %}
 
-            </form>
-
-            {%endif%}
-
-            <hr>
-            <div class="w3-margin">
-                <h3 class="w3-padding-24 w3-text-dark-grey">Comments</h3>
-                {%for comment in comments %}
-                <img src="{{comment.picture}}" alt="Avatar" class="w3-left w3-margin-right" style="height:80px">
-                <p><span class="w3-large w3-margin-right">{{comment.username}}</span> <span
-                        class="w3-right">{{comment.created_at}}</span></p>
-                <p>{{comment.body}}</p>
-                <hr>
-                {% endfor %}
+            </div>
+            <div class="w3-small col-sm-4 w3-padding-24 text-right">
 
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <hr>
+                <div class="w3-margin">
+                    <h3 class="w3-padding-24 w3-text-dark-grey">Comments</h3>
+                    {% if not comments%}
+                    <hr>
+                    <img src="../../static/images/genericAvatar.png" alt="Avatar" class="w3-left w3-margin-right"
+                         style="height:80px">
+                    <p><span class="w3-large w3-margin-right">MealMatch</span> <span
+                            class="w3-right"></span></p>
+                    <p>Be the first one to leave a comment!</p>
+                    <br>
+                    {%endif%}
 
+                    {%for comment in comments %}
+                    <hr>
+                    <img src="{{comment.picture}}" alt="Avatar" class="w3-left w3-margin-right" style="height:80px; max-width:100px;">
+                    <p><span class="w3-large w3-margin-right">{{comment.username}}</span> <span
+                            class="w3-right">{{comment.created_at}}</span></p>
+                    <p>{{comment.body}}</p>
+                    <br>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -238,7 +259,13 @@
     var id = "{{recipe.id}}";
     star_rating(rating, id);
 
+
+
+
+
+
+
 </script>
 
 
-    {% endblock %}
+{% endblock %}

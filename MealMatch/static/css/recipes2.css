@@ -80,6 +80,7 @@
     margin-bottom: 0;
 }
 #slideout {
+    z-index: 1;
     position: fixed;
     width: 315px;
     height: 80px;
