@@ -17,6 +17,7 @@ router.register(r'mapped', mappedViewSet,r"mapped")
 
 urlpatterns = [
     url(r'^profile/', views.create_profile),  # <--
+    url(r'^update_profile/', views.update_profile),  # <--
     ##main application urls
     url(r'^recipes/', include("recipes.urls")),
     url(r'^about/', include("contact.urls"), name="about"),
