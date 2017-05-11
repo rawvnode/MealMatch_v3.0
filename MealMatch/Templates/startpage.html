@@ -17,13 +17,12 @@
 
                 <div class="container_searchbar">
 
-                    <form class="search_bar" action="/recipes/" method="POST">
+                    <div class="search_bar" action="/recipes/" method="POST">
 
                         {% csrf_token %}
                         <div class="input-group">
-                            <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
-
-                                <button class="button" id="searchbar_plus" value="Add" onclick = "addItem()">
+                            <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30">
+                                <button data-toggle="popover"  data-content="You need to add an ingredient"class="button" id="searchbar_plus" value="Add" onclick = "addItem()">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
 
@@ -35,7 +34,7 @@
                                     <li><a href="#">Laktos free</a></li>
                             </ul>-->
                         </div>
-                    </form>
+                    </div>
                 </div>
             <div class="container_ingredients">
 
