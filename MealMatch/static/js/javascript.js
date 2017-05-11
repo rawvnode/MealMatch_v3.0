@@ -10,7 +10,9 @@ $("#ingredient-form").keyup(function(event){
             $("#searchbar_plus").click();
         }else{
             if(ingredientArray.length !== 0) {
-                setURL();
+                if (url_set == false){
+                    setURL();
+                }
                 $(".ing_form").submit();
             }
         }
@@ -49,7 +51,10 @@ function empty_input() {
  $(function(){
  $( "#matchme" ).click(function( event ) {
        event.preventDefault();
-       setURL();
+       if (url_set == false){
+            setURL();
+       }
+
 
        //funktionsanrop
 
@@ -88,7 +93,7 @@ function empty_input() {
 
 
 
-
+var url_set = false;
 
 
 
@@ -111,7 +116,7 @@ function setURL() {
 
     }
 
-
+    url_set = true;
 }
 
 function setURLRefresh() {
@@ -167,6 +172,7 @@ function setURLRefresh() {
 
  //Ajax functions
  function ajax_func(){
+    console.log("laoded")
     var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
 
     var inputs = $('#ingredient-form').val()
