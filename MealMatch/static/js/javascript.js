@@ -260,7 +260,8 @@ function addItemMyIng() {
 
 
             li.setAttribute('id', "item"+ lastid);
-            li.setAttribute('class', 'list-group-item');
+            li.setAttribute('class', 'list-group-item text-left');
+
             var removeSpan = document.createElement('span');
             removeSpan.setAttribute('class','pull-right');
             li.appendChild(removeSpan);
