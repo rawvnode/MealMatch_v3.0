@@ -44,13 +44,25 @@
 
 
                      <div class="form-group">
+
+                             {% if user.is_authenticated %}
+                         <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
+                        <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
+                             {% endif %}
+
+                         <!--<input id="vegBox" type="checkbox" name="veg" >-->
+                        <!--<label for="vegBox"><i>Vegetarian</i></label>-->
+                         <!--<input id="veganBox" type="checkbox" name="veg" >-->
+                        <!--<label for="veganBox"><i>Vegan</i></label>-->
+                         <!--<input id="dairyBox" type="checkbox" name="veg" >-->
+                        <!--<label for="dairyBox"><i>Dairy-free</i></label>-->
+                         <!--<input id="glutenBox" type="checkbox" name="veg" >-->
+                        <!--<label for="glutenBox"><i>Gluten-free</i></label>-->
+
+
                          <div class="center_button">
                          <input type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" value = "Match me(al)" onsubmit ="setURL()">
                          <br>
-                             {% if user.is_authenticated %}
-                         <input id="checkbox1" type="checkbox" checked name="checkbox">
-                        <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
-                             {% endif %}
                      </div>
                      </div>
 

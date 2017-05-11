@@ -147,25 +147,79 @@ def add_recipe(request):
 
 
 def create_profile(request):
-    first_name = request.POST['firstname']
-    last_name = request.POST['lastname']
-    full_name = first_name+last_name
-    gender = request.POST['gender']
-    birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
+    print(request.POST, "#####################")
+    check_picture = request.POST.get('picture', None)
+    if (check_picture is None or check_picture == ""):
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        full_name = first_name+last_name
+        gender = request.POST['gender']
+        birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
 
-    user_id = request.user.id
-    #country = request.POST['country']
-    picture = 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png'
-    current_date = date.today()
+        user_id = request.user.id
+        #country = request.POST['country']
+        picture = 'https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png'
+        current_date = date.today()
 
-    age = (current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
+        age = (current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
 
 
-    user_profile = Profile(first_name = first_name, last_name = last_name, full_name = full_name, sex = gender, age = age, user_id_reference = user_id, picture = picture)
-    user_profile.save()
+        user_profile = Profile(first_name = first_name, last_name = last_name, full_name = full_name, sex = gender, age = age, user_id_reference = user_id, picture = picture)
+        user_profile.save()
 
-    return redirect("/account_functions/my_pantry.html")
+        return redirect("/account_functions/my_pantry.html")
+    else:
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        full_name = first_name + last_name
+        gender = request.POST['gender']
+        birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
+        picture = request.POST['picture']
+        user_id = request.user.id
+        # country = request.POST['country']
 
+        current_date = date.today()
+
+        age = (
+        current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
+
+        user_profile = Profile(first_name=first_name, last_name=last_name, full_name=full_name, sex=gender, age=age,
+                               user_id_reference=user_id, picture=picture)
+        user_profile.save()
+
+        return redirect("/account_functions/my_pantry.html")
+
+def update_profile(request):
+    check_picture = request.POST.get('picture', None)
+    if(check_picture is None):
+
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        full_name = first_name+last_name
+        gender = request.POST['gender']
+        birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
+
+        user_id = request.user.id
+        #user_profile = Profile.objects.get(user_id_reference=user_id)
+
+        current_date = date.today()
+
+        age = (current_date.year - birthday.year - ((current_date.month, current_date.day) < (birthday.month, birthday.day)))
+        user_profile = Profile.objects.get(user_id_reference=user_id)
+        user_profile.update(first_name=first_name, last_name=last_name, full_name=full_name,gender=gender, age=age)
+        user_profile.save()
+
+
+        return redirect("/account_functions/user_profile.html")
+
+    else:
+        picture = request.POST['picture']
+        user_id = request.user.id
+        user_profile = Profile.objects.get(user_id_reference=user_id)
+        user_profile.update(picture = picture)
+        user_profile.save()
+
+        return redirect("/account_functions/user_profile.html")
 
 ###############HELPER FUNCTIONS################
 

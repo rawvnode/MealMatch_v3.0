@@ -115,7 +115,9 @@ def retrieveRecipes(request):
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
 
         query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
+
         dictlist = sortquery(query_mapped) #sorts the queried result
+
         paginator = Paginator(dictlist, 12)  # Show 9 contacts per page
         page = request.GET.get('page', 1)
         recipes = view_paginator(page, paginator)
@@ -146,8 +148,8 @@ def sanitize(user_string):
     user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     user_string.capitalize()
-    print("user_string", user_string)
-    return user_string
+    
+    return user_string.capitalize()
 
 
 def getComments(comments_query):
