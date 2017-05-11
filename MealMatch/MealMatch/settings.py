@@ -7,7 +7,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.9/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.9/ref/settings/
+https://docs.django<project.com/en/1.9/ref/settings/
 """
 
 import os
@@ -22,11 +22,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DBNAME = 'test'
 _MONGODB_USER = 'fabian'
 _MONGODB_PASSWD = '!Endless#1246%J'
-_MONGODB_HOST = 'ds133321.mlab.com:33321'
-_MONGODB_NAME = 'mealmatch'
+_MONGODB_HOST = '130.238.15.203:27017'
+_MONGODB_NAME = 'serverDB'
 _MONGODB_DATABASE_HOST = \
     'mongodb://%s:%s@%s/%s' \
     % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
+
+
 
 mongoengine.connect(DBNAME, host=_MONGODB_DATABASE_HOST)
 
