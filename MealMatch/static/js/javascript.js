@@ -237,6 +237,11 @@ function addItemMyIng() {
 
             lastid += 1;
         }
+        else {
+            window.alert("hej")
+            $('.ingredient-form').effect("highlight", {}, 3000);
+            //do something
+        }
 
     }
 // Adds ingredient to search list, on startpage
@@ -280,6 +285,22 @@ function addItem(length){
              // document.querySelector(".column_remove").appendChild(removeButton);
 
             lastid += 1;
+        }
+        else {
+
+            $('[data-toggle="popover"]').popover({
+                placement : 'left', delay: {
+                show: "500",
+                hide: "100"
+            }});
+            $('[data-toggle="popover"]').on('shown.bs.popover',function() {
+            setTimeout(function() {
+            $('[data-toggle="popover"]').popover('hide');
+            }, 2000);
+            });
+
+            $('#ingredient-form').effect("pulsate", "slow");
+            //do something
         }
     }
 
@@ -399,7 +420,7 @@ $(document).ready(function(){
         // handle a non-successful response
         //error :"",
             });
-		//window.location.reload();
+		window.location.reload();
 
     });
 
@@ -422,9 +443,9 @@ function star_rating(rating, id){
 function popup(your_rating) {
 
     if(your_rating != "None") {
-        window.alert("Pip freeze motherfucker! You have already rated this goodie.")
+        window.alert("You have already rated this recipe.")
     }
     else{
-        window.alert("Pip freeze motherfucker! You have to be logged in to rate these goodies.")
+        window.alert("You have to be logged in to rate recipes.")
     }
 }
