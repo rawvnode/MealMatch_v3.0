@@ -46,6 +46,7 @@
                      <div class="form-group">
 
                              {% if user.is_authenticated %}
+                         <script>init_pantry()</script>
                          <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
                         <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
                              {% endif %}

@@ -1,24 +1,42 @@
 var ingredientArray = [];
 var lastid = 0;
+var url_set = false;
 
 // Listeenes
 $(function(){
 $("#ingredient-form").keyup(function(event){
     var input = document.getElementById("ingredient-form");
     if(event.keyCode == 13){
+
         if(input.value.length >0) {
             $("#searchbar_plus").click();
         }else{
-            if(ingredientArray.length !== 0) {
-                if (url_set == false){
+        pantry();
+
+
+            if(ingredientArray.length != 0 || pantry() ==true  ) { //length of ing list gte one, OR pantry activate
+                if (url_set == false){ //checks if url already has been set, due to ajax async
                     setURL();
-                }
+                                   }
                 $(".ing_form").submit();
             }
         }
     }
     });
 });
+
+function pantry (){
+
+    if ( $("#checkbox1").prop( "checked" ) ){ //checks prop of checkbox
+
+        return true;
+        } else {
+        return false;
+
+        }
+
+
+}
 
 
 function autocomplete_listener(){
@@ -57,8 +75,10 @@ function empty_input() {
 
 
        //funktionsanrop
+        if(ingredientArray.length != 0 || pantry() ==true  ){
+            $(".ing_form").submit();
+        }
 
-       $(".ing_form").submit();
     });
  });
 
@@ -93,7 +113,7 @@ function empty_input() {
 
 
 
-var url_set = false;
+
 
 
 
