@@ -43,18 +43,17 @@
 
         <div class="container-fluid text-center" style="overflow: hidden; padding-right: .5em;">
 
-        <br>
+            <br>
             <div class="input-group">
 
-                                <input type="text" id="ingredient-form" id="add" class="form-control" size="50" placeholder="Add ingredient..." required>
-                            <button class="button text-center" id="searchbar_plus" onclick="addItemMyIng()" value="Add">
+                <input type="text" id="ingredient-form" id="add" class="form-control" size="50"
+                       placeholder="Add ingredient..." required>
+                <button class="button text-center" id="searchbar_plus" onclick="addItemMyIng()" value="Add">
 
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </button>
-                            </div>
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
             </div>
-
-
+        </div>
 
 
         <form class="ing_form_refresh" action="/recipes/recipes/" method="GET">
@@ -63,14 +62,13 @@
 
                 <ul id="ingredients" name="{{refresh_ingredients}}" class="container-fluid w3-text-black"
                     style="font-size: 0.7em;">
-
-
+                    <div class="center_button">
+                        <input type="submit" class="btn btn-primary w3-ripple matchbutton refresh-button"
+                               id="matchmerefresh" value="Refresh">
+                    </div>
+                    <br>
                     {% for input in user_input %}
 
-                      <div class="center_button">
-                    <input type="submit" class="btn btn-primary w3-ripple matchbutton refresh-button"
-                           id="matchmerefresh" value="Refresh">
-                </div>
 
                     <li class="list-group-item text-left" id="itembefore{{forloop.counter0}}">{{input}}
                         <span class="pull-right">
@@ -83,7 +81,6 @@
 
                     {% endfor %}
                 </ul>
-
 
 
             </div>
@@ -153,7 +150,6 @@
 
             </div>
         </div>
-
 
 
     </div>
