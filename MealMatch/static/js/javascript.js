@@ -236,6 +236,11 @@ function addItemMyIng() {
 
             lastid += 1;
         }
+        else {
+            window.alert("hej")
+            $('.ingredient-form').effect("highlight", {}, 3000);
+            //do something
+        }
 
     }
 // Adds ingredient to search list, on startpage
@@ -279,6 +284,22 @@ function addItem(length){
              // document.querySelector(".column_remove").appendChild(removeButton);
 
             lastid += 1;
+        }
+        else {
+
+            $('[data-toggle="popover"]').popover({
+                placement : 'left', delay: {
+                show: "500",
+                hide: "100"
+            }});
+            $('[data-toggle="popover"]').on('shown.bs.popover',function() {
+            setTimeout(function() {
+            $('[data-toggle="popover"]').popover('hide');
+            }, 2000);
+            });
+
+            $('#ingredient-form').effect("pulsate", "slow");
+            //do something
         }
     }
 

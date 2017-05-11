@@ -126,8 +126,9 @@
     background-repeat: no-repeat;
     border: none;
     padding-top: 0.6%;
-    padding-left: 0.5%
+    padding-left: 0.5%;
 }
+
 #searchbar_clear {
     background-color: transparent;
     background-repeat: no-repeat;
@@ -149,7 +150,7 @@
     background-color: transparent;
     box-shadow: none !important;
     color: whitesmoke;
-    font-size: 20;
+    font-size: 20px;
     padding-left: 1em;
     padding-bottom: 0em;
 }
@@ -165,6 +166,7 @@
 
 
 }
+
 .column_remove{
     border: none;
 
