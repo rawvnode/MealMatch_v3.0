@@ -1,4 +1,16 @@
 
+.input-group {
+
+    display: flex !important;
+    border-radius: 0.2em;
+    /* box-shadow: inset 0 0 5px; */
+
+    -moz-box-shadow: inset 0 0 10px #000000;
+    /* -webkit-box-shadow: inset 0 0 10px rgba(97, 83, 83, 0.53); */
+
+}
+
+
 .w3-white {
     padding-top: 1em;
     padding-bottom: 1em;
@@ -10,7 +22,8 @@
 
 
 #ingredient-form {
-    width:80%;
+    width:100%;
+    border: none;
 }
     body,
     h1,
@@ -24,6 +37,10 @@
 .startPage {
     background-size: cover;
     padding-top: 4em;
+}
+
+.second_navbar {
+    opacity: 1;
 }
 
 .panel-default {
@@ -59,23 +76,18 @@
 
 }
 .glyphicon-plus {
-    color: white;
-    font-size: 1.5em;
-    padding:0.1em
+    color: green;
+    background-color: transparent;
+
+    /*font-size: 2em;
+    /*padding-top: 0.7%;
+    /*padding-right: 1%;
+    /*padding-left: 1%;
+    /*padding-bottom: 0.2em;*/
+
 }
 
-#ratio-bar {
-    /*background-color: rgba(250,250,250,0.8) !important;
-    color: white;*/
-}
-#searchbar_plus {
-    border-radius: 0.3em;
-    background-color: green;
-    padding-top: 0.2em;
-    padding-left: 0.6em;
-    padding-bottom: 0.1em;
-    float:right;
-}
+
 .single_recipe{
     margin-bottom: 0;
 }
@@ -129,7 +141,7 @@ input[type="image"]:hover{
 }
 
 
-.btn{
+.refresh-button{
     background-color: rgb(189,64,4) !important;
 }
 
