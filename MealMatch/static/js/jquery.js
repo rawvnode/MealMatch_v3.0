@@ -12,6 +12,7 @@ $(document).ready(function(){
 */
 
 $(document).ready(function(){
+
     console.log($('#searchbar_plus').attr());
     $('#searchbar_plus').attr('disabled',true);
     $('#ingredient-form').keyup(function(){
