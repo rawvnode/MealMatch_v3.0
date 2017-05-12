@@ -19,6 +19,23 @@ $("#ingredient-form").keyup(function(event){
     }
     });
 });
+$(function(){
+$("#ingredient-form-recipes").keyup(function(event){
+    var input = document.getElementById("ingredient-form-recipes");
+    if(event.keyCode == 13){
+        if(input.value.length >0) {
+            $("#searchbar_pluss").click();
+        }else{
+            if(ingredientArray.length !== 0) {
+                if (url_set == false){
+                    setURLRefresh();
+                }
+                $(".ing_form_refresh").submit();
+            }
+        }
+    }
+    });
+});
 
 
 function autocomplete_listener(){
@@ -40,13 +57,26 @@ function autocomplete_listener(){
 function empty_input() {
      $("#ingredient-form").val('');
 }
-
+                                                                                                //SEARCHBAR ON STARTPAGE
  $(function(){
  $( ".search_bar" ).keyup(function( event ) {
-
-        ajax_func();
+        var input = '.search_bar';
+        ajax_func(input);
     });
  });
+
+                                                                                                //SEARCHBAR ON RECIPES
+ $(function(){
+ $( ".search_bar_recipes" ).keyup(function( event ) {
+        var input = '.search_bar_recipes';
+        ajax_func(input);
+    });
+ });
+
+
+
+
+
 
  $(function(){
  $( "#matchme" ).click(function( event ) {
@@ -170,26 +200,44 @@ function setURLRefresh() {
 
 
 
- //Ajax functions
- function ajax_func(){
-    console.log("laoded")
+                                                                                                        //Ajax functions
+ function ajax_func(searchbar){
+
     var csrftoken = getCookie('csrftoken'); //retrieve the specified csrftoken cookie
+    var indata;
+    //window.alert(searchbar)
+     if(searchbar === ".search_bar" ){
+            indata = $('#ingredient-form');
 
-    var inputs = $('#ingredient-form').val()
+     }
+     else if(searchbar === ".search_bar_recipes"){
+            indata = $('#ingredient-form');
+     }
 
+    var inputs = indata.val();
+    console.log(inputs)
 
     $.ajax({ //do an ajax request, since default prevented
         url : "autocorrect/", // the endpoint
         type : "POST", // http method
         data : {csrfmiddlewaretoken: csrftoken, input: inputs},// data sent with the post request
         dataType: "json",
+
         // handle a successful response
         success : function(array){
 
             array = JSON.parse(array);
-            automatiskKomplettering(array);
+            if(searchbar === ".search_bar" ) {
+                automatiskKomplettering(array);
+            }
+            else if(searchbar === ".search_bar_recipes") {
+                automatiskKompletteringRecipes(array);
+            }
+
 
         }
+
+
         // handle a non-successful response
         //error :"",
     });
@@ -338,7 +386,6 @@ function addItem(length){
             lastid += 1;
         }
         else {
-            //$('[data-toggle="popover"]').popover();
 
             $('[data-toggle="popover"]').popover({
                 placement : 'left', delay: {
@@ -352,7 +399,7 @@ function addItem(length){
             }, 2000);
             });
 
-            //do something
+
         }
     }
 
@@ -411,6 +458,18 @@ function addItemPantry(){
     }
 
 function automatiskKomplettering(array){
+
+
+        var availableTags = array;
+        $( "#ingredient-form" ).autocomplete({
+            source: availableTags,
+            autoFocus: true,
+
+        });
+        autocomplete_listener();
+        //$( "#ui-id-1" ).autocomplete("widget").attr("max-height", 100px);
+}
+function automatiskKompletteringRecipes(array){
 
 
         var availableTags = array;
