@@ -28,6 +28,14 @@
     padding-bottom: 7em;
 }
 
+.pwdPage{
+    background-image: linear-gradient(rgba(45, 45, 45, 0.1), rgba(255, 255, 255, 0.5)), url("https://dl.dropboxusercontent.com/s/7x2h0fh6f26opux/8.jpeg?dl=0");
+    background-size: cover;
+    padding-top: 7em;
+    padding-bottom: 7em;
+
+}
+
 .startPageContainer {
 
     max-width: 700px;
@@ -135,7 +143,7 @@
 #slogan {
     text-align: center;
     font-family: "RammettoOne" !important;
-    padding-bottom: 1em;
+    color: rgb(75,75,75) !important;
 }
 
 #searchbar_plus {
@@ -234,6 +242,18 @@
 }
 
 /********************************************************************************************/
+@media screen and (max-width: 480px){
+      .userprofile{
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+      .pwdPage{
+        padding-top: 0px;
+        padding-bottom: 0px;
+      }
+
+  }
+
 
 @media screen and (max-width: 700px) {
     h2 {
@@ -341,3 +361,4 @@ input[class="pantryCheck"]:checked + label i {
 #vegBox {
     position: right;
 }
+
