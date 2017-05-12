@@ -13,7 +13,7 @@
 }
 
 .startPage {
-    background-image: linear-gradient(rgba(45, 45, 45, 0.1), rgba(255, 255, 255, 0.5)), url(../images/8.jpeg);
+    background-image: linear-gradient(rgba(45, 45, 45, 0.1), rgba(255, 255, 255, 0.5)), url("https://dl.dropboxusercontent.com/s/7x2h0fh6f26opux/8.jpeg?dl=0");
 
     background-size: cover;
     padding-top: 7em;
@@ -21,7 +21,7 @@
 }
 
 .startPage1 {
-    background-image: linear-gradient(rgba(45, 45, 45, 0.5), rgba(255, 255, 255, 0)), url(../images/chili.jpg);
+    background-image: linear-gradient(rgba(45, 45, 45, 0.5), rgba(255, 255, 255, 0)), url("https://dl.dropboxusercontent.com/s/7x2h0fh6f26opux/8.jpeg?dl=0");
 
     background-size: cover;
     padding-top: 50px;
