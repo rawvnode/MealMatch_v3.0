@@ -151,7 +151,7 @@ def sanitize(user_string):
     user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
     user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
     user_string.capitalize()
-    
+
     return user_string.capitalize()
 
 

@@ -36,20 +36,39 @@
                         </div>
                     </div>
                 </div>
-            <div class="container_ingredients">
+            <div class="container_ingredients text-center">
 
 
-                <form class = "ing_form" action="/recipes/recipes/" method="GET" >
+                <form class = "ing_form "  action="/recipes/recipes/" method="GET" >
                     {% csrf_token %}
 
 
-                     <div class="form-group">
 
-                             {% if user.is_authenticated %}
-                         <script>init_pantry()</script>
+
+
+                     <div class="btn-group text-center toggle-group" style="height: 45px; background-color: #2199E8">
+                         <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" style="height: 100%;">Match me(al)</button>
+
+
+                      {% if user.is_authenticated %}
+
+                             <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
+                            <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
+
+
+
+
+                             {% endif %}
+
+
+
+                     </div>
+
+                           <!--  {% if user.is_authenticated %}
+
                          <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
                         <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
-                             {% endif %}
+                             {% endif %}-->
 
                          <!--<input id="vegBox" type="checkbox" name="veg" >-->
                         <!--<label for="vegBox"><i>Vegetarian</i></label>-->
@@ -61,13 +80,13 @@
                         <!--<label for="glutenBox"><i>Gluten-free</i></label>-->
 
 
-                         <div class="center_button">
+                        <!-- <div class="center_button">
                          <input type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" value = "Match me(al)">
                          <br>
-                     </div>
-                     </div>
 
+                         </div>-->
 
+                     </div>
 
 
 
