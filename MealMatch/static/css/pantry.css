@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pantryPage {
-    background-image: linear-gradient(rgba(148, 97, 97, 0.42), rgba(255, 255, 255, 0.5)), url("../images/8.jpeg");
+    background-image: linear-gradient(rgba(148, 97, 97, 0.42), rgba(255, 255, 255, 0.5)), url("https://dl.dropboxusercontent.com/s/7x2h0fh6f26opux/8.jpeg?dl=0");
     background-size: cover;
     padding-top: 50px;
     height: 96%;
@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .pantryPage {
-        background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("../images/recipes-background.jpeg");
+        background-image: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("https://dl.dropboxusercontent.com/s/7x2h0fh6f26opux/8.jpeg?dl=0");
         background-size: cover;
         padding-top: 50px;
         height: 95%;
