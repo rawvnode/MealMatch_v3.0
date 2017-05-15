@@ -25,7 +25,7 @@ def breadcrumb(request):
     for element in temp_array:
         if element != "":
             array.append(element)
-            print("hallå " ,element)
+
 
 
 

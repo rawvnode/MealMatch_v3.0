@@ -100,13 +100,13 @@ def refresh(request):
 
 
 def retrieveRecipes(request, raw_input):
-
+    print(raw_input, "####################################")
     if request.method == "GET":
         raw_input = raw_input.split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
 
 
 
-        pantry = request.GET.get('checkbox', False)
+        #pantry = request.GET.get('checkbox', False)
         input = []
         # if(request.user.is_authenticated() and pantry):
         #     mongouser = Profile.objects.get(user_id_reference=request.user.id)
