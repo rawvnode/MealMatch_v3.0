@@ -11,10 +11,11 @@ from .decorators import check_recaptcha
 from django.core.mail import send_mail
 from django.conf import settings
 from datetime import datetime, date
-
+from bson.json_util import dumps
 
 from recipes.models import recipe
 import re
+
 
 
 #### pantry function ###
@@ -235,3 +236,6 @@ def sanitize_pantry(list):
 
 def user_profile(request):
     return render(request, "account_functions/user_profile.html")
+
+
+
