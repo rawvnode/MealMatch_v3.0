@@ -19,21 +19,21 @@ from account_functions.decorators import check_recaptcha
 
 ############# VIEW FUNCTIONS #####################
 def startpage(request):
+    print("hej")
     if (request.method == "GET"):
         return render(request, "startpage.html")
 
 
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
-def presentRecipe(request):
+def presentRecipe(request, recipe_id):
+    print("presentRecipe")
 
     if request.method == "POST":
         form = CommentForm(request.POST)
-
         if form.is_valid() and request.recaptcha_is_valid:
 
-
-            recipe_id = request.path[-24:]
+            #recipe_id = request.path[-24:]
             try:
                 mongouser = Profile.objects.get(user_id_reference=request.user.id)
                 recipe_response = recipe.objects.get(_id=ObjectId(recipe_id))
@@ -54,21 +54,23 @@ def presentRecipe(request):
 
 
     if request.method == "GET": #When the page is retrieved
-        req_id = request.path[-24:] #Extracts the id from the path
-        recipe_response = recipe.objects.get(_id = ObjectId(req_id))#Runs query with the request ID
+        recipe_response = recipe.objects.get(_id = ObjectId(recipe_id))#Runs query with the request ID
+        breadcrumb = recipe_response.title
 
+
+        print("rec ", recipe_response)
         try:
 
-            recipe_object = get_ratings(req_id)
+            recipe_object = get_ratings(recipe_id)
             recipe_rating = recipe_object[0] # Provides the rating of the recipe
             count = recipe_object[1] # Provides the amount of people that rated the recipe
-            your_rating = get_user_rating(req_id, request) # Provides the raters rating on this certain recipe
+            your_rating = get_user_rating(recipe_id, request) # Provides the raters rating on this certain recipe
 
 
         except:
 
             your_rating = None
-            recipe_object = get_ratings(req_id)
+            recipe_object = get_ratings(recipe_id)
             if(recipe_object[0] != None):
                 recipe_rating = recipe_object[0]
                 count = recipe_object[1]
@@ -83,7 +85,7 @@ def presentRecipe(request):
             comments = getComments(comments_query)
 
 
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating})
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
 
 
 
@@ -96,10 +98,11 @@ def refresh(request):
     else:
         return render(request, "startpage.html")
 
-def retrieveRecipes(request):
+
+def retrieveRecipes(request, raw_input):
+
     if request.method == "GET":
-        index = request.path.rfind("/")
-        raw_input = request.path[index+1:-1].split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
+        raw_input = raw_input.split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
 
 
 
@@ -114,7 +117,6 @@ def retrieveRecipes(request):
             if sanitize(element):
                 input.append(sanitize(element))
 
-             #Sanitizses !! IMPORTANT !!
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
 
         query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
@@ -125,6 +127,9 @@ def retrieveRecipes(request):
         page = request.GET.get('page', 1)
         recipes = view_paginator(page, paginator)
         page_range = paginateSlice(3, recipes, paginator)
+
+
+
         return render(request, "recipes.html", {"user_input" : input, "recipes": recipes, "page_range" : page_range, "num_pages": paginator.num_pages})
     else:
         return render(request, "startpage.html")
