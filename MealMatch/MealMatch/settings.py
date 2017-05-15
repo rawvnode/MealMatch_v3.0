@@ -193,6 +193,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'account_functions.context_processors.include_login_form',
                 'account_functions.context_processors.get_user',
+                'account_functions.context_processors.breadcrumb',
 
                 'social_django.context_processors.backends',  # <--
                 'social_django.context_processors.login_redirect', # <--

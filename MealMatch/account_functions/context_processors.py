@@ -15,3 +15,21 @@ def get_user(request):
     return{'user': request.user, 'mongouser': mongouser}
 
 
+def breadcrumb(request):
+
+    string = request.path[0:-request.path.rfind("/")] #takes away the last part of the url, which instead should be handled by the respective view function
+
+    print("string: ", string)
+    array = []
+    temp_array = string.split("/")
+    for element in temp_array:
+        if element != "":
+            array.append(element)
+            print("hallå " ,element)
+
+
+
+    return {"base": string, "array": array}
+
+
+
