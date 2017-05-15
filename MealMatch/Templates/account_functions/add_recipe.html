@@ -6,29 +6,77 @@
 <link rel="stylesheet" type="text/css" href='{% static "css/add_recipe.css"%}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/recipes.css"%}'>
 <link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
-<div class="startPage" style="padding-top:0;">
-<div class="container-fluid">
-    <h2>Add new recipe</h2>
+<link rel="stylesheet" type="text/css" href='{% static "css/pantry.css"%}'>
+
+<div class="pantryPage">
 
 
 
+   <div class="container-fluid ">
 
-           <form action=/account_functions/add_recipe/ method="POST">
-    {% csrf_token %}
+        <div class="w3-card">
+            <h3 class="w3-center" id="added">Add new recipe</h3>
+            <!--<form class = "ing_form" action="/recipes/recipes/" method="GET" >
+                {% csrf_token %}-->
 
-   {{ form|crispy }}
-
-            <input type="submit" value="Upload your recipe">
-    </form>
-
-    </div>
-    </div>
+            <div class="rows_add_recipe">
 
 
+                    <form class="w3-padding" action=/account_functions/add_recipe/ method="POST">
+                        {% csrf_token %}
+
+                        {{ form|crispy }}
+
+                        <input type="submit" value="Upload your recipe">
+                    </form>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
 
 
 
+</div>
 
 
+<!--<div class="startPage" style="padding-top:0;">-->
 
+<!--<div class="row">-->
+<!--<div class="container-fluid pantry-container">-->
+
+
+<!--<div class="w3-white w3-text-grey w3-card-4">-->
+
+<!--<div class="w3-container w3-margin-top">-->
+
+
+<!--<h3 class="w3-center" id="added">Add new recipe</h3>-->
+<!--&lt;!&ndash;<form class = "ing_form" action="/recipes/recipes/" method="GET" >-->
+<!--{% csrf_token %}&ndash;&gt;-->
+
+
+<!--<div class="container-fluid">-->
+
+
+<!--<form action=/account_functions/add_recipe/ method="POST">-->
+<!--{% csrf_token %}-->
+
+<!--{{ form|crispy }}-->
+
+<!--<input type="submit" value="Upload your recipe">-->
+<!--</form>-->
+
+<!--</div>-->
+
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--</div>-->
 {% endblock %}

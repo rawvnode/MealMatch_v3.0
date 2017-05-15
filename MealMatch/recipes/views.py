@@ -105,10 +105,10 @@ def retrieveRecipes(request):
 
         pantry = request.GET.get('checkbox', False)
         input = []
-        if(request.user.is_authenticated() and pantry):
-            mongouser = Profile.objects.get(user_id_reference=request.user.id)
-            user_pantry = mongouser.Pantry
-            input = user_pantry
+        # if(request.user.is_authenticated() and pantry):
+        #     mongouser = Profile.objects.get(user_id_reference=request.user.id)
+        #     user_pantry = mongouser.Pantry
+        #     input = user_pantry
 
         for element in raw_input:
             if sanitize(element):
@@ -269,3 +269,7 @@ def sortquery(query_mapped):
         temp = [key,value]
         dictlist.append(temp)
     return dictlist
+
+
+
+
