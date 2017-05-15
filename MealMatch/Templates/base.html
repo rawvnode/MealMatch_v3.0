@@ -74,7 +74,11 @@
             <ul class="nav navbar-nav navbar-right" id="navHomeText">
                 <!--rename from id to class -->
 
-                <!--<li><a class="menu" href="/recipes.html">RECIPES</a></li>-->
+                <!--<li><a class="menu" href="/recipes.html">RECIPES</a></li>-->{% if user.is_staff %}
+                                        <!--<li><a href="/account_functions/admin_pages.html">Admin</a></li>-->
+                                        <li><a href="/admin">Admin</a></li>
+                                    {% endif %}
+
               
                 {% if user.is_authenticated %}
                 <li><a class="menu" href="/account_functions/add_recipe.html">Add recipe</a></li>

@@ -174,7 +174,7 @@ function setURL() {
 
         if (input.value.length > 0) {
             ingredientArray.push(input.value);
-            window.alert(ingredientArray)
+
         }
     for (var i in ingredientArray){
         var action = $( ".ing_form" ).attr("action")
@@ -202,7 +202,7 @@ function setURLRefresh() {
             }
             else if(lis[i].innerHTML.split(" ")[2] == ""){
             ingredient = (lis[i].innerHTML.replace(/(\r\n|\n|\r)/,"").split(" ")[0] + " " + lis[i].innerHTML.replace(/(\r\n|\n|\r)/,"").split(" ")[1]);
-            window.alert(ingredient)
+
             list_of_ing.push(ingredient);
             }
             else{    window.alert(lis[i].innerHTML)
