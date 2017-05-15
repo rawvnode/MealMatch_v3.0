@@ -5,10 +5,11 @@
 
 <link rel="stylesheet" type="text/css" href='{% static "css/index.css"%}'>
         <div class="startPage">
-            <div class="container_logo container-fluid w3-hide-small" style="max-width:700px; padding-top: 3em;">
+            <div class="container_logo container-fluid" style="max-width:700px;">
 
-                <img src="../../static/images/logo.png" alt="Logo" width="100%" height="auto">
-                 <h2 id="slogan">Let's find your perfect match!</h2>
+                <img src="../../static/images/logo.png" alt="Logo" width="100%" height="auto" class="w3-hide-small">
+                 <h2 class="w3-hide-small" id="slogan">Let's find your perfect match!</h2>
+                 <h4 class="w3-hide-medium w3-hide-large" id="slogan">Let's find your perfect match!</h4>
 
 
             </div>
@@ -45,6 +46,7 @@
 
 
 
+
                      <div class="btn-group text-center toggle-group" style="height: 45px; background-color: #2199E8">
                          <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" style="height: 100%;">Match me(al)</button>
 
@@ -64,6 +66,7 @@
                      </div>
 
                            <!--  {% if user.is_authenticated %}
+
                          <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
                         <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i></i></label>
                              {% endif %}-->

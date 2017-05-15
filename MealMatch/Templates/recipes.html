@@ -36,56 +36,57 @@
 <nav class="w3-sidebar w3-black w3-animate-left w3-bar-block w3-large"
      style="display:none;padding-top:50px;left:0;z-index:2" id="mySidebar">
     <a href="javascript:void(0)" onclick="closeNav()" class="w3-button w3-black w3-xxxlarge w3-display-topright"
-       style="padding:0 12px;">
+       style="margin-top:50px; padding:0 12px;">
         <i class="fa fa-remove"></i>
     </a>
-    <div class="w3-bar-block w3-center">
+    <div class="w3-bar-block w3-center" style="margin-top:50px;">
 
         <div class="container-fluid text-center " style="overflow: hidden; padding-right: .5em;">
             <div class="search_bar_recipes" action="/recipes/" method="POST">
-            <br>
-            <div class="input-group">
+                <br>
+                <div class="input-group">
 
-                <input type="text" id="ingredient-form" id="add" class="form-control" size="50"
-                       placeholder="Add ingredient..." required>
-                <button class="button text-center" id="searchbar_plus" onclick="addItemMyIng()" value="Add"> <!-- lade till ett s -->
+                    <input type="text" id="ingredient-form" id="add" class="form-control" size="50"
+                           placeholder="Add ingredient..." required>
+                    <button class="button text-center" id="searchbar_plus" onclick="addItemMyIng()" value="Add">
+                        <!-- lade till ett s -->
 
-                    <i class="glyphicon glyphicon-plus"></i>
-                </button>
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </div>
             </div>
-        </div>
 
 
-        <form class="ing_form_refresh" action="/recipes/recipes/" method="GET">
-            {% csrf_token %}
-            <div class="panel-body" id="slideIngredients">
-
-                <ul id="ingredients" name="{{refresh_ingredients}}" class="container-fluid w3-text-black"
-                    style="font-size: 0.7em;">
+            <form class="ing_form_refresh" action="/recipes/recipes/" method="GET">
+                {% csrf_token %}
+                <div class="panel-body" id="slideIngredients">
                     <div class="center_button">
                         <input type="submit" class="btn btn-primary w3-ripple matchbutton refresh-button"
                                id="matchmerefresh" value="Refresh">
                     </div>
-                    <br>
-                    {% for input in user_input %}
+                    <ul id="ingredients" name="{{refresh_ingredients}}" class="container-fluid w3-text-black"
+                        style="overflow:auto; font-size: 0.7em;">
+
+                        <br>
+                        {% for input in user_input %}
 
 
-                    <li class="list-group-item text-left" id="itembefore{{forloop.counter0}}">{{input}}
-                        <span class="pull-right">
+                        <li class="list-group-item text-left" id="itembefore{{forloop.counter0}}">{{input}}
+                            <span class="pull-right">
                                                     <button id="removeButton"
                                                             onclick="removeIngredient('itembefore{{forloop.counter0}}')"> <i
                                                             class="fa fa-remove"></i>   </button></span>
 
-                    </li>
+                        </li>
 
 
-                    {% endfor %}
-                </ul>
+                        {% endfor %}
+                    </ul>
 
 
-            </div>
-        </form>
-    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </nav>
 
@@ -157,7 +158,16 @@
 
 
 <!-- Overlay effect when opening sidebar on small screens -->
+<div class="container-fluid" style="background-color: rgba(240,234,227,0.5);">
 
+    <div buttons class="">
+
+        <button class="btn btn-primary navbar-btn">Filter<span class="glyphicon glyphicon-filter"></span></button>
+        <button class="btn btn-danger navbar-btn" onclick="openNav()">Edit search <span
+                class="	glyphicon glyphicon-edit"> </span></button>
+
+    </div>
+</div>
 <div class="w3-content" style="max-width:100%; margin: auto; background-color:  rgba(240,234,227,0.5);">
     <!-- !PAGE CONTENT! -->
     <div class="w3-main" style="margin-left:100px; margin-right:100px">
@@ -259,40 +269,40 @@
         </div>--->
 
 
-
-            <!-- Pagination -->
-            <div class="w3-center w3-padding-32">
-                <div class="w3-bar">
-                    <p>{{recipes}}</p>
-
-
-                    {% if recipes.has_previous%}
-                    <a href="?page=1" class="w3-bar-item w3-button"><<</a>
-                    <a href="?page={{ recipes.previous_page_number }}" class="w3-bar-item w3-button"><</a>
-                    {% endif %}
+    <!-- Pagination -->
+    <div class="w3-center w3-padding-32">
+        <div class="w3-bar">
+            <p>{{recipes}}</p>
 
 
-                    {% for pg in page_range %}
-                    {% if recipes.number == pg %}
-                    <div class="w3-bar-item" id="currentPage">{{pg}}</div>
-                    {% else %}
-                    <a href="?page={{pg}}" class="w3-bar-item w3-button">{{pg}}</a>
-                    {% endif %}
-                    {% endfor %}
+            {% if recipes.has_previous%}
+            <a href="?page=1" class="w3-bar-item w3-button"><<</a>
+            <a href="?page={{ recipes.previous_page_number }}" class="w3-bar-item w3-button"><</a>
+            {% endif %}
 
 
-                    {% if recipes.has_next %}
-                    <a href="?page={{recipes.next_page_number}}" class="w3-bar-item w3-button">></a>
-                    <a href="?page={{num_pages}}" class="w3-bar-item w3-button">>></a>
-                    {% endif %}
+            {% for pg in page_range %}
+            {% if recipes.number == pg %}
+            <div class="w3-bar-item" id="currentPage">{{pg}}</div>
+            {% else %}
+            <a href="?page={{pg}}" class="w3-bar-item w3-button">{{pg}}</a>
+            {% endif %}
+            {% endfor %}
 
 
-                </div>
-            </div>
+            {% if recipes.has_next %}
+            <a href="?page={{recipes.next_page_number}}" class="w3-bar-item w3-button">></a>
+            <a href="?page={{num_pages}}" class="w3-bar-item w3-button">>></a>
+            {% endif %}
 
 
         </div>
-        <script>
+    </div>
+
+
+</div>
+
+<script>
             // Script to open and close sidebar
             function w3_open() {
                 document.getElementById("mySidebar").style.display = "block";
@@ -303,9 +313,10 @@
                 document.getElementById("mySidebar").style.display = "none";
                 document.getElementById("myOverlay").style.display = "none";
             }
-        </script>
-    </div>
+
+</script>
+</div>
 
 
-    <script> addItemMyIng()</script>
-    {% endblock %}
+<script> addItemMyIng()</script>
+{% endblock %}

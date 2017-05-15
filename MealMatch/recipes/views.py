@@ -117,7 +117,6 @@ def retrieveRecipes(request, raw_input):
             if sanitize(element):
                 input.append(sanitize(element))
 
-             #Sanitizses !! IMPORTANT !!
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
 
         query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check

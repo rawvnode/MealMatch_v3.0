@@ -5,7 +5,7 @@
 
 
 /*effects for double navbars */
-(function ($) {
+/*(function ($) {
   $(document).ready(function(){
 
     // hide .navbar first
@@ -25,7 +25,7 @@
     });
 
 });
-  }(jQuery));
+  }(jQuery));*/
 
 /*effect for navbar*/
 function openNav() {
