@@ -5,7 +5,11 @@ from . import views
 
 urlpatterns = [
 
-    url(r'^recipes', views.retrieveRecipes, name="recipes"),
+    url(r'^recipes/(?P<raw_input>[A-Za-z]{1,75})', views.retrieveRecipes, name="recipes"),
+    url(r'^recipes/(?P<recipe_id>(.*){12})', views.presentRecipe, name="recipes"),
+
+
+
     url(r'^autocorrect', views.autocorrect, name="autocorrect"),
     url(r'^presenterarecept/starrating', views.starrating, name="starrating"),
     url(r'^presenterarecept/', views.presentRecipe, name="presenterarecept"),

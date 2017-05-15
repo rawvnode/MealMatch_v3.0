@@ -1,4 +1,4 @@
-{% extends 'base_recipes.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 {% load staticfiles %}
@@ -194,8 +194,10 @@
         <!-- First Photo Grid-->
         <div class="w3-row-padding">
 
+            
+
             {%for item in recipes %}
-            <form class="single_recipe" action="/recipes/presenterarecept/{{item|first}}" method="GET">
+            <form class="single_recipe" action="/recipes/{{item|first}}" method="GET">
                 {% csrf_token %}
                 <div class="w3-col m4 w3-container w3-margin-bottom" data-id={{item|first}}>
                     <input type="image" name="ind_recipe" class="recipe_image" value="" src={{item.1.image }}
