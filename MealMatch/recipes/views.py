@@ -100,7 +100,7 @@ def refresh(request):
 
 
 def retrieveRecipes(request, raw_input):
-    print(raw_input, "####################################")
+
     if request.method == "GET":
         raw_input = raw_input.split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
 
