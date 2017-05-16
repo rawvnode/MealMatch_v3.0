@@ -27,7 +27,7 @@ def startpage(request):
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
 def presentRecipe(request, recipe_id):
-    print("presentRecipe")
+
 
     if request.method == "POST":
         form = CommentForm(request.POST)

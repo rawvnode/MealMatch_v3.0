@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^my_pantry', views.my_pantry, name = "myPantry"),
     #url(r'^', views.login_view, name="loginPage"),
 
-
+    url(r'^autocorrect', views.autocorrect, name="autocorrect"),
 
 
 
