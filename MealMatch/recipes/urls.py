@@ -12,7 +12,7 @@ urlpatterns = [
 
     url(r'^autocorrect', views.autocorrect, name="autocorrect"),
     url(r'^presenterarecept/starrating', views.starrating, name="starrating"),
-    url(r'^presenterarecept/', views.presentRecipe, name="presenterarecept"),
+    url(r'^presenterarecept/(?P<recipe_id>(.*){24})', views.presentRecipe, name="presenterarecept"),
 
     url(r'^starrating', views.starrating, name="starrating"),
     #url(r'^refresh', views.refresh, name="refresh"),
