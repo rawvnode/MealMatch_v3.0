@@ -48,8 +48,11 @@
 
 
                      <div class="btn-group text-center toggle-group" style="height: 45px; background-color: #2199E8">
+                         {%if user.is_authenticated%}
+                         <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme"  value="{{mongouser.Pantry}}" style="height: 100%;">Match me(al)</button>
+                         {%else%}
                          <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" style="height: 100%;">Match me(al)</button>
-
+                         {%endif%}
 
                       {% if user.is_authenticated %}
 

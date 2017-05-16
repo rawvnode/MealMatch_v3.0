@@ -101,6 +101,7 @@ function empty_input() {
  $( "#matchme" ).click(function( event ) {
        event.preventDefault();
        if (url_set == false){
+
             setURL();
        }
 
@@ -152,12 +153,29 @@ function empty_input() {
 
 //Setter function
 function setURL() {
+
+    if(document.getElementById("matchme").getAttribute("value") && document.getElementById("checkbox1").checked ){
+        str = document.getElementById("matchme").getAttribute("value").slice(1, -1);
+        inputArray = str.split(',')
+
+        for(var i in inputArray){
+            inputArray[i] = String(inputArray[i].replace("'", ""))
+
+            if(inputArray[i][inputArray[i].length - 1] == "'"){inputArray[i] = inputArray[i].substring(0, inputArray[i].length - 1)}
+            if(inputArray[i][0] == " "){inputArray[i] = inputArray[i].substring(1, inputArray[i].length)}
+
+            inputArray[i] = inputArray[i][0].toUpperCase() + inputArray[i].slice(1);
+
+
+        ingredientArray.push(inputArray[i])
+        }}
+
     //check if textbox is empty and if not add to ing array:::
     var input = document.getElementById("ingredient-form");
 
         if (input.value.length > 0) {
             ingredientArray.push(input.value);
-            window.alert(ingredientArray)
+
         }
     for (var i in ingredientArray){
         var action = $( ".ing_form" ).attr("action")
@@ -183,8 +201,14 @@ function setURLRefresh() {
 
 
             }
-            else{
+            else if(lis[i].innerHTML.split(" ")[2] == ""){
+            ingredient = (lis[i].innerHTML.replace(/(\r\n|\n|\r)/,"").split(" ")[0] + " " + lis[i].innerHTML.replace(/(\r\n|\n|\r)/,"").split(" ")[1]);
+
+            list_of_ing.push(ingredient);
+            }
+            else{    window.alert(lis[i].innerHTML)
             index = lis[i].innerHTML.split(" ")[0].indexOf("<");
+
             str = lis[i].innerHTML.split(" ")[1].slice(0,index);
 
             ing_to_push = lis[i].innerHTML.split(" ")[0] + " " + str
@@ -192,7 +216,7 @@ function setURLRefresh() {
              ing_to_push = ing_to_push.slice(0,index)
 
 
-            list_of_ing.push(ing_to_push);}
+            list_of_ing.push(ing_to_push); }
 
         }
 

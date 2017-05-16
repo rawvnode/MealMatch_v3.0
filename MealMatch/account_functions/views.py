@@ -11,10 +11,11 @@ from .decorators import check_recaptcha
 from django.core.mail import send_mail
 from django.conf import settings
 from datetime import datetime, date
-
+from bson.json_util import dumps
 
 from recipes.models import *
 import re
+
 
 
 
@@ -29,6 +30,7 @@ from bson.objectid import ObjectId
 
 
 #####################
+
 
 
 #### pantry function ###
@@ -249,6 +251,7 @@ def sanitize_pantry(list):
 
 def user_profile(request):
     return render(request, "account_functions/user_profile.html")
+
 
 ##Autocorrect implementation. Must be adjusted to prevent crashed (eg via elasticsearch or fewer queries)##
 def autocorrect(request):

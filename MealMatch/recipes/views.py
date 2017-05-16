@@ -58,7 +58,7 @@ def presentRecipe(request, recipe_id):
         breadcrumb = recipe_response.title
 
 
-        print("rec ", recipe_response)
+
         try:
 
             recipe_object = get_ratings(recipe_id)
@@ -84,7 +84,7 @@ def presentRecipe(request, recipe_id):
         else:
             comments = getComments(comments_query)
 
-
+        print(comments, "##################################")
         return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
 
 
@@ -106,12 +106,12 @@ def retrieveRecipes(request, raw_input):
 
 
 
-        pantry = request.GET.get('checkbox', False)
+        #pantry = request.GET.get('checkbox', False)
         input = []
-        if(request.user.is_authenticated() and pantry):
-            mongouser = Profile.objects.get(user_id_reference=request.user.id)
-            user_pantry = mongouser.Pantry
-            input = user_pantry
+        # if(request.user.is_authenticated() and pantry):
+        #     mongouser = Profile.objects.get(user_id_reference=request.user.id)
+        #     user_pantry = mongouser.Pantry
+        #     input = user_pantry
 
         for element in raw_input:
             if sanitize(element):
@@ -274,3 +274,7 @@ def sortquery(query_mapped):
         temp = [key,value]
         dictlist.append(temp)
     return dictlist
+
+
+
+
