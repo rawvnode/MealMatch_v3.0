@@ -44,7 +44,7 @@
 
 
 
-            {% if array|length > 0 %}
+           {% if array|length > 0 %}
 
                 <div class="breadcrumb" style="background-color: transparent;">
 
@@ -160,8 +160,8 @@
                                 </form>
 
                             </div>
-                            <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset
-                                it" %}</a>!</p>
+                            <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">Reset
+                                it</a>!</p>
                             <div class="bottom text-center">
                                 <a href="{% url 'registration_register' %}"><b>Sign up</b></a>
 

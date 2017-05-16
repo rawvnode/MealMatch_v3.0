@@ -40,7 +40,11 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     background-color: transparent;
 }
+#back_to_search{
+    border-radius: 2px;
 
+
+}
 #added{
     padding: 1%;
     font-weight: bold;

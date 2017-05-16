@@ -47,32 +47,35 @@
             </div>
 
             <button id="myBtn"><i class="fa fa-plus-circle fa-3x"></i></button>
-
+            <button class="button" id="back_to_search" value="Back to search" onclick="location.href = 'http://localhost:8000'">Back to search
+            </button>
             <!-- The Modal -->
             <div id="myModal" class="modal">
 
-                <!-- Modal content -->
-                <div class="modal-content-pantry">
-                    <span class="close"></span>
-                    <form class="search_bar w3-padding w3-light-grey" action="my_pantry" method="POST">
-                        {% csrf_token %}
-                        <div class="input-group">
-                            <input type="text" id="ingredient-form" class="form-control" size="50"
-                                   placeholder="Add ingredient..." maxlength="30" required>
 
-                            <button class="button" id="searchbar_plus_pantry" value="Add">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
+                      <!-- Modal content -->
+                      <div class="modal-content-pantry">
+                        <span class="close"></span>
+                            <div class="search_bar w3-padding w3-light-grey" action="my_pantry" method="POST">
+                           {% csrf_token %}
+                            <div class="input-group">
+                               <input type="text" id="ingredient-form" class="form-control"  size="50" placeholder="Add ingredient..." maxlength="30" required >
 
-                            <!--<<button type="button" class="btn btn-info dropdown-toggle" id="alternatives" data-toggle="dropdown">Alternatives
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                                <li><a href="#">Vegetarian</a></li>
-                                <li><a href="#">Gluten free</a></li>
-                                <li><a href="#">Laktos free</a></li>
-                        </ul>-->
-                        </div>
-                    </form>
+                                   <button class="button" id="searchbar_plus" value="Add">
+                                       <span class="glyphicon glyphicon-plus"></span>
+                                   </button>
+
+
+                                   <!--<<button type="button" class="btn btn-info dropdown-toggle" id="alternatives" data-toggle="dropdown">Alternatives
+                                   <span class="caret"></span></button>
+                               <ul class="dropdown-menu">
+                                       <li><a href="#">Vegetarian</a></li>
+                                       <li><a href="#">Gluten free</a></li>
+                                       <li><a href="#">Laktos free</a></li>
+                               </ul>-->
+                           </div>
+                       </div>
+
 
 
                 </div>
