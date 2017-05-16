@@ -27,7 +27,7 @@ def startpage(request):
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
 def presentRecipe(request, recipe_id):
-    print("presentRecipe")
+
 
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -58,7 +58,7 @@ def presentRecipe(request, recipe_id):
         breadcrumb = recipe_response.title
 
 
-        print("rec ", recipe_response)
+
         try:
 
             recipe_object = get_ratings(recipe_id)
@@ -84,7 +84,7 @@ def presentRecipe(request, recipe_id):
         else:
             comments = getComments(comments_query)
 
-
+        print(comments, "##################################")
         return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
 
 
