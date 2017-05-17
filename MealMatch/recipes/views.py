@@ -27,14 +27,15 @@ def startpage(request):
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
 def presentRecipe(request, recipe_id):
-
-    user_input_string = request.GET.get('user_input')
-    user_input_list = ast.literal_eval(user_input_string)
     ingredients_dict = {}
+    if request.method == "GET":
+        user_input_string = request.GET.get('user_input')
+        user_input_list = ast.literal_eval(user_input_string)
+
 
 
     if request.method == "POST":
-
+        user_input_list = request.POST.get('user_input')
         form = CommentForm(request.POST)
         if form.is_valid() and request.recaptcha_is_valid:
 
@@ -101,7 +102,7 @@ def presentRecipe(request, recipe_id):
 
 
 
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "user_input":ingredients_dict,"comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "user_input_list": user_input_string, "user_input":ingredients_dict,"comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
 
 
 
