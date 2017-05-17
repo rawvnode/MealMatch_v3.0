@@ -43,6 +43,7 @@
 
         <div class="container-fluid text-center " style="overflow: hidden; padding-right: .5em;">
             <div class="search_bar_recipes" action="/recipes/" method="POST">
+
                 <br>
                 <div class="input-group">
 
@@ -95,65 +96,65 @@
 
 
     <!-- old side bar -->
-    <div id="slideout">
+    <!--<div id="slideout">-->
 
-        <div id="slidecontent">
-            <div class="my_ingredients">
-                <div class="panel-group">
-                    <div class="panel-default">
-                        <div class="panel-header">
-                            <button class="button" id="searchbar_plus" onclick="addItemMyIng()" value="Add"
-                                    style="float: right">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                            <div style="overflow: hidden; padding-right: .5em;">
-                                <input type="text" id="ingredient-form" id="add" class="form-control" size="50"
-                                       placeholder="Add ingredient..." required style="width:100%">
-                            </div>
+        <!--<div id="slidecontent">-->
+            <!--<div class="my_ingredients">-->
+                <!--<div class="panel-group">-->
+                    <!--<div class="panel-default">-->
+                        <!--<div class="panel-header">-->
+                            <!--<button class="button" id="searchbar_plus" onclick="addItemMyIng()" value="Add"-->
+                                    <!--style="float: right">-->
+                                <!--<span class="glyphicon glyphicon-plus"></span>-->
+                            <!--</button>-->
+                            <!--<div style="overflow: hidden; padding-right: .5em;">-->
+                                <!--<input type="text" id="ingredient-form" id="add" class="form-control" size="50"-->
+                                       <!--placeholder="Add ingredient..." required style="width:100%">-->
+                            <!--</div>-->
 
-                            <form class="ing_form_refresh" action="/recipes/recipes/" method="GET">
-                                {% csrf_token %}
-                                <div class="panel-body" id="slideIngredients">
-
-
-                                    <!--<ul id="ingredients" name="{{refresh_ingredients}}" class="w3-ul"
-                                        style="font-size: 0.7em;">
+                            <!--<form class="ing_form_refresh" action="/recipes/recipes/" method="GET">-->
+                                <!--{% csrf_token %}-->
+                                <!--<div class="panel-body" id="slideIngredients">-->
 
 
-                                        {% for input in user_input %}
-
-                                        <li class="list-group-item" id="itembefore{{forloop.counter0}}">{{input}}
-                                            <span class="pull-right">
-                                                    <button id="removeButton"
-                                                            onclick="removeIngredient('itembefore{{forloop.counter0}}')"> <i
-                                                            class="fa fa-remove"></i>   </button></span>
-
-                                        </li>
+                                    <!--&lt;!&ndash;<ul id="ingredients" name="{{refresh_ingredients}}" class="w3-ul"-->
+                                        <!--style="font-size: 0.7em;">-->
 
 
-                                        {% endfor %}
-                                    </ul>-->
+                                        <!--{% for input in user_input %}-->
 
-                                    <!--
-                                                                        <div class="center_button">
-                                                                            <input type="submit" class="btn btn-primary w3-ripple matchbutton refresh-button"
-                                                                                   id="matchmerefresh" value="Refresh" style="margin-left: 20%;">
-                                                                        </div>-->
-                                </div>
-                            </form>
-                        </div>
+                                        <!--<li class="list-group-item" id="itembefore{{forloop.counter0}}">{{input}}-->
+                                            <!--<span class="pull-right">-->
+                                                    <!--<button id="removeButton"-->
+                                                            <!--onclick="removeIngredient('itembefore{{forloop.counter0}}')"> <i-->
+                                                            <!--class="fa fa-remove"></i>   </button></span>-->
+
+                                        <!--</li>-->
 
 
-                    </div>
+                                        <!--{% endfor %}-->
+                                    <!--</ul>&ndash;&gt;-->
 
-                </div>
+                                    <!--&lt;!&ndash;-->
+                                                                        <!--<div class="center_button">-->
+                                                                            <!--<input type="submit" class="btn btn-primary w3-ripple matchbutton refresh-button"-->
+                                                                                   <!--id="matchmerefresh" value="Refresh" style="margin-left: 20%;">-->
+                                                                        <!--</div>&ndash;&gt;-->
+                                <!--</div>-->
+                            <!--</form>-->
+                        <!--</div>-->
 
 
-            </div>
-        </div>
+                    <!--</div>-->
+
+                <!--</div>-->
 
 
-    </div>
+            <!--</div>-->
+        <!--</div>-->
+
+
+    <!--</div>-->
 </div>
 
 
@@ -227,6 +228,7 @@
                         </div>
                     </div>
                 </div>
+                <input name="user_input" type="hidden" value="{{user_input}}"/>
             </form>
 
             {% if forloop.counter|divisibleby:3 %}

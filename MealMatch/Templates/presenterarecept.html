@@ -87,6 +87,7 @@
                     </form>
                     <p class="w3-margin-left"><strong>{{count_ratings}} ratings</strong></p><br>
 
+
                     {% endif %}
                     <!-- first grid -->
 
@@ -133,8 +134,9 @@
                 <div class="row">
                     <div class="white">
                         <div class="container text-left container_about">
-
                             <hr>
+
+                            <div class="w3-padding-16"><i class="fa fa-tags " aria-hidden="true"></i></div>
                             {%for tag in recipe.tags%}
                             <p id="tag">{{tag}}</p>
                             {%endfor%}
@@ -161,10 +163,13 @@
             <h5><strong>Ingredients</strong></h5>
             <div class="w3-row w3-medium">
                 <div class="w3-col s12">
-                    {% for ingredient in recipe.ingredients_complete %}
-                    <p>{{ingredient}}</p>
+                    {% for key, value in user_input.items %}
+                    {%if value%}
+                    <p> <i class="fa fa-check" style="color:green;"aria-hidden="true"></i> {{ key }}</p>
+                    {%else%}
+                     <p><i class="fa fa-times" style="color:rgb(189,64,4); margin-right:2px;" aria-hidden="true"></i> {{ key }}</p>
+                    {%endif%}
                     {%endfor%}
-
                 </div>
 
             </div>

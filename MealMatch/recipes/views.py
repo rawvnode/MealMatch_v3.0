@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from account_functions.views import *
 from .forms import CommentForm
-
+import ast
 from account_functions.context_processors import *
 
 
@@ -28,8 +28,13 @@ def startpage(request):
 @check_recaptcha
 def presentRecipe(request, recipe_id):
 
+    user_input_string = request.GET.get('user_input')
+    user_input_list = ast.literal_eval(user_input_string)
+    ingredients_dict = {}
+
 
     if request.method == "POST":
+
         form = CommentForm(request.POST)
         if form.is_valid() and request.recaptcha_is_valid:
 
@@ -84,8 +89,19 @@ def presentRecipe(request, recipe_id):
         else:
             comments = getComments(comments_query)
 
-        print(comments, "##################################")
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
+
+        for item in user_input_list:
+            for ingredient in recipe_response.ingredients_complete:
+                if item.lower() in ingredient.lower():
+                    ingredients_dict[ingredient] = True;
+                else:
+                    if ingredient not in ingredients_dict:
+                        ingredients_dict[ingredient] = False
+
+
+
+
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "user_input":ingredients_dict,"comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
 
 
 
