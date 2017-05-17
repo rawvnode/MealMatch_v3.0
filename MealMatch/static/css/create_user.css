@@ -27,5 +27,12 @@
 	position: relative;
 }
 
-
+#inputForms{
+    background-color: rgb(240,234,227);
+   border-radius: 1em;
+   padding-top: 1em;
+   padding-left:2em;
+   padding-right:2em;
+   display:inline;
+}
 
