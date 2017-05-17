@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from mongoengine.django.auth import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -11,10 +11,26 @@ from .decorators import check_recaptcha
 from django.core.mail import send_mail
 from django.conf import settings
 from datetime import datetime, date
+from bson.json_util import dumps
 
-
-from recipes.models import recipe
+from recipes.models import *
 import re
+
+
+
+
+
+
+##################### for autocorrect
+
+
+from bson.json_util import dumps
+from collections import OrderedDict
+from bson.objectid import ObjectId
+
+
+#####################
+
 
 
 #### pantry function ###
@@ -112,7 +128,7 @@ def split_string_directions(string):
     return list
 
 #@login_required(redirect_field_name = "account_functions/add_recipe.html")
-@check_recaptcha
+
 
 def handle_bad_input_from_users(bad_string):
     good_string = bad_string.split(":")
@@ -126,7 +142,7 @@ def add_recipe(request):
         "form": form,
         "title": title
     }
-    if form.is_valid() and request.recaptcha_is_valid:
+    if form.is_valid():
         title_recipe = form.cleaned_data.get('title')
 
 
@@ -235,3 +251,28 @@ def sanitize_pantry(list):
 
 def user_profile(request):
     return render(request, "account_functions/user_profile.html")
+
+
+##Autocorrect implementation. Must be adjusted to prevent crashed (eg via elasticsearch or fewer queries)##
+def autocorrect(request):
+    input = sanitize(request.POST['input'])  # gets the user input and sanitizses using sanitize()
+    if (len(input) > 0):
+        array = []
+        foods = food_ref.objects(food__istartswith=input)  # checks if any word starts with the user input
+        for element in foods:
+            array.append(element.food)  # appends matches to an initially empty array
+        array = dumps(array)  # dumps the aray to JSON format
+        return JsonResponse(array, safe=False)  # returns a JSONResponse to client-side
+    else:
+        return render(request, "startpage.html") #if there is no input, do as before
+
+############# HELPER FUNCTIONS #############
+def sanitize(user_string):
+    if (user_string == ""):
+        return False
+    user_string = re.sub("_", " ", user_string)  # Converts underscore to whitespace
+    user_string = re.sub("[^a-öA-Ö],[^-]","", user_string) #removes non alphabetic characters but allows whitespcae and single dash
+    user_string = re.sub("--", "", user_string)#removes double dash to prevent injections
+    user_string.capitalize()
+
+    return user_string.capitalize()

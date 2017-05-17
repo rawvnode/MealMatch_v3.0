@@ -21,12 +21,13 @@ urlpatterns = [
     url(r'^add_recipe', views.add_recipe, name = "addRecipe"),
 
 
+
     #url(r'^logout', views.user_logout, name = "logout"),
     url(r'^user_profile', views.user_profile, name="userProfile"),
     url(r'^my_pantry', views.my_pantry, name = "myPantry"),
     #url(r'^', views.login_view, name="loginPage"),
 
-
+    url(r'^autocorrect', views.autocorrect, name="autocorrect"),
 
 
 

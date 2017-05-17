@@ -24,6 +24,8 @@
     <script src='{% static "js/javascript.js"%}'></script>
     <script type="/text/javascript" src='{% static "js/jquery.js"%}'></script>
 
+
+
 </head>
 <body>
 
@@ -42,9 +44,10 @@
 
 
 
-            {% if array|length > 0 %}
+           {% if array|length > 0 %}
 
                 <div class="breadcrumb" style="background-color: transparent;">
+
 
 
                     <li class="breadcrumb-item"><a href="javascript:history.go(-1)">/{{array.0}}</a></li>
@@ -71,12 +74,17 @@
             <ul class="nav navbar-nav navbar-right" id="navHomeText">
                 <!--rename from id to class -->
 
-                <!--<li><a class="menu" href="/recipes.html">RECIPES</a></li>-->
+                <!--<li><a class="menu" href="/recipes.html">RECIPES</a></li>-->{% if user.is_staff %}
+                                        <!--<li><a href="/account_functions/admin_pages.html">Admin</a></li>-->
+                                        <li><a href="/admin">Admin</a></li>
+                                    {% endif %}
+
+              
                 {% if user.is_authenticated %}
                 <li><a class="menu" href="/account_functions/add_recipe.html">Add recipe</a></li>
                 <li><a class="menu" href="/account_functions/my_pantry.html">My pantry</a></li>
                 <li class="dropdown">
-                    <a class="menu dropdown-toggle menu" href="#" data-toggle="dropdown" id="user_logged_in">{{mongouser.full_name}}<span
+                    <a class="menu dropdown-toggle menu" href="#" data-toggle="dropdown" id="user_logged_in">{{mongouser.first_name}} {{mongouser.last_name}}<span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" id="loggedin-dp">
 
@@ -108,9 +116,8 @@
                                         <button type="submit" class="btn btn-primary btn-block">Logout</button>
                                     </div>
                                 </form>
-
-
                             </div>
+
                         </li>
                     </ul>
 
@@ -153,10 +160,11 @@
                                 </form>
 
                             </div>
-                            <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset
-                                it" %}</a>!</p>
+                            <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">Reset
+                                it</a>!</p>
                             <div class="bottom text-center">
                                 <a href="{% url 'registration_register' %}"><b>Sign up</b></a>
+
                             </div>
                         </li>
                     </ul>
@@ -202,6 +210,11 @@
                         <div class="col-sm-4 col-xs-6">
                             <h3>Contact</h3>
                             <ul style="list-style: none; padding-left:0;">
+                              <li>
+
+                                         <!--href="{% url 'about' %}"-->
+                                        <a target="_blank" href="https://www.facebook.com/TheMealMatch/">Facebook</a>
+                                    </li>
                                 <li>
 
                                     <a href="{% url 'about' %}#CONTACTUS">Contact us</a>
@@ -215,6 +228,10 @@
                         <div class="col-sm-4 hidden-xs">
                             <h3>My pages</h3>
                             <ul style="list-style: none; padding-left:0;">
+                               {% if user.is_staff %}
+                                        <!--<li><a href="/account_functions/admin_pages.html">Admin</a></li>-->
+                                        <li><a href="/admin">Admin</a></li>
+                                    {% endif %}
                                 {%if user.is_authenticated%}
                                 <li>
                                     <a href="/account_functions/user_profile.html">Settings</a>

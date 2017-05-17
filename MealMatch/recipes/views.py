@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from account_functions.views import *
 from .forms import CommentForm
-
+import ast
 from account_functions.context_processors import *
 
 
@@ -27,9 +27,14 @@ def startpage(request):
 ##Queries and renders a recipe when a recipe in the result list is clicked##
 @check_recaptcha
 def presentRecipe(request, recipe_id):
-    print("presentRecipe")
+
+    user_input_string = request.GET.get('user_input')
+    user_input_list = ast.literal_eval(user_input_string)
+    ingredients_dict = {}
+
 
     if request.method == "POST":
+
         form = CommentForm(request.POST)
         if form.is_valid() and request.recaptcha_is_valid:
 
@@ -58,7 +63,7 @@ def presentRecipe(request, recipe_id):
         breadcrumb = recipe_response.title
 
 
-        print("rec ", recipe_response)
+
         try:
 
             recipe_object = get_ratings(recipe_id)
@@ -85,7 +90,18 @@ def presentRecipe(request, recipe_id):
             comments = getComments(comments_query)
 
 
-        return render(request, "presenterarecept.html", {"recipe": recipe_response, "comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
+        for item in user_input_list:
+            for ingredient in recipe_response.ingredients_complete:
+                if item.lower() in ingredient.lower():
+                    ingredients_dict[ingredient] = True;
+                else:
+                    if ingredient not in ingredients_dict:
+                        ingredients_dict[ingredient] = False
+
+
+
+
+        return render(request, "presenterarecept.html", {"recipe": recipe_response, "user_input":ingredients_dict,"comments": comments or None, "commentform": CommentForm, "rating" : recipe_rating, 'count_ratings': count, 'your_rating':your_rating, 'breadcrumb' : breadcrumb})
 
 
 
@@ -107,12 +123,12 @@ def retrieveRecipes(request, raw_input):
 
 
 
-        pantry = request.GET.get('checkbox', False)
+        #pantry = request.GET.get('checkbox', False)
         input = []
-        if(request.user.is_authenticated() and pantry):
-            mongouser = Profile.objects.get(user_id_reference=request.user.id)
-            user_pantry = mongouser.Pantry
-            input = user_pantry
+        # if(request.user.is_authenticated() and pantry):
+        #     mongouser = Profile.objects.get(user_id_reference=request.user.id)
+        #     user_pantry = mongouser.Pantry
+        #     input = user_pantry
 
         for element in raw_input:
             if sanitize(element):
@@ -275,3 +291,7 @@ def sortquery(query_mapped):
         temp = [key,value]
         dictlist.append(temp)
     return dictlist
+
+
+
+

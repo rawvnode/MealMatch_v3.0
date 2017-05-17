@@ -6,6 +6,7 @@ from django.contrib import admin
 from account_functions import views
 
 
+
 # from MealMatch.recipes.viewsets import viewsets
 from recipes.viewsets import *
 
@@ -36,6 +37,7 @@ urlpatterns = [
 
 
     ##admin
+
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^accounts/', include('registration.backends.default.urls')),
@@ -50,6 +52,6 @@ admin.site.site_header = 'MealMatch'
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'recipes'
+#LOGIN_REDIRECT_URL = 'recipes'
 
 
