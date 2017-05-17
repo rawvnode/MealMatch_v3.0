@@ -128,7 +128,7 @@ def split_string_directions(string):
     return list
 
 #@login_required(redirect_field_name = "account_functions/add_recipe.html")
-@check_recaptcha
+
 
 def handle_bad_input_from_users(bad_string):
     good_string = bad_string.split(":")
@@ -142,7 +142,7 @@ def add_recipe(request):
         "form": form,
         "title": title
     }
-    if form.is_valid() and request.recaptcha_is_valid:
+    if form.is_valid():
         title_recipe = form.cleaned_data.get('title')
 
 

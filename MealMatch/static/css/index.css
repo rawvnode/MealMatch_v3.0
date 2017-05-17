@@ -64,7 +64,7 @@
 }
 
 .glyphicon-plus {
-    color: green;
+    color: rgb(123,158,83);
     font-size: 2em;
     padding-top: 0.7%;
     padding-right: 1%;
@@ -94,7 +94,7 @@
 
 .matchbutton {
     font-size: medium;
-    background-color: #2199E8;
+    background-color: rgb(96,125,139);
     border-right: thin white;
     border-style: solid;
 }
@@ -117,7 +117,7 @@
     display: flex;
     border-radius: 0.2em;
     /* box-shadow: inset 0 0 5px; */
-    background-color: rgba(148, 148, 148, 1);
+    background-color: rgba(75, 75, 75, 0.69);
     -moz-box-shadow: inset 0 0 10px #000000;
     /* -webkit-box-shadow: inset 0 0 10px rgba(97, 83, 83, 0.53); */
     border: 2px;
@@ -209,6 +209,20 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 10px;
     border-radius: 10px;
+}
+::-webkit-input-placeholder { /* Chrome */
+  color: black !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: black;
+  opacity: 1;
 }
 
 /* Handle */
@@ -319,9 +333,7 @@ input[class="pantryCheck"] + label:hover {
 
 
 input[class="pantryCheck"]:checked + label {
-    background-color: #71c65b;
-
-
+    background-color: rgb(123,158,83)!important;
     border-style: solid;
     border-width: thin;
     border-color: #497c5c;
