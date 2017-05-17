@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="container_ingredients text-center">
+            <div class="container_ingredients text-center w3-padding-16">
 
 
                 <form class = "ing_form "  action="/recipes/" method="GET" >
@@ -41,17 +41,17 @@
 
 
 
-                     <div class="btn-group text-center toggle-group" style="height: 45px; background-color: #2199E8">
+                     <div class="btn-group text-center toggle-group" style="height: 45px;">
                          {%if user.is_authenticated%}
-                         <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme"  value="{{mongouser.Pantry}}" style="height: 100%;">Match me(al)</button>
+                         <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme"  value="{{mongouser.Pantry}}" style="border-radius:20px;height: 100%;">Match me!</button>
                          {%else%}
-                         <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" style="height: 100%;">Match me(al)</button>
+                         <button type="submit" class="btn btn-primary w3-ripple matchbutton" id="matchme" style="border-radius:20px;height: 100%;">Match me(al)</button>
                          {%endif%}
 
-                      {% if user.is_authenticated %}
+                             {% if user.is_authenticated %}
 
                              <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
-                            <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i class="fa fa-exchange fa-2x" style="color:black;"></i></label>
+                            <label for="checkbox1" data-text-true="Pantry" data-text-false="No pantry"><i ></i></label>
 
 
 
@@ -61,7 +61,10 @@
 
 
                      </div>
+                    {% if user.is_authenticated %}
+<a href="#" title="Help" data-placement="top" data-toggle="popover" data-trigger="focus" data-content="Choose if you want to include or exclude your pantry when searching for recipes by using the toggle button to the left."> <span class="glyphicon glyphicon-question-sign" style="font-size:1.2em;color:black;" aria-hidden="true"></span></a>
 
+{% endif %}
                            <!--  {% if user.is_authenticated %}
 
                          <input id="checkbox1" type="checkbox" checked name="checkbox" class="pantryCheck">
@@ -89,11 +92,11 @@
 
 
 
-                <div class="rows_ingredients">
+                <div class="rows_ingredients" >
 
 
 
-                    <div class="column_ingredients col-sm-11">
+                    <div class="column_ingredients col-sm-11" style="overflow:auto; ">
 
 
 

@@ -85,10 +85,14 @@
 .column_ingredients {
     padding-bottom: 0;
     height: 30em;
+    overlow:auto;
+
 }
 
 .rows_ingredients {
     border-radius: 0.5em;
+
+
 
 }
 
@@ -293,18 +297,20 @@ input[class="pantryCheck"] + label {
     display: inline-block;
     background-color: rgb(189, 64, 4);
     color: whitesmoke;
-    font-size: 14px;
+    font-size: 10px;
 
     border-width: thin;
     border-color: rgb(105, 42, 4);
     border-style: solid;
+    border-radius: 20px;
     font-family: Lotus, sans-serif;
     height: 100%;
     line-height: 20px;
     position: relative;
 
-    width: 142px;
-    padding-top: 9px;
+    width: 100px;
+    padding-top: 10px;
+    margin-left:2px;
 }
 
 input[class="pantryCheck"] + label,
@@ -346,6 +352,7 @@ input[class="pantryCheck"] + label i {
     display: inline-block;
     height: 100%;
     text-align: center;
+    border-radius:20px;
 }
 
 input[class="pantryCheck"] + label:before {
@@ -370,7 +377,5 @@ input[class="pantryCheck"]:checked + label i {
 
 }
 
-#vegBox {
-    position: right;
-}
+
 
