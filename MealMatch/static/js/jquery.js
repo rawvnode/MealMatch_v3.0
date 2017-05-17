@@ -50,3 +50,4 @@ $(function () {
         $(this).parent().animate({left:'-280px'}, {queue: false, duration: 500});
     });
 });
+

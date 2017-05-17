@@ -3,6 +3,11 @@ var lastid = 0;
 var url_set = false;
 
 // Listeenes
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+
+
 $(function(){
 $("#ingredient-form").keyup(function(event){
     var input = document.getElementById("ingredient-form");
