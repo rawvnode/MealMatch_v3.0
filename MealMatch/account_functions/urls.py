@@ -13,7 +13,6 @@ urlpatterns = [
     #url(r'^logout', views.user_logout, name = "logout"),
     url(r'^logout', views.logout_view, name = "logout"),
 
-    url(r'^create_user', views.register_view, name = "newUser"),
     url(r'^edit_pantry', views.editpantry, name="editPantry"),
 
 

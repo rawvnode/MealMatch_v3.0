@@ -42,9 +42,8 @@
 
                 {{form | crispy}}
 
-                <div class="g-recaptcha" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn"></div>
-
-                <input id="Google" type="submit" value="{% trans 'Sign up' %}">
+                <div class="g-recaptcha" id="recap" data-sitekey="6LfO9h8UAAAAAJdQ3B0NVSHsVrhFAPZtHhGjFGsn" data-theme="light" data-size="compact" ></div>
+                <input id="Google" style="display:inline;" type="submit" value="{% trans 'Sign up' %}">
             </form>
         </div>
 
