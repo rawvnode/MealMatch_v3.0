@@ -89,7 +89,7 @@ def presentRecipe(request, recipe_id):
 
 
 
-##Queries user inputs on database and renders a result list##
+
 def refresh(request):
     if request.method == "GET":
         print(request.GET)
@@ -98,8 +98,9 @@ def refresh(request):
     else:
         return render(request, "startpage.html")
 
-
+##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request, raw_input):
+    print("retrieving")
 
     if request.method == "GET":
         raw_input = raw_input.split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)

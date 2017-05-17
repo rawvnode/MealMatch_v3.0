@@ -77,7 +77,10 @@ h2 {
     text-overflow:ellipsis;
 }
 
-
+.btn-primary{
+    background-color: rgb(96,125,139)!important;
+    border-color: rgb(96,125,139)!important;
+}
 
 .breadcrumb {
     margin-bottom: 0px !important;
