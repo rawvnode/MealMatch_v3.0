@@ -29,8 +29,13 @@ def startpage(request):
 def presentRecipe(request, recipe_id):
     ingredients_dict = {}
     if request.method == "GET":
-        user_input_string = request.GET.get('user_input')
-        user_input_list = ast.literal_eval(user_input_string)
+        if request.GET.get('user_input'):
+            user_input_string = request.GET.get('user_input')
+            user_input_list = ast.literal_eval(user_input_string)
+        else:
+            user_input_list = []
+            user_input_string = ""
+
 
 
 
@@ -122,22 +127,32 @@ def retrieveRecipes(request, raw_input):
     if request.method == "GET":
         raw_input = raw_input.split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
 
-
-
-        #pantry = request.GET.get('checkbox', False)
-        input = []
         # if(request.user.is_authenticated() and pantry):
         #     mongouser = Profile.objects.get(user_id_reference=request.user.id)
         #     user_pantry = mongouser.Pantry
         #     input = user_pantry
 
+
+
+        pantry = request.GET.get('checkbox', False)
+        if (pantry):
+            mongouser = Profile.objects.get(user_id_reference=request.user.id)
+            user_pantry = mongouser.Pantry
+            pantry_length = len(user_pantry)
+        else:
+            pantry_length = 0
+
+        input = []
         for element in raw_input:
             if sanitize(element):
                 input.append(sanitize(element))
 
+        search_input = input[0:-pantry_length]
+
         # Now that the input is cleaned, we can implement elasticsearch/fuzzy search on food_ref t
 
-        query_mapped = mapped.objects(title__in=input).only('value').key_frequency()#queries from the mapped colletion and does a key_frequency check
+        q1 = list(mapped.objects(title__in=search_input).item_frequencies("value").keys()) ##retrieves all the recipes id which contains what the user has typed in
+        query_mapped = mapped.objects(title__in=input).only('value').key_frequency(q1)#queries from the mapped colletion and does a key_frequency check
 
         dictlist = sortquery(query_mapped) #sorts the queried result
 
@@ -157,9 +172,9 @@ def autocorrect(request):
     input = sanitize(request.POST['input'])  # gets the user input and sanitizses using sanitize()
     if (len(input) > 0):
         array = []
-        foods = food_ref.objects(food__istartswith=input)  # checks if any word starts with the user input
+        foods = food_ref.objects(foods__istartswith=input)  # checks if any word starts with the user input
         for element in foods:
-            array.append(element.food)  # appends matches to an initially empty array
+            array.append(element.foods)  # appends matches to an initially empty array
         array = dumps(array)  # dumps the aray to JSON format
         return JsonResponse(array, safe=False)  # returns a JSONResponse to client-side
     else:

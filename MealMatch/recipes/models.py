@@ -35,34 +35,17 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
 
         return reduced_result
 
-    def key_frequency(self): #maybe to be renamed
-
+    def key_frequency(self, q1): #maybe to be renamed
         freq = self.item_frequencies("value") ##key frequency
         freq = OrderedDict(reversed(sorted(freq.items(),key=lambda x: (x[1])))) ##sorts by key frequency
-
-
-        query_keys = list(freq.keys())[0:1000]
-
-
+        if q1 == []:
+            query_keys = list(freq.keys())[0:1000]
+        else:
+            intersection = set(q1).intersection(list(freq.keys())) #does this preserve the order of things?
+            query_keys = list(intersection)[0:1000]
         reduced_result = mappedQuerysSet.get_stats(query_keys)
-
         returnval = mappedQuerysSet.join(reduced_result, freq)
-
         return returnval
-
-
-
-
-
-
-### Old (deleter after 26th of april):
- #arr = []
-       #for item in self:
-       #    for key in item.value:
-       #        arr += list(key.to_mongo().to_dict().values()) #helt orimlig rad, jag vet. //Fabian
-
-        #freq = {x: arr.count(x) for x in arr}
-## recipe models ##
 
 class ingredients(Document):
     amount = ListField(required=True)
@@ -124,6 +107,7 @@ class mapped_id(Document):
 
 
 class mapped(Document):
+    id = StringField(primary_key=True)
     value = ListField(ObjectIdField(primary_key=True))
     #value = ListField(EmbeddedDocumentField('mapped_id'))
     #value = DictField() <--- restore this to get working queryset
@@ -131,9 +115,12 @@ class mapped(Document):
     meta = {'queryset_class': mappedQuerysSet}  # Defines a custom queryet
 
 class food_ref(Document):
-    food = StringField(required=True)
+    foods = StringField(required=True)
     # _id = StringField(primary_key=True)
 
+class autocorrect(Document):
+    id = ObjectIdField(primary_key=True)
+    food = StringField()
 
 
 
