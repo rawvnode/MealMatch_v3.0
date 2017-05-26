@@ -14,9 +14,10 @@ from datetime import datetime, date
 from bson.json_util import dumps
 
 from recipes.models import *
+from account_functions.models import *
 import re
 
-
+from account_functions.context_processors import *
 
 
 
@@ -143,20 +144,79 @@ def add_recipe(request):
         "title": title
     }
     if form.is_valid():
+        #user = get_user(request)
+        mongouser = Profile.objects.get(user_id_reference=request.user.id)
+        author = mongouser.full_name
         title_recipe = form.cleaned_data.get('title')
+        ingredients = handle_bad_input_from_users(form.cleaned_data.get('ingredients'))
 
-
-        # preperation_time = form.cleaned_data.get('preperation_time')
-        # servings = form.check_username('servings')
+        preperation_time = form.cleaned_data.get('preperation_time')
+        #servings = form.check_username('servings')
         directions_recipe = handle_bad_input_from_users(form.cleaned_data.get('directions'))
-        # amount = form.check_username('amount')
-        # unit = form.check_username('unit')
+        #amount = form.check_username('amount')
+
         category_recipe = handle_bad_input_from_users(form.cleaned_data.get('category'))
-        # picture_url = form.check_username('picture_url')
+        picture_url = form.cleaned_data.get('picture_url')
 
 
-        recipe_saving = recipe(title=title_recipe, directions=directions_recipe, category=category_recipe)
+
+        ingredients_list = []
+        for input in ingredients: #Goes through all user inputs from the form
+            ingredient = input.split(" ") #Splits the inputs in ingredients into array (eg 1 pinch of salt -> [1, pinch, of, salt})
+            for item in ingredient:
+                print(item, "ITEM")
+
+
+                try:
+
+                    food = food_ref.objects.get(foods__iexact=item) #try and find a match
+                    print(food, "FOOD")
+                except:
+                    pass #if no match found, don't bother about it
+                else:
+                    ingredients_list.append(food.foods) #if match found append to ingredients_list
+
+        print("ing_list", ingredients_list)
+
+
+
+
+        #ingredients_list = []
+        #temp_list = []
+        #for ingredient in ingredients:
+        #    for index in range(len(foods)):
+        #        if foods[index] is not None:
+        #            print(foods[index])
+        #            if foods[index].lower() in ingredient or foods[index] in ingredient:
+        #                if foods[index] not in ingredients_list:
+        #                    temp_list.append(foods[index])
+        #
+        #    if (len(temp_list) > 0):
+        #        ingredients_list.append(max(temp_list, key=len))
+        #        temp_list = []
+
+
+
+
+        recipe_saving = recipe(title=title_recipe, directions=directions_recipe, tags=category_recipe, ingredients_complete = ingredients,
+                               time = preperation_time, image = picture_url, ingredients_list = ingredients_list, author = author)
+
         recipe_saving.save()
+        recipe_id = recipe_saving.id
+
+
+        for item in ingredients_list:
+            item = item.lower()
+            item = item[:1].upper() + item[1:]
+            mapped_object = mapped.objects(title=item)
+            print(mapped_object[0].title)
+
+
+            mapped_object[0].update(add_to_set__value=ObjectId(recipe_id))
+
+            mapped_object[0].save()
+
+
     return render(request, "account_functions/add_recipe.html", context)
 
     return redirect("/")
@@ -250,7 +310,10 @@ def sanitize_pantry(list):
     return list
 
 def user_profile(request):
-    return render(request, "account_functions/user_profile.html")
+    mongouser = Profile.objects.get(user_id_reference=request.user.id)
+    username = mongouser.full_name
+    added_recipes = recipe.objects(author=username)
+    return render(request, "account_functions/user_profile.html",{"my_recipes":added_recipes})
 
 
 ##Autocorrect implementation. Must be adjusted to prevent crashed (eg via elasticsearch or fewer queries)##

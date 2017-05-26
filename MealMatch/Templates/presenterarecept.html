@@ -110,7 +110,7 @@
                     {% endif %}
 
                     {%if not your_rating == None %}
-                    <p><strong>Your rated: {{your_rating}} </strong></p>
+                    <p><strong>You rated: {{your_rating}} </strong></p>
                     {% endif %}
                 </div>
 
@@ -163,13 +163,19 @@
             <h5><strong>Ingredients</strong></h5>
             <div class="w3-row w3-medium">
                 <div class="w3-col s12">
-                    {% for key, value in user_input.items %}
-                    {%if value%}
-                    <p> <i class="fa fa-check" style="color:green;"aria-hidden="true"></i> {{ key }}</p>
+                    {%if user_input%}
+                        {% for key, value in user_input.items %}
+                        {%if value%}
+                        <p> <i class="fa fa-check" style="color:green;"aria-hidden="true"></i> {{ key }}</p>
+                        {%else%}
+                         <p><i class="fa fa-times" style="color:rgb(189,64,4); margin-right:2px;" aria-hidden="true"></i> {{ key }}</p>
+                        {%endif%}
+                        {%endfor%}
                     {%else%}
-                     <p><i class="fa fa-times" style="color:rgb(189,64,4); margin-right:2px;" aria-hidden="true"></i> {{ key }}</p>
+                        {% for item in recipe.ingredients_complete%}
+                             <p>{{item}} </p>
+                        {%endfor%}
                     {%endif%}
-                    {%endfor%}
                 </div>
 
             </div>
@@ -183,10 +189,18 @@
                 <p>{{forloop.counter}}. {{direction}}</p>
             </div>
             {% endfor %}
+
+            {%if "foodista" in recipe.author%}
             <div class="w3-small w3-padding-24 text-right">
                 <p class=>Recipe by Foodista.com<br>– The Cooking Encyclopedia Everyone Can Edit</p>
                 <a href={{recipe.author}}>View original at Foodista.com</a>
             </div>
+            {%else%}
+            <div class="w3-small w3-padding-24 text-right">
+                <p class=>Recipe by {{recipe.author}}</p>
+
+            </div>
+            {%endif%}
         </div>
     </div>
 
