@@ -42,6 +42,12 @@ class mappedQuerysSet(QuerySet):  # Work similar to item_frequency and mapreduce
             query_keys = list(freq.keys())[0:1000]
         else:
             intersection = set(q1).intersection(list(freq.keys())) #does this preserve the order of things?
+            #print(intersection)
+            #relative_complement = set(q1).difference(list(freq.keys()))
+            #print("rel compt ", relative_complement)
+            #query_keys = intersection.update(relative_complement)
+
+
             query_keys = list(intersection)[0:1000]
         reduced_result = mappedQuerysSet.get_stats(query_keys)
         returnval = mappedQuerysSet.join(reduced_result, freq)

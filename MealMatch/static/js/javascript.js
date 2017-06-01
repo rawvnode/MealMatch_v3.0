@@ -121,9 +121,12 @@ function empty_input() {
 
  $(function(){
  $( "#matchmerefresh" ).click(function( event ) {
-       event.preventDefault();
-       setURLRefresh();
-       $(".ing_form_refresh").submit();
+        if (url_set == false){
+            event.preventDefault();
+            setURLRefresh();
+        }
+
+
     });
  });
 
@@ -211,7 +214,7 @@ function setURLRefresh() {
 
             list_of_ing.push(ingredient);
             }
-            else{    window.alert(lis[i].innerHTML)
+            else{
             index = lis[i].innerHTML.split(" ")[0].indexOf("<");
 
             str = lis[i].innerHTML.split(" ")[1].slice(0,index);
@@ -225,6 +228,7 @@ function setURLRefresh() {
 
         }
 
+        url_set = true;
 //    var lis = [];
 //    new_list = []
 //    var ul = document.getElementById("ingredients");
@@ -570,10 +574,13 @@ $(document).ready(function(){
         type : "POST", // http method
 
         data : {csrfmiddlewaretoken: csrftoken, rating: this.value, recipe_id : global_id},// data sent with the post request
+        success: function(data) {
+         $('#rating_div').html(data);
+  }
         // handle a non-successful response
         //error :"",
             });
-		window.location.reload();
+		history.go(0);
 
     });
 

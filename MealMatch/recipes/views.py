@@ -122,8 +122,6 @@ def refresh(request):
 
 ##Queries user inputs on database and renders a result list##
 def retrieveRecipes(request, raw_input):
-    print("retrieving")
-
     if request.method == "GET":
         raw_input = raw_input.split("&") #splits into array based on &, title() makes first letters capitalized (to be reomved?)
 
@@ -131,8 +129,6 @@ def retrieveRecipes(request, raw_input):
         #     mongouser = Profile.objects.get(user_id_reference=request.user.id)
         #     user_pantry = mongouser.Pantry
         #     input = user_pantry
-
-
 
         pantry = request.GET.get('checkbox', False)
         if (pantry):
@@ -280,7 +276,7 @@ def starrating(request):
 
 
         else:
-            return render_to_response(request.path, message='You, my friend, have already rated this goodie.')
+            return render(request.path, message='You, my friend, have already rated this goodie.')
 
 
     else:
@@ -301,7 +297,8 @@ def get_user_rating(id,request):
         return None
 
 def sortquery(query_mapped):
-    sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
+    #sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'], x[1]['rating'])))) #Sorts list based on frequency
+    sorted_dict = OrderedDict(reversed(sorted(query_mapped.items(), key=lambda x: (x[1]['frequency']/x[1]['ing_count']*x[1]['frequency'], x[1]['clicks'])))) #Sorts list based on frequency
     dictlist = []
     for key, value in sorted_dict.items():
         temp = [key,value]
