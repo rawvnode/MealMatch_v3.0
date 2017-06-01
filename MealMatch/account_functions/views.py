@@ -273,7 +273,7 @@ def update_profile(request):
         last_name = request.POST['lastname']
         full_name = first_name+last_name
         gender = request.POST['gender']
-        birthday = datetime.strptime(request.POST['bday'], "%Y-%m-%d")
+        birthday = datetime.datetime.strptime(request.POST['bday'], "%Y-%m-%d")
 
         user_id = request.user.id
         #user_profile = Profile.objects.get(user_id_reference=user_id)
